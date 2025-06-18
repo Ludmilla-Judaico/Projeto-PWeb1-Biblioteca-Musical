@@ -2,9 +2,10 @@
 
 ## Descrição do Projeto
 
-Este projeto tem como objetivo desenvolver uma aplicação web onde usuários podem registrar suas opiniões sobre músicas ouvidas. Será utilizada a tecnologia de HTML E CSS
+Este projeto tem como objetivo desenvolver uma aplicação web onde usuários podem registrar suas notas e opiniões sobre músicas ouvidas. Nele, será utilizada a tecnologia de HTML e de CSS.
 
 ## Integrantes do Grupo
 
-*Ludmilla Judaico Ribeiro da Silva
-*Bianca Rodrigues Bandeira
+* Ludmilla Judaico Ribeiro da Silva
+* Bianca Rodrigues Bandeira
+* Ana Raquel Barroso Pereira
