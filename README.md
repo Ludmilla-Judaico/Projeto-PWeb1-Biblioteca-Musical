@@ -1,4 +1,4 @@
-# Projeto de Programação para Web 1 - [Nome do Seu Projeto]
+# Projeto de Programação para Web 1 - Biblioteca Musical
 
 ## Descrição do Projeto
 
