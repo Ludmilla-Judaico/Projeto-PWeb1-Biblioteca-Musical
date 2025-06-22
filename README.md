@@ -7,3 +7,4 @@ Este projeto tem como objetivo desenvolver uma aplicação web onde usuários po
 ## Integrantes do Grupo
 
 *Ludmilla Judaico Ribeiro da Silva
+*Bianca Rodrigues Bandeira
