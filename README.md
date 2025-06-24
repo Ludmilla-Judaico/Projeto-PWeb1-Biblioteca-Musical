@@ -9,3 +9,4 @@ Este projeto tem como objetivo desenvolver uma aplicação web onde usuários po
 * Ludmilla Judaico Ribeiro da Silva
 * Bianca Rodrigues Bandeira
 * Ana Raquel Barroso Pereira
+*Luís Miguel Carvalho da Rocha
