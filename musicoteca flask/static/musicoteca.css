@@ -1,0 +1,114 @@
+@font-face {
+  font-family: 'San Francisco';
+  src: url('sf woff/san_francisco-webfont.woff') format('woff'),
+       url('sf woff/san_francisco-webfont.woff2') format('woff2'),
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+img.logo {
+    width: 65px;
+    height: auto;
+    position: relative;
+}
+
+.container {
+    display: grid;
+    grid-template-areas:
+    'header header header'
+    'nav main sidebar';
+    grid-template-columns: 1fr 3fr 20px;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+}
+
+header {
+    grid-area: header;
+    background-color: #ff00a1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menudireito {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+    gap: 20px;
+}
+
+#explorar {
+color: white;
+}
+
+#iconeperfil {
+
+}
+
+aside.sidebar {
+    grid-area: sidebar;
+    background-color: #f5f5f5;
+}
+
+nav {
+    grid-area: nav;
+    background-color: #e70092;
+}
+
+main {
+    grid-area: main;
+    padding: 20px;
+}
+
+form.pesquisar {
+    padding: 10px;
+    border-radius: 25px;
+}
+
+input.pesquisar {
+    border: none;
+    outline: none;
+    padding: 5px;
+    font-size: 10px;
+    border-radius: 25px;
+}
+
+p.subtitulo {
+    color: white;
+
+}
+
+div.selecionar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.selecionar label {
+    color: white;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    gap: 5px;
+}
+
+.selecionar input[type="checkbox"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background-color: transparent;
+    border-width: 1px;
+    border-color: white;
+    border-style: solid;
+    border-radius: 4px;
+}
