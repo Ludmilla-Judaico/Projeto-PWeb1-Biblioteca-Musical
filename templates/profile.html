@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>perfil.usuario</title>
-    <link rel="stylesheet" href="perfil.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
 </head>
 <body>
 
 <!--------Menu-------->
     <header>
         <nav class="menu">
-            <img class="logo" src="imgs/" alt="logo da musicoteca">
+            <img class="logo" src="{{ url_for('static', filename='logo.png') }}" alt="logo da musicoteca">
             <div class="navegacao">
                 <a href="">Explorar</a>
                 <a href="">Minha Biblioteca</a>
-                <a><img src="imgs/" class="perfil" alt="perfil"></a>
+                <a><img src="{{'static', filename='perfil-icon.png'}}" class="perfil" alt="perfil"></a>
             </div>
         </nav>
 
 <!--------Capa------->
         <section class="capa">
-            <img src="imgs/perfil.png" alt="foto de perfil">
+            <img src="{{ url_for('static', filename='perfil.png') }}" alt="foto de perfil">
             <div class="info-usuario">
                 <h1>Miguelito</h1>
                 <div>
@@ -45,10 +45,10 @@
     <section class="favoritos">
         <h2>Albúns favoritos</h2>
         <div class="albuns-fav">
-            <a href=""><img src="imgs/perfil.png" alt=""></a>
-            <a href=""><img src="imgs/perfil.png" alt=""></a>
-            <a href=""><img src="imgs/perfil.png" alt=""></a>
-            <a href=""><img src="imgs/perfil.png" alt=""></a>
+            <a href=""><img src="{{ url_for('static', filename='perfil.png') }}" alt=""></a>
+            <a href=""><img src="{{ url_for('static', filename='perfil.png') }}" alt=""></a>
+            <a href=""><img src="{{ url_for('static', filename='perfil.png') }}" alt=""></a>
+            <a href=""><img src="{{ url_for('static', filename='perfil.png') }}" alt=""></a>
         </div>
     </section>
 
@@ -56,34 +56,35 @@
     <section class="albuns">
         <div class="grupos">
             <figure class="albuns-agrupados" id="grupo1">
-                <a href=""><img src="imgs/perfil.png" alt=""></a>
-                <a href=""><img src="imgs/perfil.png" alt=""></a>
-                <a href=""><img src="imgs/perfil.png" alt=""></a>
-                <a href=""><img src="imgs/perfil.png" alt=""></a>
-                <a href=""><img src="imgs/perfil.png" alt=""></a>
+                <a href=""><img src="{{ url_for('static', filename='perfil.png')}}" alt=""></a>
+                <a href=""><img src="{{ url_for('static', filename='perfil.png')}}" alt=""></a>
+                <a href=""><img src="{{ url_for('static', filename='perfil.png')}}" alt=""></a>
+                <a href=""><img src="{{url_for('static', filename='perfil.png')}}" alt=""></a>
+                <a href=""><img src="{{url_for('static', filename='perfil.png')}}" alt=""></a>
             </figure>
-            <img src="imgs/cd-aberto.png" class="cd-aberto">
+            <img src="{{url_for('static', filename='cd-aberto.png')}}" class="cd-aberto">
         </div>
 
         <div class="grupos">
             <figure class="albuns-agrupados" id="grupo2">
-                <a href=""><img src="imgs/perfil.png" alt=""></a>
-                <a href=""><img src="imgs/perfil.png" alt=""></a>
-                <a href=""><img src="imgs/perfil.png" alt=""></a>
-                <a href=""><img src="imgs/perfil.png" alt=""></a>
-                <a href=""><img src="imgs/perfil.png" alt=""></a>
+                <a href=""><img src="{{url_for('static', filename='perfil.png')}}" alt=""></a>
+                <a href=""><img src="{{url_for('static', filename='perfil.png')}}" alt=""></a>
+                <a href=""><img src="{{url_for('static', filename='perfil.png')}}" alt=""></a>
+                <a href=""><img src="{{url_for('static', filename='perfil.png')}}" alt=""></a>
+                <a href=""><img src="{{url_for('static', filename='perfil.png')}}" alt=""></a>
             </figure>
-            <img src="imgs/cd-aberto.png" class="cd-aberto">
+            <img src="{{url_for('static', filename='cd-aberto.png')}}" class="cd-aberto">
         </div>
         <div class="grupos">
-            <figure class="albuns-agrupados" id="grupo2">
-                <a href=""><img src="imgs/perfil.png" alt=""></a>
-                <a href=""><img src="imgs/perfil.png" alt=""></a>
-                <a href=""><img src="imgs/perfil.png" alt=""></a>
-                <a href=""><img src="imgs/perfil.png" alt=""></a>
-                <a href=""><img src="imgs/perfil.png" alt=""></a>
+            <figure class="albuns-agrupados" id="grupo3">
+                <a href=""><img src="{{url_for('static', filename='perfil.png')}}" alt=""></a>
+                <a href=""><img src="{{url_for('static', filename='perfil.png')}}" alt=""></a>
+                <a href=""><img src="{{url_for('static', filename='perfil.png')}}" alt=""></a>
+                <a href=""><img src="{{url_for('static', filename='perfil.png')}}" alt=""></a>
+                <a href=""><img src="{{url_for('static', filename='perfil.png')}}" alt=""></a>
             </figure>
-            <img src="imgs/cd-aberto.png" class="cd-aberto">
+            <img src="{{url_for('static', filename='cd-aberto.png')}}" class="cd-aberto">
+        </div>
     </section>
 </body>
 </html>
