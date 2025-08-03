@@ -19,6 +19,17 @@
     color: white;
 }
 
+.menu .logo {
+    width: 120px;
+    height: 60px;
+}
+
+.menu .perfil-botão{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
 /*--------Capa--------*/
 .capa{
     background-color: #e70092;

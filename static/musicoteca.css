@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'San Francisco';
   src: url('sf woff/san_francisco-webfont.woff') format('woff'),
-       url('sf woff/san_francisco-webfont.woff2') format('woff2'),
+       url('sf woff/san_francisco-webfont.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
@@ -52,7 +52,7 @@ color: white;
 }
 
 #iconeperfil {
-
+    margin: 0.1px;
 }
 
 aside.sidebar {
