@@ -1,10 +1,10 @@
-from flask import render_template, url_for
+from flask import render_template
 from app import app
 
-@app.route("/")
+@app.route('/')
 def homepage():
-    return render_template("musicotecahome.html")
+    return render_template('musicotecahome.html')
 
-@app.route("/profile")
+@app.route('/profile')
 def profile():
-    return render_template("profile.html")
+    return render_template('profile.html')
