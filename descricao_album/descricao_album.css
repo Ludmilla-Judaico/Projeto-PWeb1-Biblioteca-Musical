@@ -4,7 +4,7 @@ body{
 }
 .box{
     margin: 3%;
-    /* background-color: rgb(48, 175, 91); */
+    background-color: rgb(48, 175, 91);
     width: 500px;
     font-size: 1.3em;
 }
@@ -19,6 +19,10 @@ body{
 }
 .box-2 h1{
     color:#7991bd;
+}
+.box-3 {
+  background-color: #7991bd;
+  border-radius: 5%;
 }
 
 #capa_cd {
@@ -47,21 +51,6 @@ body{
     flex-wrap: wrap;
     gap: 3%;
 }
-/* .grid-container{
-    display: grid;
-    grid-template-columns: repeat(5, 300px);
-    grid-template-rows: repeat(7,140px);
-    gap: 1em;
-    grid-template-areas: 
-    "box-1 box-1 box-2 box-2"
-    "box-1 box-1 box-2 box-2"
-    "box-3 box-3 box-4 box-4"
-    "box-3 box-3 box-4 box-4"
-    /* "box-11 box-11 box-11 box-11"
-    "box-5 box-5 box-6 box-6"
-    "box-7 box-7 box-8 box-8"
-    "box-9 box-9 box-10 box-10";} */
-
 
 .musicas ol{
     column-count: 2;
@@ -130,4 +119,14 @@ textarea:focus {
 
 .rating label.favorito:hover {
   color: rgba(216, 6, 6, 0.76);
+}
+
+#imagem_bio {
+  width: 200px;
+}
+
+.biografia {
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
 }
