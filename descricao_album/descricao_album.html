@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicoTeca</title>
+    <link rel="stylesheet" href="descricao_album.css" />
+</head>
+<body>
+    <section>
+        <div class="container">
+            <div class='box box-1'>
+                <img id="capa_cd" src="img/capa do album.png">
+                <img id="cd" src="img/Lana Del Rey -Born To Die CD.jpg">
+            </div>
+
+            <div class='box box-2'>
+                <h1>BORN TO DIE</h1>
+                <h3>LANA DEL REY</h3>
+                <p>Pop, Indie Pop, 2012</p>
+                <div class="rating">
+                    <input type="radio" id="favorito" name="favorito" value="0" />
+                    <label for="favorito" title="favorito" class="favorito">❤</label>
+                    <input type="radio" id="star5" name="rating" value="5" />
+                    <label for="star5" title="5 estrelas">★</label>
+                    <input type="radio" id="star4" name="rating" value="4" />
+                    <label for="star4" title="4 estrelas">★</label>
+                    <input type="radio" id="star3" name="rating" value="3" />
+                    <label for="star3" title="3 estrelas">★</label>
+                    <input type="radio" id="star2" name="rating" value="2" />
+                    <label for="star2" title="2 estrelas">★</label>
+                    <input type="radio" id="star1" name="rating" value="1" />
+                    <label for="star1" title="1 estrela">★</label>
+                </div>
+
+                <!-- AQUI FICA AS ESTRELAS E O CORAÇÃO PARA COLOCAR NOS FAVS-->
+                 <div class="musicas">
+                    <ol>
+                        <li>Off To The Races</li>
+                        <li>Blue Jeans</li>
+                        <li>Video Games</li>
+                        <li>Diet Mountain Dew</li>
+                        <li>Born To Die</li>
+                        <li>National anthem</li>
+                        <li>Dark Paradise</li>
+                        <li>Radio</li>
+                        <li>Carmen</li>
+                        <li>Millon Dollar Man</li>
+                        <li>Summertime Sadness</li>
+                        <li>This Is What Makes Us Girls</li>
+                    </ol>
+                 </div>
+            </div>
+
+            <div class='box box-3'>
+                
+            </div>
+
+            <div class='box box-4'>
+                <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/album/4vXt6IpMcSnqonljffWlMI?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+            
+            <h2 class="comentario box-11">Comentários</h2>
+
+            <div class='box box-5' style="grid-area: box-5">
+                <form class="comentario" action="/destino" method="post">
+                    <label for="comentario">Comentário:</label>
+                    <textarea id="comentario" name="comentario" rows="5" cols="33" placeholder="Eai, o que você achou dessa discografia?"></textarea>
+                </form>
+            </div>
+            <div class='box box-6' style="grid-area: box-6">dfgh</div>
+            <div class='box box-7' style="grid-area: box-7"></div>
+            <div class='box box-8' style="grid-area: box-8"></div>
+            <div class='box box-9' style="grid-area: box-9"></div>
+            <div class='box box-10' style="grid-area: box-10"></div>
+        </div>
+    </section>
+</body>
+</html>
