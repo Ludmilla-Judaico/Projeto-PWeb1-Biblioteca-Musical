@@ -1,0 +1,180 @@
+body{
+    padding: 2%; 
+}
+
+/* INICIO DO CONTAINER 1 */
+.container{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 3%;
+}
+
+.box{
+    margin: 3%;
+    width: 100%;
+    max-width: 500px;
+    font-size: 1.3em;
+}
+.box-1{
+    position: relative;
+    z-index: -1;
+}
+
+#capa_cd {
+    width: 100%;
+    max-width: 450px;
+    display: block;
+}
+
+#cd {
+    width: 100%;
+    max-width: 380px;
+    margin-right: 10%;
+    position: absolute;
+    left: 48%;
+    top: 1%;
+    z-index: -1;
+    border-radius: 80%;
+    border-color: rgb(0, 0, 0);
+    background-color: #fff;
+    animation: cd 4s linear infinite;
+    display: block;
+}
+
+@keyframes cd {
+    to {
+        transform: rotate(360deg);
+    }  
+}
+
+.box-2{
+    margin-left: 4%;
+    margin-right: 0%;
+}
+
+.box-2 h1{
+    color:#7991bd;
+}
+
+.musicas ol{
+    column-count: 2;
+    column-gap: 0.1em;
+    /* background-color: blueviolet; */
+}
+
+.musicas li:hover{
+    color: #7991bd
+}
+
+.rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: start;
+  gap: 5px;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  font-size: 40px;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.rating input:checked ~ label {
+  color: rgb(255, 217, 0);
+}
+
+.rating label:hover,
+.rating label:hover ~ label {
+  color: rgb(255, 217, 0);
+}
+
+.heart-checkbox:checked + .heart {
+  color: red;
+}
+
+.heart:hover {
+  color: red;
+}
+
+.heart {
+  color: #aaa;
+  transition: color 0.3s;
+}
+
+.box-3 {
+  background-color: #7991bd;
+  border-radius: 5%;
+}
+
+#imagem_bio {
+  width: 200px;
+}
+
+.biografia {
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 5%;
+  text-align: justify;
+  margin:3%;
+  color:white;
+}
+
+/* FIM DO CONTAINER 1 */
+
+h1.comentario {
+  font-size: 2em;
+  /* background-color: #4a90e2; */
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+/* INICIO DO CONTAINER 2 */
+
+.container-2 {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.container-2 .box{
+  background-color: #7991bd;
+  border-radius: 3%;
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.foto_perfil {
+  height: 80px;
+  border-radius: 100%;
+}
+
+textarea {
+  width: 100%;
+  max-width: 100%;
+  height: 70px;
+  padding: 12px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: vertical;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+textarea:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+/* FIM DO CONTAINER 2 */
