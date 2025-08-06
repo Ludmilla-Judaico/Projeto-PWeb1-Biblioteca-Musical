@@ -1,4 +1,4 @@
-from flask import render_template, url_for
+from flask import render_template, url_for 
 from app import app
 
 @app.route('/')
@@ -8,3 +8,7 @@ def homepage():
 @app.route('/profile')
 def profile():
     return render_template('profile.html')
+
+@app.route('/album')
+def album():
+    return render_template('descricao_album.html')
