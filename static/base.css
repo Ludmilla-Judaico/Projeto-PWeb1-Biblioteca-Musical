@@ -1,0 +1,30 @@
+body {
+    margin: 0%;
+    padding: 0%;
+}
+
+.menu{
+    background-color: #ff00a1;
+    padding: 1%;
+    font-size: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.menu .navegacao a{
+    margin: 0 1rem 0 1rem;
+    text-decoration: none;
+    color: white;
+}
+
+.menu .logo {
+    width: 120px;
+    height: 60px;
+}
+
+.menu .perfil-botão{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
