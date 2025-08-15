@@ -1,22 +1,9 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Musicoteca</title>
-    <link rel="stylesheet" href="../static/musicotecahome.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Musicoteca{% endblock %}
+{% block style %}{{ url_for('static', filename='styles/musicotecahome.css') }}{% endblock %}
+    
+{% block content %}
     <div class="container">
-        <header>
-           <img class="logo" src="../static/logo.png" alt="Musicoteca"/>
-           <div class="menudireito">
-                <p id="explorar">Explorar</p>
-                <p id="minha">Minha biblioteca</p>
-                <i class="fa-solid fa-user" id="iconeperfil"></i>
-            </div>
-        </header>
 
     <nav>
         <form class="pesquisar" action="/search" method="GET">
@@ -44,5 +31,4 @@
     <main></main>
 
     </div>
-</body>
-</html>
+{% endblock %}

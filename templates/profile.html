@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
-</head>
-<body>
 {% extends "base.html"%}
-    {% block content %}
+{% block title %}Profile{% endblock %}
+{% block style %}{{ url_for('static', filename='styles/profile.css') }}{% endblock %}
 
+    {% block content %}
 <!--------Capa------->
         <section class="capa">
             <img src="{{ url_for('static', filename='perfil.png') }}" alt="foto de perfil">
@@ -86,5 +79,3 @@
         </div>
     </section>
 {% endblock %}
-</body>
-</html>

@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title%}Album{% endblock %}</title>
-    <link rel="stylesheet" href="static/descricao_album.css" />
-</head>
-<body>
 {% extends "base.html"%}
-    {% block content %}
+{% block title%}Album{% endblock %}
+{% block style %} {{ url_for('static', filename='styles/descricao_album.css') }} {% endblock %}"
+
+{% block content %}
     <section>
         <div class="container">
             <div class='box box-1'>
@@ -110,5 +104,3 @@
         </div>
     </section>
 {% endblock %}
-</body>
-</html>
