@@ -25,7 +25,7 @@ img.logo {
     grid-template-areas:
     'header header header'
     'nav main sidebar';
-    grid-template-columns: 0.5fr 3fr 20px;
+    grid-template-columns: 0.5fr 3fr 50px;
     grid-template-rows: auto 1fr;
     height: 100vh;
 }
@@ -134,8 +134,6 @@ div.selecionar {
   position: relative;
 }
 
-
-/* Exemplo de ícone ou "check" */
 .custom-checkbox:checked::after {
   content: "✓";
   color: white;
