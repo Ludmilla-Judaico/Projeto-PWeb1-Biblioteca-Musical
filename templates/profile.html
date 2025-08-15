@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>perfil.usuario</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
 </head>
 <body>
@@ -45,15 +45,23 @@
     <section class="favoritos">
         <h2>Albúns favoritos</h2>
         <div class="albuns-fav">
-            <a href=""><img src="{{ url_for('static', filename='perfil.png') }}" alt=""></a>
-            <a href=""><img src="{{ url_for('static', filename='perfil.png') }}" alt=""></a>
-            <a href=""><img src="{{ url_for('static', filename='perfil.png') }}" alt=""></a>
-            <a href=""><img src="{{ url_for('static', filename='perfil.png') }}" alt=""></a>
+            <figure>
+                <a href=""><img src="{{ url_for('static', filename='perfil.png') }}" alt=""></a>
+                <a href=""><img src="{{ url_for('static', filename='perfil.png') }}" alt=""></a>
+                <a href=""><img src="{{ url_for('static', filename='perfil.png') }}" alt=""></a>
+                <a href=""><img src="{{ url_for('static', filename='perfil.png') }}" alt=""></a>
+
+                <a href=""><img src="{{ url_for('static', filename='perfil.png') }}" alt=""></a>
+                <a href=""><img src="{{ url_for('static', filename='perfil.png') }}" alt=""></a>
+                <a href=""><img src="{{ url_for('static', filename='perfil.png') }}" alt=""></a>
+                <a href=""><img src="{{ url_for('static', filename='perfil.png') }}" alt=""></a>
+            </figure>
         </div>
     </section>
 
 <!--------Albúns--------->
     <section class="albuns">
+        <h2> Albúns comentados </h2>
         <div class="grupos">
             <figure class="albuns-agrupados" id="grupo1">
                 <a href=""><img src="{{ url_for('static', filename='perfil.png')}}" alt=""></a>
