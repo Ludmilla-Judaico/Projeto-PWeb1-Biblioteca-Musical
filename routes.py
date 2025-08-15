@@ -11,7 +11,7 @@ def homepage():
 def profile():
     return render_template('profile.html')
 
-@app.route('/album')
+@app.route('/album/<int:album_id>')
 def album():
     # album = carregar_album()
     return render_template('descricao_album.html', album=album)

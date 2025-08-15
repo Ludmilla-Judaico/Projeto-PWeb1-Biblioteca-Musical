@@ -1,49 +1,72 @@
 import csv
 
-  #CRIAR OS ALBUNS
-
-dados = [["id","capa", "nome", "lancamento", "genero", "artista", "biografia"]]
+#   #CRIAR OS ALBUNS
+# CRIAR UM NOVO ARQUIVO CSV PARA COLOCAR AS MUSICAS E O IFRAME DO SPOTIFY
+dados = [["id","capa", "nome", "lancamento", "genero", "artista", "foto_bio", "biografia", "spotify"]]
+colecao = [["id","musicas" ]]
 while True:
-     album = []
-     id = input('id: ')
-     if id == 'FIM':
-         break
-     album.append(input('Capa: '))
-     album.append(input('Nome do album: '))
-     album.append(input('Lançamento: '))
-     album.append(input('Gênero: '))
-     album.append(input('Artista: '))
-     album.append(input('Biografia: '))
-     dados.append(album)
-
+    id = input('id: ')
+    album = []
+    musicas = []
+    if id == 'FIM':
+        break
+    album.append(id)
+    album.append(input('Capa: '))
+    album.append(input('Nome do album: '))
+    album.append(input('Lançamento: '))
+    album.append(input('Gênero: '))
+    album.append(input('Artista: '))
+    album.append(input('Foto da bio: '))
+    album.append(input('Biografia: '))
+    album.append(input('link do spotify: '))
+    musicas.append(id)
+    qtd_repeticoes = int(input("Qual a quantidade de músicas: "))
+    lista_musicas = []
+    for i in range(qtd_repeticoes):
+        musica = input('qual a música: ')
+        lista_musicas.append(musica)
+    musicas.append(lista_musicas)
+    dados.append(album)
+    colecao.append(musicas)
   #trocar o 'w' pelo 'a' quando for usar de verdade
 
 with open("albuns.csv", "w", newline="", encoding="utf-8") as arq:
-     escritor = csv.writer(arq, delimiter=';')
-     escritor.writerows(dados)
+    escritor = csv.writer(arq, delimiter=';')
+    escritor.writerows(dados)
+
+with open("dicografia.csv", "w", newline="", encoding="utf-8") as arq:
+    escritor = csv.writer(arq, delimiter=';')
+    escritor.writerows(musicas)
 
   #LER O ARQUIVO CSV ONDE ESTÁ A LISTA DE ALBUNS
 
 def carregar_album()->list:
-     arq = open('albuns.csv','r', encoding='utf-8')
-     lista_albuns = []
-     linhas = arq.readlines()
-     for linha in linhas[1:]:
-         id,capa,nome,lancamento,genero,artista,biografia = linha.strip().split(';')
-         album = {
-             'id': id,
-             'capa': capa,
-             'nome': nome,
-             'lancamento': lancamento,
-             'genero':genero,
-             'artista': artista,
-             'biografia': biografia
-             }
-         lista_albuns.append(album)
-     arq.close()
-     return lista_albuns
+    arq_album = open('albuns.csv','r', encoding='utf-8')
+    arq_musicas = open('discografia.csv','r', encoding='utf-8')
+    lista_albuns = []
+    linhas = arq_album.readlines()
+    for linha in linhas[1:]:
+        id,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify = linha.strip().split(';')
+        album = {
+            'id': id,
+            'capa': capa,
+            'nome': nome,
+            'lancamento': lancamento,
+            'genero':genero,
+            'artista': artista,
+            'foto_bio': foto_bio,
+            'biografia': biografia,
+            'spotify': spotify
+            }
+        lista_albuns.append(album)
+    arq_album.close()
+    return lista_albuns
 
+a = carregar_album()
+for l in a:
+  print(l)
 
+b = 
 # lista_albuns = carregar_album()
 
 # for d in lista_albuns:
