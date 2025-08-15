@@ -1,6 +1,8 @@
 from flask import render_template, url_for 
 from app import app
 
+import servicos
+
 @app.route('/')
 def homepage():
     return render_template('musicotecahome.html')
@@ -11,4 +13,5 @@ def profile():
 
 @app.route('/album')
 def album():
-    return render_template('descricao_album.html')
+    # album = carregar_album()
+    return render_template('descricao_album.html', album=album)
