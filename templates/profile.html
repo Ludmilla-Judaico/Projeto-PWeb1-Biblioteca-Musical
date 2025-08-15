@@ -7,17 +7,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
 </head>
 <body>
-
-<!--------Menu-------->
-    <header>
-        <nav class="menu">
-            <img class="logo" src="{{ url_for('static', filename='logo.png') }}" alt="logo da musicoteca">
-            <div class="navegacao">
-                <a href="">Explorar</a>
-                <a href="">Minha Biblioteca</a>
-                <a><img src="{{ url_for('static', filename='perfil-icon.png') }}" class="perfil-botão" alt="botão de perfil"></a>
-            </div>
-        </nav>
+{% extends "base.html"%}
+    {% block content %}
 
 <!--------Capa------->
         <section class="capa">
@@ -94,5 +85,6 @@
             <img src="{{url_for('static', filename='cd-aberto.png')}}" class="cd-aberto">
         </div>
     </section>
+{% endblock %}
 </body>
 </html>

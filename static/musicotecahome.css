@@ -15,7 +15,7 @@ body {
 }
 
 img.logo {
-    width: 65px;
+    width: 80px;
     height: auto;
     position: relative;
 }
@@ -25,7 +25,7 @@ img.logo {
     grid-template-areas:
     'header header header'
     'nav main sidebar';
-    grid-template-columns: 1fr 3fr 20px;
+    grid-template-columns: 0.5fr 3fr 50px;
     grid-template-rows: auto 1fr;
     height: 100vh;
 }
@@ -48,7 +48,7 @@ header {
 }
 
 #explorar {
-color: white;
+color: rgb(255, 255, 255);
 }
 
 #iconeperfil {
@@ -57,7 +57,6 @@ color: white;
 
 aside.sidebar {
     grid-area: sidebar;
-    background-color: #f5f5f5;
 }
 
 nav {
@@ -79,13 +78,24 @@ input.pesquisar {
     border: none;
     outline: none;
     padding: 5px;
-    font-size: 10px;
-    border-radius: 25px;
+    background-color: #ffffff;
+    width: 200px;
+    height: 30px;
+    font-size: 14px;
+    border-radius: 20px;
+}
+
+p {
+    display: inline;
 }
 
 p.subtitulo {
     color: white;
-
+    display: inline;
+    font-weight: bold;
+    text-decoration: underline;
+    padding: 5px;
+    margin: 0;
 }
 
 div.selecionar {
@@ -111,4 +121,30 @@ div.selecionar {
     border-color: white;
     border-style: solid;
     border-radius: 4px;
+}
+
+.custom-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+}
+
+.custom-checkbox:checked::after {
+  content: "✓";
+  color: white;
+  position: absolute;
+  left: 1px;
+  top: -4px;
+  font-size: 16px;
+}
+
+img.fones {
+    margin-top: 30px;
+    width: 200px;
+    height: auto;
 }

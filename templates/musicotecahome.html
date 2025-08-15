@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Musicoteca</title>
-    <link rel="stylesheet" href="static/musicoteca.css">
+    <link rel="stylesheet" href="../static/musicotecahome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <header>
-           <img class="logo" src="logo.png" alt="Musicoteca"/>
+           <img class="logo" src="../static/logo.png" alt="Musicoteca"/>
            <div class="menudireito">
-                <p id ="explorar">Explorar</p>
+                <p id="explorar">Explorar</p>
                 <p id="minha">Minha biblioteca</p>
                 <i class="fa-solid fa-user" id="iconeperfil"></i>
             </div>
@@ -24,28 +24,25 @@
         </form>
         <div class="selecionar">
         <p class="subtitulo">Gêneros</p>
-        <label><input type="checkbox" name="generos" value="pop">Pop</label>
-        <label><input type="checkbox" name="generos" value="rock">Rock</label>
-        <label><input type="checkbox" name="generos" value="rap">Rap</label>
-        <label><input type="checkbox" name="generos" value="R&B">R&B</label>
-        <label><input type="checkbox" name="generos" value="folk">Folk</label>
-        <label><input type="checkbox" name="generos" value="mpb">MPB</label>
-        <p class = "subtitulo">Lançamento</p>
-        <label><input type="checkbox" name="generos" value="20s">2020 - 2025</label>
-        <label><input type="checkbox" name="generos" value="10s">2010 - 2019</label>
-        <label><input type="checkbox" name="generos" value="00s">2000 - 2009</label>
-        <label><input type="checkbox" name="generos" value="90s">1990 1999</label>
-        <label><input type="checkbox" name="generos" value="80s">1980 - 1989</label>
-        <label><input type="checkbox" name="generos" value="70s">1970 - 1979</label>
-        <p class="subtitulo">Mais</p>
-        </div>
-
+        <label><input type="checkbox" name="generos" value="pop" class="custom-checkbox">Pop</label>
+        <label><input type="checkbox" name="generos" value="rock" class="custom-checkbox">Rock</label>
+        <label><input type="checkbox" name="generos" value="rap" class="custom-checkbox">Rap</label>
+        <label><input type="checkbox" name="generos" value="R&B" class="custom-checkbox">R&B</label>
+        <label><input type="checkbox" name="generos" value="folk" class="custom-checkbox">Folk</label>
+        <label><input type="checkbox" name="generos" value="mpb" class="custom-checkbox">MPB</label>
+        <p class="subtitulo">Lançamentos</p>
+        <label><input type="checkbox" name="generos" value="20s" class="custom-checkbox">2020 - 2025</label>
+        <label><input type="checkbox" name="generos" value="10s" class="custom-checkbox">2010 - 2019</label>
+        <label><input type="checkbox" name="generos" value="00s" class="custom-checkbox">2000 - 2009</label>
+        <label><input type="checkbox" name="generos" value="90s" class="custom-checkbox">1990 1999</label>
+        <label><input type="checkbox" name="generos" value="80s" class="custom-checkbox">1980 - 1989</label>
+        <label><input type="checkbox" name="generos" value="70s" class="custom-checkbox">1970 - 1979</label>
+        <img class="fones" src="../static/fones.png" alt="fones de ouvido"/>
     </nav>
-    <aside class = "sidebar"></aside>
+    <aside class="sidebar"></aside>
 
-    <main>principal</main>
+    <main></main>
 
     </div>
-
 </body>
 </html>
