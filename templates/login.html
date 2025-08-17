@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title%}Musicoteca{%endblock%}</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/login.css')}}">
+</head>
+<body>
+    <div class="wraper">
+        <div id="base">
+            <img src="{{ url_for('static', filename='logo.png')}}" alt="logo-musicoteca">
+            <form action="POST">
+                <div id="input_form">
+                    <label for="email_login">Login:</label>
+                    <input type="email" name="email_login" id="inputs">
+        
+                    <label for="senha_login">Senha:</label>
+                    <input type="password" name="senha_login" id="inputs">
+                </div>
+                    <input type="button" name="btn_login" value="Entrar" class="btn-base">
+        
+            </form>
+            <a href="" id="mudar-senha">Esqueci a senha</a>
+            <p class="cadastre-se">Ainda não tem uma conta? <a href="" id="link-cadastrese">Cadastre-se</a></p>
+        </div>
+    </div>
+</body>
+</html>
