@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title%}{% endblock %}</title>
+    <link rel="stylesheet" href="{% block style %}{% endblock %}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!--------Menu-------->
+    <header>
+        <nav class="menu">
+            <img class="logo" src="{{ url_for('static', filename='imgs/logo.png') }}" alt="logo da musicoteca">
+            <div class="navegacao">
+                <a href="/">Explorar</a>
+                <a href="">Minha Biblioteca</a>
+                <a href="/profile"><i class="fa-solid fa-user" id="iconeperfil"></i></a>
+            </div>
+        </nav>
+    </header>
+{% block content %}{% endblock %}
+</body>
+</html>
