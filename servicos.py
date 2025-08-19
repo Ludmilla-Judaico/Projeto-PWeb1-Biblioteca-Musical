@@ -34,9 +34,9 @@ with open("albuns.csv", "w", newline="", encoding="utf-8") as arq:
     escritor = csv.writer(arq, delimiter=';')
     escritor.writerows(dados)
 
-with open("dicografia.csv", "w", newline="", encoding="utf-8") as arq:
+with open("discografia.csv", "w", newline="", encoding="utf-8") as arq:
     escritor = csv.writer(arq, delimiter=';')
-    escritor.writerows(musicas)
+    escritor.writerows(colecao)
 
   #LER O ARQUIVO CSV ONDE ESTÁ A LISTA DE ALBUNS
 
@@ -61,10 +61,15 @@ def carregar_album()->list:
     arq_album.close()
     
 
-    # arq_musicas = open('discografia.csv','r', encoding='utf-8')
-    # linhas_musicas = arq_musicas.readlines()
-    # for l in linhas_musicas[1:]:
-    #         id,musicas = l.strip().split(';')
+    arq_musicas = open('discografia.csv','r', encoding='utf-8')
+    linhas_musicas = arq_musicas.readlines()
+    for l in linhas_musicas[1:]:
+            id,musicas = l.strip().split(';')
+            lista_albuns.append({
+                'id': id,
+                'musicas': musicas
+            })
+    arq_musicas.close()          
 
     return lista_albuns
 
@@ -72,6 +77,8 @@ def carregar_album()->list:
 a = carregar_album()
 for l in a:
   print(l)
+
+
 
 
 # lista_albuns = carregar_album()

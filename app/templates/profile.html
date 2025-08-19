@@ -1,0 +1,49 @@
+{% extends "base.html"%}
+{% block title %}Profile{% endblock %}
+{% block style %}{{ url_for('static', filename='styles/profile.css') }}{% endblock %}
+
+    {% block content %}
+<!--------Capa------->
+        <section class="capa">
+            <img src="{{ url_for('static', filename='perfil.png') }}" alt="foto de perfil">
+            <div class="info-usuario">
+                <h1>Miguelito</h1>
+                <div>
+                    <p class="seguidores">365 seguidores</p>
+                    <p class="seguindo">126 seguindo</p>
+                </div>
+            </div>
+        </section>
+
+<!-------Mini Menu------->
+        <nav class="mini-menu">
+            <a href="">Atividade</a>
+            <a href="">Biblioteca</a>
+            <a href="">Favoritos</a>
+            <a href="">Reports</a>
+            <a href="">Retrospectiva</a>
+        </nav>
+
+<!--------Favoritos------->
+    <section class="favoritos">
+        <h2>Albúns favoritos</h2>
+        <div class="albuns-fav">
+            <figure>
+                {% for fav in favoritos.values() %}
+                <a href=""><img src="{{ favorito.img_url }}" alt="{{ favorito.nome }}"></a>
+                {% endfor %}
+            </figure>
+        </div>
+    </section>
+
+<!--------Albúns--------->
+    <section class="albuns">
+        <h2> Albúns comentados </h2>
+        <div class="grupos">
+            <figure class="albuns-agrupados" id="grupo1">
+                
+                <a href=""><img src="" alt=""></a>
+            </figure>
+            <img src="{{url_for('static', filename='cd-aberto.png')}}" class="cd-aberto">
+        </div>
+{% endblock %}

@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+.outfit-regular {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.outfit-semibold {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.outfit-bold {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+body{
+    background-image: url(/static/fundologin.png);
+    background-size: cover;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#base {
+    color: #FFFF;
+    width: 430px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #e70092;
+    box-shadow: 0 8px 12px rgba(0,0,0,0.5);
+    border-radius: 15px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#input_form{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 1.3rem;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-family: Outfit;
+    font-weight: 500;
+}
+
+#inputs {
+    border-radius: 20px;
+    font-family: Outfit;
+    font-weight: 400;
+    font-size: 1.15rem;
+    border: none;
+    width: 350px;
+    height: 30px;
+    padding: 17px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    box-sizing: border-box;
+}
+#inputs:focus{
+    font-size: 1.15rem;
+    font-family: Outfit;
+    font-weight: 400;
+    outline: none;
+    padding: 17px;
+}
+
+.btn-base {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    width: 130px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #cc0884;
+    color: #FFFF;
+    font-family: Outfit;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2)
+}
+
+.btn-base:hover{
+    background-color: #d3389a;
+}
+
+#base img {
+    padding-top: 75px;
+    width: 250px;
+}
+
+#mudar-senha {
+    color: rgba(255, 255, 255, 0.9);
+    opacity: 0.5;
+    opacity: unset;
+    font-family: Outfit;
+    font-weight: 400;
+    font-size: 1.4rem;
+    padding: 15px;
+}
+
+#btn-cadastrese {
+    width: 200px;
+}
+
+.cadastre-se {
+    font-family: Outfit;
+    font-weight: 400;
+    font-style: normal;
+    color: #FFFF;
+    font-size: 1.3rem;
+}
+
+#link-cadastrese{
+    padding-top: 0;
+    font-weight: 600;
+    color: #FFFF;
+    text-decoration: none;
+}
