@@ -5,7 +5,7 @@
     {% block content %}
 <!--------Capa------->
         <section class="capa">
-            <img src="{{ url_for('static', filename='perfil.png') }}" alt="foto de perfil">
+            <img src="{{ url_for('static', filename='imgs/perfil.png') }}" alt="foto de perfil">
             <div class="info-usuario">
                 <h1>Miguelito</h1>
                 <div>
@@ -27,13 +27,17 @@
 <!--------Favoritos------->
     <section class="favoritos">
         <h2>Albúns favoritos</h2>
+        {% if favoritos %}
         <div class="albuns-fav">
             <figure>
-                {% for fav in favoritos.values() %}
-                <a href=""><img src="{{ favorito.img_url }}" alt="{{ favorito.nome }}"></a>
+                {% for fav in favoritos %}
+                <a href=""><img src="{{ favoritos.img_url }}" alt="{{ favoritos.nome }}"></a>
                 {% endfor %}
             </figure>
         </div>
+        {% else %}
+        <p>Comece a favoritar álbuns para que seu perfil fique cada vez mais bonito!</p>
+        {% endif %}
     </section>
 
 <!--------Albúns--------->

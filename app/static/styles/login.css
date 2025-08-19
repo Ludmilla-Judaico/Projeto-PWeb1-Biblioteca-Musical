@@ -22,7 +22,7 @@
 }
 
 body{
-    background-image: url(/static/fundologin.png);
+    background-image: url(/static/imgs/fundologin.png);
     background-size: cover;
     margin: 0;
     height: 100vh;
