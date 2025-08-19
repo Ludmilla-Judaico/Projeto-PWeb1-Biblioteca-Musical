@@ -1,15 +1,6 @@
-from flask import Flask
+from app import create_app
 
-app = Flask(__name__)
+app = create_app()
 
-# @app.route('/')
-# def homepage():
-#     return render_template('musicotecahome.html')
-
-# @app.route('/profile')
-# def profile():
-#     return render_template('profile.html')
-
-# @app.route('/album')
-# def album():
-#     return render_template('descricao_album.html')
+if __name__ == "__main__":
+    app.run(debug=True)
