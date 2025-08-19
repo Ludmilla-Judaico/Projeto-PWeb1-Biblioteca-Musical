@@ -1,9 +1,8 @@
 import csv
 
 #   #CRIAR OS ALBUNS
-# CRIAR UM NOVO ARQUIVO CSV PARA COLOCAR AS MUSICAS E O IFRAME DO SPOTIFY
 dados = [["id","capa", "nome", "lancamento", "genero", "artista", "foto_bio", "biografia", "spotify"]]
-colecao = [["id","musicas" ]]
+colecao = [["album_id","musicas" ]]
 while True:
     id = input('id: ')
     album = []
@@ -19,17 +18,18 @@ while True:
     album.append(input('Foto da bio: '))
     album.append(input('Biografia: '))
     album.append(input('link do spotify: '))
-    musicas.append(id)
+    dados.append(album)
+
     qtd_repeticoes = int(input("Qual a quantidade de músicas: "))
     lista_musicas = []
     for i in range(qtd_repeticoes):
         musica = input('qual a música: ')
         lista_musicas.append(musica)
+    musicas.append(id)
     musicas.append(lista_musicas)
-    dados.append(album)
     colecao.append(musicas)
-  #trocar o 'w' pelo 'a' quando for usar de verdade
 
+  #trocar o 'w' pelo 'a' quando for usar de verdade
 with open("albuns.csv", "w", newline="", encoding="utf-8") as arq:
     escritor = csv.writer(arq, delimiter=';')
     escritor.writerows(dados)
@@ -42,10 +42,9 @@ with open("dicografia.csv", "w", newline="", encoding="utf-8") as arq:
 
 def carregar_album()->list:
     arq_album = open('albuns.csv','r', encoding='utf-8')
-    arq_musicas = open('discografia.csv','r', encoding='utf-8')
     lista_albuns = []
-    linhas = arq_album.readlines()
-    for linha in linhas[1:]:
+    linhas_album = arq_album.readlines()  
+    for linha in linhas_album[1:]:
         id,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify = linha.strip().split(';')
         album = {
             'id': id,
@@ -60,13 +59,21 @@ def carregar_album()->list:
             }
         lista_albuns.append(album)
     arq_album.close()
+    
+
+    # arq_musicas = open('discografia.csv','r', encoding='utf-8')
+    # linhas_musicas = arq_musicas.readlines()
+    # for l in linhas_musicas[1:]:
+    #         id,musicas = l.strip().split(';')
+
     return lista_albuns
+
 
 a = carregar_album()
 for l in a:
   print(l)
 
-b = 
+
 # lista_albuns = carregar_album()
 
 # for d in lista_albuns:
