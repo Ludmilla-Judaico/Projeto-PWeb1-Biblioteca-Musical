@@ -1,4 +1,9 @@
-import csv
+import csv, os
+
+os.makedirs("data", exist_ok=True)
+
+caminho_album = 'data/albuns.csv'
+caminho_musicas = 'data/musicas.csv'
 
 #   #CRIAR OS ALBUNS
 dados = [["id","capa", "nome", "lancamento", "genero", "artista", "foto_bio", "biografia", "spotify"]]
@@ -30,18 +35,18 @@ while True:
     colecao.append(musicas)
 
   #trocar o 'w' pelo 'a' quando for usar de verdade
-with open("albuns.csv", "w", newline="", encoding="utf-8") as arq:
+with open(caminho_album, "w", newline="", encoding="utf-8") as arq:
     escritor = csv.writer(arq, delimiter=';')
     escritor.writerows(dados)
 
-with open("discografia.csv", "w", newline="", encoding="utf-8") as arq:
+with open(caminho_musicas, "w", newline="", encoding="utf-8") as arq:
     escritor = csv.writer(arq, delimiter=';')
     escritor.writerows(colecao)
 
   #LER O ARQUIVO CSV ONDE ESTÁ A LISTA DE ALBUNS
 
 def carregar_album()->list:
-    arq_album = open('albuns.csv','r', encoding='utf-8')
+    arq_album = open(caminho_album,'r', encoding='utf-8')
     lista_albuns = []
     linhas_album = arq_album.readlines()  
     for linha in linhas_album[1:]:
@@ -61,7 +66,7 @@ def carregar_album()->list:
     arq_album.close()
     
 
-    arq_musicas = open('discografia.csv','r', encoding='utf-8')
+    arq_musicas = open(caminho_musicas,'r', encoding='utf-8')
     linhas_musicas = arq_musicas.readlines()
     for l in linhas_musicas[1:]:
             id,musicas = l.strip().split(';')

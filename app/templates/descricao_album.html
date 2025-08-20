@@ -1,5 +1,5 @@
-{% extends "base.html"%}
-{% block title%}Album{% endblock %}
+{% extends "base.html" %}
+{% block title %}Album{% endblock %}
 {% block style %} {{ url_for('static', filename='styles/descricao_album.css') }} {% endblock %}
 
 {% block content %}
@@ -16,8 +16,8 @@
                 <p>Pop, 2012</p>
                 <div class="rating">
                     <label class="heart-wrapper">
-                    <input type="checkbox" class="heart-checkbox" />
-                    <span class="heart">❤</span>
+                    <input type="checkbox" class="heart-checkbox" name="favoritar" />
+                    <span class="heart"><a href="{{ url_for('app.favoritar', album_id=1) }}">❤</a></span>
                     </label>
                     <input type="radio" id="star5" name="rating" value="5" />
                     <label for="star5" title="5 estrelas">★</label>
