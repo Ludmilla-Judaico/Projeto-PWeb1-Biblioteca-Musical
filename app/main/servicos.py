@@ -4,8 +4,10 @@ os.makedirs("data", exist_ok=True)
 
 caminho_album = 'data/albuns.csv'
 caminho_musicas = 'data/musicas.csv'
+caminho_review = 'data/review.csv'
 
 #   #CRIAR OS ALBUNS
+# NO LUGAR DOS INPUTS COLOCAR OS FORMULARIOS
 dados = [["id","capa", "nome", "lancamento", "genero", "artista", "foto_bio", "biografia", "spotify"]]
 colecao = [["album_id","musicas" ]]
 while True:
@@ -34,12 +36,21 @@ while True:
     musicas.append(lista_musicas)
     colecao.append(musicas)
 
+# comentarios = [["id_album", "comentario"]]
+# while True:
+
+
+
   #trocar o 'w' pelo 'a' quando for usar de verdade
-with open(caminho_album, "w", newline="", encoding="utf-8") as arq:
+with open(caminho_album, "a", newline="", encoding="utf-8") as arq:
     escritor = csv.writer(arq, delimiter=';')
     escritor.writerows(dados)
 
-with open(caminho_musicas, "w", newline="", encoding="utf-8") as arq:
+with open(caminho_musicas, "a", newline="", encoding="utf-8") as arq:
+    escritor = csv.writer(arq, delimiter=';')
+    escritor.writerows(colecao)
+
+with open(caminho_review, "w", newline="", encoding="utf-8") as arq:
     escritor = csv.writer(arq, delimiter=';')
     escritor.writerows(colecao)
 
@@ -77,6 +88,9 @@ def carregar_album()->list:
     arq_musicas.close()          
 
     return lista_albuns
+
+def review():
+
 
 
 a = carregar_album()
