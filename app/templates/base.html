@@ -12,14 +12,12 @@
 
 <!--------Menu-------->
     <header>
-        <nav class="menu">
             <img class="logo" src="{{ url_for('static', filename='imgs/logo.png') }}" alt="logo da musicoteca">
-            <div class="navegacao">
-                <a href="/">Explorar</a>
-                <a href="">Minha Biblioteca</a>
+            <div class="menudireito">
+                <a id="explorar" href="/">Explorar</a>
+                <a id="minhabiblioteca" href="">Minha Biblioteca</a>
                 <a href="/profile"><i class="fa-solid fa-user" id="iconeperfil"></i></a>
             </div>
-        </nav>
     </header>
 {% block content %}{% endblock %}
 </body>

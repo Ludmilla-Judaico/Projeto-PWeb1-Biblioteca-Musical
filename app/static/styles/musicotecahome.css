@@ -79,7 +79,7 @@ p.subtitulo {
     display: inline;
     font-weight: bold;
     text-decoration: underline;
-    padding: 5px;
+    padding: 0;
     margin: 0;
 }
 
@@ -87,6 +87,7 @@ div.selecionar {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding: 10px;
 }
 
 .selecionar label {
