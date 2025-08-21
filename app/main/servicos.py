@@ -8,33 +8,31 @@ caminho_review = 'data/review.csv'
 
 #   #CRIAR OS ALBUNS
 # NO LUGAR DOS INPUTS COLOCAR OS FORMULARIOS
-dados = [["id","capa", "nome", "lancamento", "genero", "artista", "foto_bio", "biografia", "spotify"]]
-colecao = [["album_id","musicas" ]]
-while True:
-    id = input('id: ')
+def album(id,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify):
+    dados = [["id","capa", "nome", "lancamento", "genero", "artista", "foto_bio", "biografia", "spotify"]]
     album = []
-    musicas = []
-    if id == 'FIM':
-        break
-    album.append(id)
-    album.append(input('Capa: '))
-    album.append(input('Nome do album: '))
-    album.append(input('Lançamento: '))
-    album.append(input('Gênero: '))
-    album.append(input('Artista: '))
-    album.append(input('Foto da bio: '))
-    album.append(input('Biografia: '))
-    album.append(input('link do spotify: '))
-    dados.append(album)
+    for i in range(9):
+        album.append(id)
+        album.append(capa)
+        album.append(nome)
+        album.append(lancamento)
+        album.append(genero)
+        album.append(artista)
+        album.append(foto_bio)
+        album.append(biografia)
+        album.append(spotify)
+        dados.append(album)
+    return dados
 
-    qtd_repeticoes = int(input("Qual a quantidade de músicas: "))
-    lista_musicas = []
-    for i in range(qtd_repeticoes):
-        musica = input('qual a música: ')
-        lista_musicas.append(musica)
-    musicas.append(id)
-    musicas.append(lista_musicas)
-    colecao.append(musicas)
+def musicas(id,musicas):
+        colecao = [["album_id","musicas" ]]
+        faixas = []
+        for m in musicas:
+             musica = m.strip().split(';')
+             faixas.append(musica)
+        colecao.append(id)
+        colecao.append(faixas)
+        return colecao
 
 # comentarios = [["id_album", "comentario"]]
 # while True:
@@ -55,7 +53,7 @@ with open(caminho_review, "w", newline="", encoding="utf-8") as arq:
     escritor.writerows(colecao)
 
   #LER O ARQUIVO CSV ONDE ESTÁ A LISTA DE ALBUNS
-
+# AQUI A FUNÇÃO VAI RECEBER OS VALORES E COLOCAR EM UM DIC PARA FICAR MAIS FACIL PRA SUBSTITUIR
 def carregar_album()->list:
     arq_album = open(caminho_album,'r', encoding='utf-8')
     lista_albuns = []
@@ -88,9 +86,6 @@ def carregar_album()->list:
     arq_musicas.close()          
 
     return lista_albuns
-
-
-
 
 a = carregar_album()
 for l in a:

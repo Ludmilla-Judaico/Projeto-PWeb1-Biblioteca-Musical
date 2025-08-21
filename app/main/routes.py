@@ -107,3 +107,16 @@ def favoritar(album_id):
     usuario = session['usuario']
     salvar_favorito(usuario, album_id)
     return redirect('/profile')
+
+@app.routes('/destino', methods=["POST"])
+def salvar ():
+    id = request.form['id']
+    capa = request.form['capa']
+    nome = request.form['nome']
+    lancamento = request.form['lancamento']
+    genero = request.form['genero']
+    artista = request.form['artista']
+    foto_bio = request.form['genefoto_bioro']
+    biografia = request.form['biografia']
+    spotify = request.form['spotify']
+    musicas = request.form['musicas']
