@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+label {
+    font-size: 1.3rem;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-family: Outfit;
+    font-weight: 500;
+}
+    </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+</head>
+<body>
+    <form action="/destino" method="post">
+        <label for="id">id da música:</label>
+        <input type="text" name="id" id="id" maxlength="30" required>
+
+        <label for="capa">URL da capa do album:</label>
+        <textarea name="capa" id="url" rows="7" cols="50" required></textarea>
+
+        <label for="nome">Nome do album:</label>
+        <input type="text" name="nome" id="nome" maxlength="30" required>
+
+        <label for="lancamento">Data de lançamento do album:</label>
+        <input type="text" name="lancamento" id="lancamento" maxlength="30" required>
+
+        <label for="genero">Genero do album:</label>
+        <input type="text" name="genero" id="genero" maxlength="30" required>
+
+        <label for="artista">Nome do artista:</label>
+        <input type="text" name="artista" id="artista" maxlength="30" required>
+
+        <label for="foto_bio">URL da foto da biografia:</label>
+        <input type="text" name="foto_bio" id="foto_bio" maxlength="30" required>
+
+        <label for="biografia">Biografia:</label>
+        <textarea name="biografia" id="biografia" rows="7" cols="50" required></textarea>
+
+        <label for="spotify">Iframe do spotify:</label>
+        <textarea name="spotify" id="spotify" rows="7" cols="50" required></textarea>
+
+        <label for="musicas">Digite as músicas (separe por pronto-virgula ';'):</label>
+        <textarea name="musicas" id="musicas" rows="7" cols="50" required></textarea>
+
+        <button type="submit">Enviar</button>
+  
+    </form>
+</body>
+</html>
