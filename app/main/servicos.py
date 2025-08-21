@@ -89,7 +89,6 @@ def carregar_album()->list:
 
     return lista_albuns
 
-def review():
 
 
 
