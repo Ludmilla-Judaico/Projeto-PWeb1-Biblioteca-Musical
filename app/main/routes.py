@@ -75,6 +75,10 @@ def login():
 def cadastro():
     return render_template('signin.html')
 
+@app.route('/biblioteca')
+def minha_biblioteca():
+    return render_template('biblioteca.html')
+
 @app.route('/profile')
 def profile():
     usuario = session['usuario']
