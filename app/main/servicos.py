@@ -89,13 +89,8 @@ def carregar_album()->list:
 
     return lista_albuns
 
-def review():
 
-
-
-a = carregar_album()
-for l in a:
-  print(l)
+    
 
 
 

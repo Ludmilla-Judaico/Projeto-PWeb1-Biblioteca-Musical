@@ -3,11 +3,11 @@ import csv, os
 from . import app
 
 #==================FUNÇÕES====================
-caminho_albuns = 'data/albuns.csv'
+caminho_albuns_lud = 'data/albuns-lud.csv'
 
 def carregar_albuns():
-    if not os.path.exists(caminho_albuns):
-        with open(caminho_albuns, 'w', newline='', encoding='utf-8') as arquivo:
+    if not os.path.exists(caminho_albuns_lud):
+        with open(caminho_albuns_lud, 'w', newline='', encoding='utf-8') as arquivo:
             writer = csv.writer(arquivo)
             writer.writerow(['id', 'nome', 'artista', 'capa'])
             albuns = [
@@ -17,11 +17,11 @@ def carregar_albuns():
                 writer.writerow(album)
         
     albuns = []
-    with open(caminho_albuns, newline='', encoding='utf-8') as arquivo:
+    with open(caminho_albuns_lud, newline='', encoding='utf-8') as arquivo:
         reader = csv.DictReader(arquivo)
         for row in reader:
             row["id"] = str(row["id"])
-            albuns.append(row)
+            albuns.append(row) 
     return albuns
 
 caminho_favoritos = 'data/favoritos.csv'
@@ -48,7 +48,6 @@ def carregar_favoritos(usuario):
 def salvar_favorito(usuario, album_id):
     inicializar_favoritos()
 
-    
     favoritos = []
     with open(caminho_favoritos, newline="", encoding="utf-8") as arquivo:
         reader = csv.DictReader(arquivo)
@@ -61,11 +60,38 @@ def salvar_favorito(usuario, album_id):
             writer = csv.writer(arquivo)
             writer.writerow([usuario, album_id])
 
+def signin(user, email, senha):
+    with open('data/usuarios.csv', 'a', newline="", encoding="utf-8") as arquivo_user:
+        writer = csv.writer(arquivo_user)
+        writer.writerow([user, email, senha])
+
+
 #==========================ROTAS================================
 @app.route('/')
 def homepage():
     albuns = carregar_albuns()
     return render_template('musicotecahome.html', albuns=albuns)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    session['usuario'] = 'ludmilla'
+    return render_template('login.html')
+
+@app.route('/cadastro', methods=['GET', 'POST'])
+def cadastro():
+    if request.method == 'POST':
+        user = request.form['nome-user']
+        email_user = request.form['email-user']
+        senha_user = request.form['senha-user']
+        signin(user, email_user, senha_user)
+        flash("Cadastro realizado com sucesso :)", "success")
+        return redirect(url_for('app.cadastro'))
+    
+    return render_template('signin.html')
+
+@app.route('/biblioteca')
+def minha_biblioteca():
+    return render_template('biblioteca.html')
 
 @app.route('/profile')
 def profile():
@@ -85,11 +111,6 @@ def profile():
 def album():
     return render_template('descricao_album.html')
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    session['usuario'] = 'ludmilla'
-    return render_template('login.html')
-
 @app.route('/logout')
 def logout():
     session.pop('usuario', None)
@@ -105,5 +126,6 @@ def favoritar(album_id):
         return redirect(url_for('login'))
     
     usuario = session['usuario']
+
     salvar_favorito(usuario, album_id)
     return redirect('/profile')
