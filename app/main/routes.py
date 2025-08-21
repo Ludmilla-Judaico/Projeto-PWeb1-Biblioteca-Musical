@@ -60,6 +60,12 @@ def salvar_favorito(usuario, album_id):
             writer = csv.writer(arquivo)
             writer.writerow([usuario, album_id])
 
+def signin(user, email, senha):
+    with open('data/usuarios.csv', 'a', newline="", encoding="utf-8") as arquivo_user:
+        writer = csv.writer(arquivo_user)
+        writer.writerow([user, email, senha])
+
+
 #==========================ROTAS================================
 @app.route('/')
 def homepage():
@@ -71,8 +77,16 @@ def login():
     session['usuario'] = 'ludmilla'
     return render_template('login.html')
 
-@app.route('/cadastro')
+@app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
+    if request.method == 'POST':
+        user = request.form['nome-user']
+        email_user = request.form['email-user']
+        senha_user = request.form['senha-user']
+        signin(user, email_user, senha_user)
+        flash("Cadastro realizado com sucesso :)", "success")
+        return redirect(url_for('app.cadastro'))
+    
     return render_template('signin.html')
 
 @app.route('/profile')

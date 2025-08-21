@@ -22,7 +22,7 @@
 }
 
 body{
-    background-image: url(/static/imgs/fundologin.png);
+    background-image: url(/static/imgs/fundomusicoteca.png);
     background-size: cover;
     margin: 0;
     height: 100vh;
@@ -48,6 +48,7 @@ form {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
 }
 
 #input_form{
@@ -89,8 +90,8 @@ label {
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
-    width: 130px;
-    padding: 10px;
+    width: auto;
+    padding: 12px;
     border-radius: 10px;
     border: none;
     background-color: #cc0884;
@@ -116,7 +117,7 @@ label {
     font-family: Outfit;
     font-weight: 400;
     font-size: 1.4rem;
-    padding: 15px;
+    padding: 10px;
 }
 
 #btn-cadastrese {
@@ -129,6 +130,7 @@ label {
     font-style: normal;
     color: #FFFF;
     font-size: 1.3rem;
+    margin-top: 10px;
 }
 
 #link-cadastrese{
@@ -136,4 +138,8 @@ label {
     font-weight: 600;
     color: #FFFF;
     text-decoration: none;
+}
+
+#btn-criar-conta {
+    margin-bottom: 30px;
 }
