@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-.menu{
+header{
     background-color: #ff00a1;
     padding: 1%;
     font-size: 25px;
@@ -13,22 +13,22 @@
     justify-content: space-between;
 }
 
-.menu .navegacao{
+.menudireito{
     text-align: end;
 }
 
-.menu .navegacao a{
+.menudireito a{
     margin: 0 1rem 0 1rem;
     text-decoration: none;
     color: white;
 }
 
-.menu .logo {
+header .logo {
     width: 120px;
     height: 60px;
 }
 
-.menu .perfil-botão{
+.menudireito #iconeperfil{
     width: 40px;
     height: 40px;
     border-radius: 50%;
