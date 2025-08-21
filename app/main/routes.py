@@ -66,6 +66,15 @@ def homepage():
     albuns = carregar_albuns()
     return render_template('musicotecahome.html', albuns=albuns)
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    session['usuario'] = 'ludmilla'
+    return render_template('login.html')
+
+@app.route('/cadastro')
+def cadastro():
+    return render_template('signin.html')
+
 @app.route('/profile')
 def profile():
     usuario = session['usuario']
@@ -83,11 +92,6 @@ def profile():
 @app.route('/album')
 def album():
     return render_template('descricao_album.html')
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    session['usuario'] = 'ludmilla'
-    return render_template('login.html')
 
 @app.route('/logout')
 def logout():
