@@ -93,12 +93,6 @@ def review():
 
 
 
-a = carregar_album()
-for l in a:
-  print(l)
-
-
-
 
 # lista_albuns = carregar_album()
 

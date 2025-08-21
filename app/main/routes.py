@@ -3,11 +3,11 @@ import csv, os
 from . import app
 
 #==================FUNÇÕES====================
-caminho_albuns = 'data/albuns.csv'
+caminho_albuns_lud = 'data/albuns-lud.csv'
 
 def carregar_albuns():
-    if not os.path.exists(caminho_albuns):
-        with open(caminho_albuns, 'w', newline='', encoding='utf-8') as arquivo:
+    if not os.path.exists(caminho_albuns_lud):
+        with open(caminho_albuns_lud, 'w', newline='', encoding='utf-8') as arquivo:
             writer = csv.writer(arquivo)
             writer.writerow(['id', 'nome', 'artista', 'capa'])
             albuns = [
@@ -17,11 +17,11 @@ def carregar_albuns():
                 writer.writerow(album)
         
     albuns = []
-    with open(caminho_albuns, newline='', encoding='utf-8') as arquivo:
+    with open(caminho_albuns_lud, newline='', encoding='utf-8') as arquivo:
         reader = csv.DictReader(arquivo)
         for row in reader:
             row["id"] = str(row["id"])
-            albuns.append(row)
+            albuns.append(row) 
     return albuns
 
 caminho_favoritos = 'data/favoritos.csv'
@@ -48,7 +48,6 @@ def carregar_favoritos(usuario):
 def salvar_favorito(usuario, album_id):
     inicializar_favoritos()
 
-    
     favoritos = []
     with open(caminho_favoritos, newline="", encoding="utf-8") as arquivo:
         reader = csv.DictReader(arquivo)
@@ -105,5 +104,6 @@ def favoritar(album_id):
         return redirect(url_for('login'))
     
     usuario = session['usuario']
+
     salvar_favorito(usuario, album_id)
     return redirect('/profile')
