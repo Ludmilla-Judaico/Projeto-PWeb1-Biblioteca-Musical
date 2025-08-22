@@ -2,6 +2,12 @@ from flask import render_template, url_for, redirect, session, request, flash
 from . import app
 from .funções import carregar_albuns, carregar_favoritos, salvar_favorito
 
+def signin(user, email, senha):
+    with open('data/usuarios.csv', 'a', newline="", encoding="utf-8") as arquivo_user:
+        writer = csv.writer(arquivo_user)
+        writer.writerow([user, email, senha])
+
+
 #==========================ROTAS================================
 @app.route('/')
 def homepage():
@@ -13,8 +19,16 @@ def login():
     session['usuario'] = 'ludmilla'
     return render_template('login.html')
 
-@app.route('/cadastro')
+@app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
+    if request.method == 'POST':
+        user = request.form['nome-user']
+        email_user = request.form['email-user']
+        senha_user = request.form['senha-user']
+        signin(user, email_user, senha_user)
+        flash("Cadastro realizado com sucesso :)", "success")
+        return redirect(url_for('app.cadastro'))
+    
     return render_template('signin.html')
 
 @app.route('/biblioteca')
@@ -57,3 +71,16 @@ def favoritar(album_id):
 
     salvar_favorito(usuario, album_id)
     return redirect('/profile')
+
+@app.routes('/destino', methods=["POST"])
+def salvar ():
+    id = request.form['id']
+    capa = request.form['capa']
+    nome = request.form['nome']
+    lancamento = request.form['lancamento']
+    genero = request.form['genero']
+    artista = request.form['artista']
+    foto_bio = request.form['genefoto_bioro']
+    biografia = request.form['biografia']
+    spotify = request.form['spotify']
+    musicas = request.form['musicas']
