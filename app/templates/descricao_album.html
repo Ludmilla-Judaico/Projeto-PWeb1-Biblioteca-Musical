@@ -1,23 +1,23 @@
-{% extends "base.html"%}
-{% block title%}Album{% endblock %}
+{% extends "base.html" %}
+{% block title %}Album{% endblock %}
 {% block style %} {{ url_for('static', filename='styles/descricao_album.css') }} {% endblock %}
 
-{% block content %} 
+{% block content %}
     <section>
         <div class="container">
             <div class='box box-1'>
-                <img id="capa_cd" src="{{ album.capa }}">
+                <img id="capa_cd" src="{{ albuns.capa }}">
                 <img id="cd" src="{{ url_for('static', filename='imgs/Lana Del Rey -Born to Die CD.jpg') }}">
             </div>
 
             <div class='box box-2'>
                 <h1>{{ album.nome }}</h1>
                 <h3>{{ album.artista }}</h3>
-                <p>{{ album.genero }}, {{ album.lancamento }}</p>
+                <p>{{ album.genero }}, {{ album.lancamento}}</p>
                 <div class="rating">
                     <label class="heart-wrapper">
-                    <input type="checkbox" class="heart-checkbox" />
-                    <span class="heart">❤</span>
+                    <input type="checkbox" class="heart-checkbox" name="favoritar" />
+                    <span class="heart"><a href="{{ url_for('app.favoritar', album_id=1) }}">❤</a></span>
                     </label>
                     <input type="radio" id="star5" name="rating" value="5" />
                     <label for="star5" title="5 estrelas">★</label>
@@ -33,27 +33,17 @@
 
                  <div class="musicas">
                     <ol>
-                        {% for m in musiscas%}
-                        <li>{{ musicas.musicas[m]}}</li>
+                        {% for m in musicas%}
+                        <li>{{ musicas.musicas[m] }}</li>
                         {% endfor %}
-                        <!-- <li>Blue Jeans</li>
-                        <li>Video Games</li>
-                        <li>Diet Mountain Dew</li>
-                        <li>Born To Die</li>
-                        <li>National anthem</li>
-                        <li>Dark Paradise</li>
-                        <li>Radio</li>
-                        <li>Carmen</li>
-                        <li>Millon Dollar Man</li>
-                        <li>Summertime Sadness</li>
-                        <li>This Is What Makes Us Girls</li> -->
+
                     </ol>
                  </div>
             </div>
 
             <div class='box box-3'>
                 <div class="biografia">
-                    <img id="imagem_bio" src="{{album.foto_bio}}">
+                    <img id="imagem_bio" src="{{ album.foto_bio }}">
                     <p id="texto_bio">{{ album.biografia }}</p>
                 </div>
             </div>
@@ -65,6 +55,7 @@
 
             <h1 class="comentario">Comentários</h1>
 
+        {% for c in comentarios %}
         <div class="container-2">
             <div class='box box-5'>
                 <img class="foto_perfil" src="{{ url_for('static', filename='imgs/ft de perfil teste.jpg')}}">
@@ -73,6 +64,10 @@
                     <textarea id="comentario" name="comentario" rows="5" cols="33" placeholder="Eai, o que você achou dessa discografia?"></textarea>
                 </form>
             </div>
+        {% endfor %}
+
+
+
             <div class='box box-6'><img class="foto_perfil" src="{{ url_for('static', filename='imgs/ft de perfil teste.jpg')}}">
                 <form class="comentario" action="/destino" method="post">
                     <label for="comentario"></label>

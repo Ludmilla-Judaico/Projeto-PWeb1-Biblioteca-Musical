@@ -18,36 +18,13 @@
 <!-------Mini Menu------->
         <nav class="mini-menu">
             <a href="">Atividade</a>
-            <a href="">Biblioteca</a>
-            <a href="">Favoritos</a>
+            <a href="/biblioteca">Biblioteca</a>
+            <a href="/favoritos">Favoritos</a>
             <a href="">Reports</a>
             <a href="">Retrospectiva</a>
         </nav>
 
-<!--------Favoritos------->
-    <section class="favoritos">
-        <h2>Albúns favoritos</h2>
-        {% if favoritos %}
-        <div class="albuns-fav">
-            <figure>
-                {% for fav in favoritos %}
-                <a href=""><img src="{{ favoritos.img_url }}" alt="{{ favoritos.nome }}"></a>
-                {% endfor %}
-            </figure>
-        </div>
-        {% else %}
-        <p>Comece a favoritar álbuns para que seu perfil fique cada vez mais bonito!</p>
-        {% endif %}
-    </section>
+    {% block profile %} {% endblock %}
 
-<!--------Albúns--------->
-    <section class="albuns">
-        <h2> Albúns comentados </h2>
-        <div class="grupos">
-            <figure class="albuns-agrupados" id="grupo1">
-                
-                <a href=""><img src="" alt=""></a>
-            </figure>
-            <img src="{{url_for('static', filename='cd-aberto.png')}}" class="cd-aberto">
-        </div>
+
 {% endblock %}

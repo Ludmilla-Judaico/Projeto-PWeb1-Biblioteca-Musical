@@ -1,6 +1,7 @@
 from flask import render_template, url_for, redirect, session, request, flash
+import csv
 from . import app
-from .funções import carregar_albuns, carregar_favoritos, salvar_favorito
+from .funcoes import carregar_albuns, carregar_favoritos, salvar_favorito
 
 def signin(user, email, senha):
     with open('data/usuarios.csv', 'a', newline="", encoding="utf-8") as arquivo_user:
@@ -16,7 +17,7 @@ def homepage():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    session['usuario'] = 'ludmilla'
+    
     return render_template('login.html')
 
 @app.route('/cadastro', methods=['GET', 'POST'])
@@ -37,6 +38,8 @@ def minha_biblioteca():
 
 @app.route('/profile')
 def profile():
+    if 'usuario' not in session:
+        redirect('/login')
     usuario = session['usuario']
     albuns = carregar_albuns()
     favoritos_ids = carregar_favoritos(usuario)
@@ -59,6 +62,10 @@ def logout():
     flash('Deslogado com sucesso, volte sempre!')
     return redirect('/login')
 
+@app.route('/favoritos')
+def favoritos():
+    return render_template('favoritos.html')
+
 #======================FAVORITAR=====================
 
 @app.route('/favoritar/<album_id>')
@@ -72,7 +79,7 @@ def favoritar(album_id):
     salvar_favorito(usuario, album_id)
     return redirect('/profile')
 
-@app.routes('/destino', methods=["POST"])
+@app.route('/destino', methods=["POST"])
 def salvar ():
     id = request.form['id']
     capa = request.form['capa']

@@ -1,0 +1,19 @@
+{% extends "profile.html" %}
+
+{% block profile %}
+<!--------Favoritos------->
+    <section class="favoritos">
+        <h2>Albúns favoritos</h2>
+        {% if favoritos %}
+        <div class="albuns-fav">
+            <figure>
+                {% for fav in favoritos %}
+                <a href=""><img src="{{ favoritos.capa }}" alt="{{ favoritos.nome }}"></a>
+                {% endfor %}
+            </figure>
+        </div>
+        {% else %}
+        <p>Comece a favoritar álbuns para que seu perfil fique cada vez mais bonito!</p>
+        {% endif %}
+    </section>
+{% endblock %}

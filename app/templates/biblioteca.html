@@ -1,2 +1,14 @@
-{% extends "musicotecahome.html" %}
-{% block title %}Minha Biblioteca{% endblock %}
+{% extends "profile.html" %}
+
+{% block profile %}
+     <section class="albuns">
+        <h2> Albúns comentados </h2>
+        <div class="grupos">
+            <figure class="albuns-agrupados" id="grupo1">
+                
+                <a href=""><img src="" alt=""></a>
+            </figure>
+            <img src="{{url_for('static', filename='cd-aberto.png')}}" class="cd-aberto">
+        </div>
+
+{% endblock %}

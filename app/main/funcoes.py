@@ -9,7 +9,7 @@ def carregar_albuns():
             writer = csv.writer(arquivo)
             writer.writerow(['id', 'nome', 'artista', 'capa'])
             albuns = [
-                ["1","album","Lana Del Rey","https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Thriller.png"]
+                ["1","album","Lana Del Rey","https://upload.wikimedia.org/wikipedia/pt/thumb/4/47/LanaDelRey_BornToDie.jpg/250px-LanaDelRey_BornToDie.jpg"]
             ]
             for album in albuns:
                 writer.writerow(album)
@@ -29,7 +29,7 @@ def inicializar_favoritos():
         os.makedirs(os.path.dirname(caminho_favoritos), exist_ok=True)
         with open(caminho_favoritos, "w", newline="", encoding="utf-8") as arquivo:
             writer = csv.writer(arquivo)
-            writer.writerow(["usuario", "album_id"])
+            writer.writerow(["usuario", "album_id", "capa"])
 
 def carregar_favoritos(usuario):
     favoritos = []
@@ -43,7 +43,7 @@ def carregar_favoritos(usuario):
                 favoritos.append(str(row['album_id']))
     return favoritos
 
-def salvar_favorito(usuario, album_id):
+def salvar_favorito(usuario, album_id, capa):
     inicializar_favoritos()
 
     favoritos = []
@@ -56,4 +56,4 @@ def salvar_favorito(usuario, album_id):
     if album_id not in favoritos:
         with open(caminho_favoritos, "a", newline="", encoding="utf-8") as arquivo:
             writer = csv.writer(arquivo)
-            writer.writerow([usuario, album_id])
+            writer.writerow([usuario, album_id, capa])
