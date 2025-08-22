@@ -87,9 +87,6 @@ def carregar_album()->list:
 
     return lista_albuns
 
-a = carregar_album()
-for l in a:
-  print(l)
 
 
 
