@@ -1,0 +1,59 @@
+from flask import session
+import csv, os
+#==================FUNÇÕES====================
+caminho_albuns_lud = 'data/albuns-lud.csv'
+
+def carregar_albuns():
+    if not os.path.exists(caminho_albuns_lud):
+        with open(caminho_albuns_lud, 'w', newline='', encoding='utf-8') as arquivo:
+            writer = csv.writer(arquivo)
+            writer.writerow(['id', 'nome', 'artista', 'capa'])
+            albuns = [
+                ["1","album","Lana Del Rey","https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Thriller.png"]
+            ]
+            for album in albuns:
+                writer.writerow(album)
+        
+    albuns = []
+    with open(caminho_albuns_lud, newline='', encoding='utf-8') as arquivo:
+        reader = csv.DictReader(arquivo)
+        for row in reader:
+            row["id"] = str(row["id"])
+            albuns.append(row) 
+    return albuns
+
+caminho_favoritos = 'data/favoritos.csv'
+
+def inicializar_favoritos():
+    if not os.path.exists(caminho_favoritos):
+        os.makedirs(os.path.dirname(caminho_favoritos), exist_ok=True)
+        with open(caminho_favoritos, "w", newline="", encoding="utf-8") as arquivo:
+            writer = csv.writer(arquivo)
+            writer.writerow(["usuario", "album_id"])
+
+def carregar_favoritos(usuario):
+    favoritos = []
+    if not os.path.exists(caminho_favoritos):
+        return favoritos
+    
+    with open(caminho_favoritos, newline='', encoding='utf-8') as arquivo:
+        reader = csv.DictReader(arquivo)
+        for row in reader:
+            if row['usuario'] == usuario:
+                favoritos.append(str(row['album_id']))
+    return favoritos
+
+def salvar_favorito(usuario, album_id):
+    inicializar_favoritos()
+
+    favoritos = []
+    with open(caminho_favoritos, newline="", encoding="utf-8") as arquivo:
+        reader = csv.DictReader(arquivo)
+        for row in reader:
+            if row["usuario"] == usuario:
+                favoritos.append(row["album_id"])
+    
+    if album_id not in favoritos:
+        with open(caminho_favoritos, "a", newline="", encoding="utf-8") as arquivo:
+            writer = csv.writer(arquivo)
+            writer.writerow([usuario, album_id])
