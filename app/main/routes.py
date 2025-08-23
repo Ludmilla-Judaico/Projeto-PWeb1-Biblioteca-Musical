@@ -17,7 +17,11 @@ def homepage():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    
+    if(request.method == 'POST'):
+        usuario = request.form['email_login']
+        senha = request.form['senha_login']
+        if not((usuario in 'usuarios.csv') and (senha in 'usuarios.csv')):
+            redirect('/login', flash('Usuário não cadastrado!'))
     return render_template('login.html')
 
 @app.route('/cadastro', methods=['GET', 'POST'])
