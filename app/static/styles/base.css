@@ -1,6 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
 *{
     margin: 0%;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     box-sizing: border-box;
 }
 
@@ -11,6 +12,7 @@ header{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 
 .menudireito{
@@ -21,16 +23,15 @@ header{
     margin: 0 1rem 0 1rem;
     text-decoration: none;
     color: white;
+    transition: 0.5s;
+}
+
+.menudireito #editar:hover, .menudireito #explorar:hover{
+    background-color: lightpink;
+    border-radius: 50%;
 }
 
 header .logo {
     width: 120px;
     height: 60px;
 }
-
-.menudireito #iconeperfil{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-}
-
