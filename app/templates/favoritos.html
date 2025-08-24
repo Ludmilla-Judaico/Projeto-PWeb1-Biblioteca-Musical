@@ -3,8 +3,9 @@
 {% block profile %}
 <!--------Favoritos------->
     <section class="favoritos">
-        <h2>Albúns favoritos</h2>
+        
         {% if favoritos %}
+        <h2 style="font-size: 30px;">Albúns favoritos</h2>
         <div class="albuns-fav">
             <figure>
                 {% for fav in favoritos %}
@@ -13,7 +14,7 @@
             </figure>
         </div>
         {% else %}
-        <p>Comece a favoritar álbuns para que seu perfil fique cada vez mais bonito!</p>
+        <p style="font-size: 30px;">Comece a favoritar álbuns para que seu perfil fique cada vez mais bonito!</p>
         {% endif %}
     </section>
 {% endblock %}

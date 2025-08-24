@@ -10,19 +10,19 @@
     {% block content %}
         <div id="base">
             <img src="{{ url_for('static', filename='imgs/logo.png')}}" alt="logo-musicoteca">
-            <form action="POST">
+            <form action="/login" method="POST">
                 <div id="input_form">
                     <label for="email_login">Login:</label>
-                    <input type="email" name="email_login" id="inputs">
+                    <input type="email" name="email_login" class="inputs">
         
                     <label for="senha_login">Senha:</label>
-                    <input type="password" name="senha_login" id="inputs">
+                    <input type="password" name="senha_login" class="inputs">
                 </div>
                     <input type="submit" name="btn_login" value="Entrar" class="btn-base">
         
             </form>
             <a href="" id="mudar-senha">Esqueci a senha</a>
-            <p class="cadastre-se">Ainda não tem uma conta? <a href="" id="link-cadastrese">Cadastre-se</a></p>
+            <p class="cadastre-se">Ainda não tem uma conta? <a href="/cadastro" id="link-cadastrese">Cadastre-se</a></p>
         </div>
     {% endblock %}
 </body>

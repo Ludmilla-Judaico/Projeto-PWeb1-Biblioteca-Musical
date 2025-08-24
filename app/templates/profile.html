@@ -7,10 +7,10 @@
         <section class="capa">
             <img src="{{ url_for('static', filename='imgs/perfil.png') }}" alt="foto de perfil">
             <div class="info-usuario">
-                <h1>Miguelito</h1>
+                <h1> {{usuario}} </h1>
                 <div>
-                    <p class="seguidores">365 seguidores</p>
-                    <p class="seguindo">126 seguindo</p>
+                    <p class="seguidores">0 seguidores</p>
+                    <p class="seguindo">0 seguindo</p>
                 </div>
             </div>
         </section>
@@ -18,13 +18,17 @@
 <!-------Mini Menu------->
         <nav class="mini-menu">
             <a href="">Atividade</a>
-            <a href="/biblioteca">Biblioteca</a>
-            <a href="/favoritos">Favoritos</a>
+            <a href="/profile/biblioteca">Biblioteca</a>
+            <a href="/profile/favoritos">Favoritos</a>
             <a href="">Reports</a>
             <a href="">Retrospectiva</a>
+            <a href="{{ url_for('app.logout') }}">Deslogar</a>
         </nav>
 
-    {% block profile %} {% endblock %}
-
+    {% block profile %} 
+        <section class="boas-vindas">
+            <p>Olá, {{usuario}}! Boas vindas ao seu perfil!</p>
+        </section>
+    {% endblock %}
 
 {% endblock %}
