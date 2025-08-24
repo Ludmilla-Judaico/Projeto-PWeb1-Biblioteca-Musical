@@ -57,3 +57,22 @@ def salvar_favorito(usuario, album_id, capa):
         with open(caminho_favoritos, "a", newline="", encoding="utf-8") as arquivo:
             writer = csv.writer(arquivo)
             writer.writerow([usuario, album_id, capa])
+
+
+def nome_associado(user_email):          
+    with open("data/usuarios.csv", newline="", encoding="utf-8") as arquivo:
+        leitor = csv.DictReader(arquivo)
+        for linha in leitor:
+            if linha["email"] == user_email:
+                return linha["usuário"]
+            
+def authenticator(user_email, senha):
+    if os.path.exists('data/usuarios.csv'):
+        with open('data/usuarios.csv', newline='', encoding='utf-8') as arquivo:
+            leitor = csv.DictReader(arquivo)
+            for linha in leitor:
+                if (linha['email'] == user_email) and (linha['senha'] == senha):
+                    return True
+                return False
+    return False
+            
