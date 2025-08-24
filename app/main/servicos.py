@@ -11,28 +11,35 @@ caminho_review = 'data/review.csv'
 def album(id,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify):
     dados = [["id","capa", "nome", "lancamento", "genero", "artista", "foto_bio", "biografia", "spotify"]]
     album = []
-    for i in range(9):
-        album.append(id)
-        album.append(capa)
-        album.append(nome)
-        album.append(lancamento)
-        album.append(genero)
-        album.append(artista)
-        album.append(foto_bio)
-        album.append(biografia)
-        album.append(spotify)
-        dados.append(album)
-    return dados
+    album.append(id)
+    album.append(capa)
+    album.append(nome)
+    album.append(lancamento)
+    album.append(genero)
+    album.append(artista)
+    album.append(foto_bio)
+    album.append(biografia)
+    album.append(spotify)
+    dados.append(album)
+    
+    with open(caminho_album, "a", newline="", encoding="utf-8") as arq:
+        escritor = csv.writer(arq, delimiter=';')
+        dados = album(id,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
+        escritor.writerows(dados)
 
 def musicas(id,musicas):
-        colecao = [["album_id","musicas" ]]
-        faixas = []
-        for m in musicas:
-             musica = m.strip().split(';')
-             faixas.append(musica)
-        colecao.append(id)
-        colecao.append(faixas)
-        return colecao
+    colecao = [["album_id","musicas" ]]
+    faixas = []
+    for m in musicas:
+         musica = m.strip().split(';')
+         faixas.append(musica)
+    colecao.append(id)
+    colecao.append(faixas)
+
+    with open(caminho_musicas, "a", newline="", encoding="utf-8") as arq:
+        escritor = csv.writer(arq, delimiter=';')
+        colecao = musicas(id,musicas)
+        escritor.writerows(colecao)
 
 # comentarios = [["id_album", "comentario"]]
 # while True:
@@ -40,56 +47,45 @@ def musicas(id,musicas):
 
 
   #trocar o 'w' pelo 'a' quando for usar de verdade
-with open(caminho_album, "a", newline="", encoding="utf-8") as arq:
-    escritor = csv.writer(arq, delimiter=';')
-    escritor.writerows(dados)
 
-with open(caminho_musicas, "a", newline="", encoding="utf-8") as arq:
-    escritor = csv.writer(arq, delimiter=';')
-    escritor.writerows(colecao)
-
-with open(caminho_review, "w", newline="", encoding="utf-8") as arq:
-    escritor = csv.writer(arq, delimiter=';')
-    escritor.writerows(colecao)
+# with open(caminho_review, "w", newline="", encoding="utf-8") as arq:
+#     escritor = csv.writer(arq, delimiter=';')
+#     escritor.writerows(colecao)
 
   #LER O ARQUIVO CSV ONDE ESTÁ A LISTA DE ALBUNS
 # AQUI A FUNÇÃO VAI RECEBER OS VALORES E COLOCAR EM UM DIC PARA FICAR MAIS FACIL PRA SUBSTITUIR
-def carregar_album()->list:
-    arq_album = open(caminho_album,'r', encoding='utf-8')
-    lista_albuns = []
-    linhas_album = arq_album.readlines()  
-    for linha in linhas_album[1:]:
-        id,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify = linha.strip().split(';')
-        album = {
-            'id': id,
-            'capa': capa,
-            'nome': nome,
-            'lancamento': lancamento,
-            'genero':genero,
-            'artista': artista,
-            'foto_bio': foto_bio,
-            'biografia': biografia,
-            'spotify': spotify
-            }
-        lista_albuns.append(album)
-    arq_album.close()
+# def carregar_album()->list:
+#     arq_album = open(caminho_album,'r', encoding='utf-8')
+#     lista_albuns = []
+#     linhas_album = arq_album.readlines()  
+#     for linha in linhas_album[1:]:
+#         id,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify = linha.strip().split(';')
+#         album = {
+#             'id': id,
+#             'capa': capa,
+#             'nome': nome,
+#             'lancamento': lancamento,
+#             'genero':genero,
+#             'artista': artista,
+#             'foto_bio': foto_bio,
+#             'biografia': biografia,
+#             'spotify': spotify
+#             }
+#         lista_albuns.append(album)
+#     arq_album.close()
     
 
-    arq_musicas = open(caminho_musicas,'r', encoding='utf-8')
-    linhas_musicas = arq_musicas.readlines()
-    for l in linhas_musicas[1:]:
-            id,musicas = l.strip().split(';')
-            lista_albuns.append({
-                'id': id,
-                'musicas': musicas
-            })
-    arq_musicas.close()          
+    # arq_musicas = open(caminho_musicas,'r', encoding='utf-8')
+    # linhas_musicas = arq_musicas.readlines()
+    # for l in linhas_musicas[1:]:
+    #         id,musicas = l.strip().split(';')
+    #         lista_albuns.append({
+    #             'id': id,
+    #             'musicas': musicas
+    #         })
+    # arq_musicas.close()          
 
-    return lista_albuns
-
-a = carregar_album()
-for l in a:
-  print(l)
+    # return lista_albuns
 
 
 
