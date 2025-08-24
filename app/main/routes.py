@@ -1,74 +1,64 @@
 from flask import render_template, url_for, redirect, session, request, flash
 import csv, os
 from . import app
+from .funcoes import carregar_albuns, carregar_favoritos, salvar_favorito, nome_associado, authenticator
+from .servicos import salvar_album, salvar_musicas
 
-#==================FUNÇÕES====================
-caminho_albuns = 'data/albuns.csv'
+def signin(user, email, senha):
+    if not os.path.exists('data/usuarios.csv'):
+        with open('data/usuarios.csv', 'w', newline="", encoding="utf-8") as arquivo_user:
+            writer = csv.writer(arquivo_user)
+            writer.writerow(['usuário', 'email', 'senha'])
 
-def carregar_albuns():
-    if not os.path.exists(caminho_albuns):
-        with open(caminho_albuns, 'w', newline='', encoding='utf-8') as arquivo:
-            writer = csv.writer(arquivo)
-            writer.writerow(['id', 'nome', 'artista', 'capa'])
-            albuns = [
-                ["1","album","Lana Del Rey","https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Thriller.png"]
-            ]
-            for album in albuns:
-                writer.writerow(album)
-        
-    albuns = []
-    with open(caminho_albuns, newline='', encoding='utf-8') as arquivo:
-        reader = csv.DictReader(arquivo)
-        for row in reader:
-            row["id"] = str(row["id"])
-            albuns.append(row)
-    return albuns
+    with open('data/usuarios.csv', 'a', newline="", encoding="utf-8") as arquivo_user:
+        writer = csv.writer(arquivo_user)
+        writer.writerow([user, email, senha])
 
-caminho_favoritos = 'data/favoritos.csv'
 
-def inicializar_favoritos():
-    if not os.path.exists(caminho_favoritos):
-        os.makedirs(os.path.dirname(caminho_favoritos), exist_ok=True)
-        with open(caminho_favoritos, "w", newline="", encoding="utf-8") as arquivo:
-            writer = csv.writer(arquivo)
-            writer.writerow(["usuario", "album_id"])
+#==========================ROTAS PÁGINAS================================
 
-def carregar_favoritos(usuario):
-    favoritos = []
-    if not os.path.exists(caminho_favoritos):
-        return favoritos
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if(request.method == 'POST'):
+        user_email = request.form['email_login']
+        senha = request.form['senha_login']
+        print("pegou infos")
+        if authenticator(user_email, senha):
+            nome_user = nome_associado(user_email)
+            session['usuario'] = nome_user
+
+            print('entrou')
+            print(session['usuario'], nome_user)
+            return redirect('/')
+
+        print('não entrou')
+        return redirect('/login')     
+    return render_template('login.html')
+
+@app.route('/cadastro', methods=['GET', 'POST'])
+def cadastro():
+    if request.method == 'POST':
+        user = request.form['nome-user']
+        email_user = request.form['email-user']
+        senha_user = request.form['senha-user']
+        signin(user, email_user, senha_user)
+        flash("Cadastro realizado com sucesso :)", "success")
+        return redirect('/')
     
-    with open(caminho_favoritos, newline='', encoding='utf-8') as arquivo:
-        reader = csv.DictReader(arquivo)
-        for row in reader:
-            if row['usuario'] == usuario:
-                favoritos.append(str(row['album_id']))
-    return favoritos
+    return render_template('signin.html')
 
-def salvar_favorito(usuario, album_id):
-    inicializar_favoritos()
-
-    
-    favoritos = []
-    with open(caminho_favoritos, newline="", encoding="utf-8") as arquivo:
-        reader = csv.DictReader(arquivo)
-        for row in reader:
-            if row["usuario"] == usuario:
-                favoritos.append(row["album_id"])
-    
-    if album_id not in favoritos:
-        with open(caminho_favoritos, "a", newline="", encoding="utf-8") as arquivo:
-            writer = csv.writer(arquivo)
-            writer.writerow([usuario, album_id])
-
-#==========================ROTAS================================
 @app.route('/')
 def homepage():
+    if 'usuario' not in session:
+        return redirect('/login')
+    usuario = session['usuario']
     albuns = carregar_albuns()
-    return render_template('musicotecahome.html', albuns=albuns)
+    return render_template('musicotecahome.html', albuns=albuns, usuario=usuario)
 
 @app.route('/profile')
 def profile():
+    if 'usuario' not in session:
+        return redirect('/login')
     usuario = session['usuario']
     albuns = carregar_albuns()
     favoritos_ids = carregar_favoritos(usuario)
@@ -81,14 +71,13 @@ def profile():
 
     return render_template('profile.html', favoritos=favoritos, usuario=usuario)
 
-@app.route('/album')
-def album():
-    return render_template('descricao_album.html')
+@app.route('/profile/biblioteca')
+def minha_biblioteca():
+    return render_template('biblioteca.html')
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    session['usuario'] = 'ludmilla'
-    return render_template('login.html')
+@app.route('/profile/favoritos')
+def favoritos():
+    return render_template('favoritos.html')
 
 @app.route('/logout')
 def logout():
@@ -96,7 +85,11 @@ def logout():
     flash('Deslogado com sucesso, volte sempre!')
     return redirect('/login')
 
-#======================FAVORITAR=====================
+@app.route('/album')
+def album():
+    return render_template('descricao_album.html')
+
+#======================ROTAS FUNÇÕES=====================
 
 @app.route('/favoritar/<album_id>')
 def favoritar(album_id):
@@ -105,6 +98,7 @@ def favoritar(album_id):
         return redirect(url_for('login'))
     
     usuario = session['usuario']
+
     salvar_favorito(usuario, album_id)
     return redirect('/profile')
 

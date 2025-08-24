@@ -21,12 +21,46 @@ def album(id,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify):
     album.append(biografia)
     album.append(spotify)
     dados.append(album)
+
+    with open(caminho_album, "a", newline="", encoding="utf-8") as arq:
+        escritor = csv.writer(arq, delimiter=';')
+        dados = album(id,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
+        escritor.writerows(dados)
+    album.append(id)
+    album.append(capa)
+    album.append(nome)
+    album.append(lancamento)
+    album.append(genero)
+    album.append(artista)
+    album.append(foto_bio)
+    album.append(biografia)
+    album.append(spotify)
+    dados.append(album)
     
     with open(caminho_album, "a", newline="", encoding="utf-8") as arq:
         escritor = csv.writer(arq, delimiter=';')
         dados = album(id,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
         escritor.writerows(dados)
 
+def salvar_musicas(id,musicas):
+    colecao = [["album_id","musicas" ]]
+    faixas = []
+    for m in musicas:
+        musica = m.strip().split(';')
+        faixas.append(musica)
+    colecao.append(id)
+    colecao.append(faixas)
+
+    with open(caminho_musicas, "a", newline="", encoding="utf-8") as arq:
+        escritor = csv.writer(arq, delimiter=';')
+        colecao = salvar_musicas(id,musicas)
+        escritor.writerows(colecao)
+
+
+
+# with open(caminho_review, "w", newline="", encoding="utf-8") as arq:
+#     escritor = csv.writer(arq, delimiter=';')
+#     escritor.writerows(colecao)
 def musicas(id,musicas):
     colecao = [["album_id","musicas" ]]
     faixas = []

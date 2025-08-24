@@ -1,0 +1,35 @@
+{% extends "login.html" %}
+
+{% block title %}Cadastre-se{% endblock %}
+
+{% block content %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div id="base">
+        <img src="{{ url_for('static', filename='imgs/logo.png')}}" alt="logo-musicoteca">
+        <form method="POST">
+            <div id="input_form">
+                <label for="nome-user">Nome de usuário:</label>
+                <input type="text" name="nome-user" class="inputs">
+
+                <label for="email-user">Email:</label>
+                <input type="email" name="email-user" class="inputs">
+
+                <label for="senha-user">Senha:</label>
+                <input type="password" name="senha-user" class="inputs">
+            </div>
+
+            <button class="btn-base" type="submit" id="btn-criar-conta">Criar conta</button>
+            <!-- <input type="button" value="Criar conta" class="btn-base" id="btn-criar-conta"> -->
+        </form>
+    </div>
+
+{% endblock %}
