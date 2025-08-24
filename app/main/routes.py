@@ -1,28 +1,38 @@
 from flask import render_template, url_for, redirect, session, request, flash
-import csv
+import csv, os
 from . import app
-from .funcoes import carregar_albuns, carregar_favoritos, salvar_favorito
+from .funcoes import carregar_albuns, carregar_favoritos, salvar_favorito, nome_associado, authenticator
 from .servicos import salvar_album, salvar_musicas
 
 def signin(user, email, senha):
+    if not os.path.exists('data/usuarios.csv'):
+        with open('data/usuarios.csv', 'w', newline="", encoding="utf-8") as arquivo_user:
+            writer = csv.writer(arquivo_user)
+            writer.writerow(['usuário', 'email', 'senha'])
+
     with open('data/usuarios.csv', 'a', newline="", encoding="utf-8") as arquivo_user:
         writer = csv.writer(arquivo_user)
         writer.writerow([user, email, senha])
 
 
-#==========================ROTAS================================
-@app.route('/')
-def homepage():
-    albuns = carregar_albuns()
-    return render_template('musicotecahome.html', albuns=albuns)
+#==========================ROTAS PÁGINAS================================
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if(request.method == 'POST'):
-        usuario = request.form['email_login']
+        user_email = request.form['email_login']
         senha = request.form['senha_login']
-        if not((usuario in 'usuarios.csv') and (senha in 'usuarios.csv')):
-            redirect('/login', flash('Usuário não cadastrado!'))
+        print("pegou infos")
+        if authenticator(user_email, senha):
+            nome_user = nome_associado(user_email)
+            session['usuario'] = nome_user
+
+            print('entrou')
+            print(session['usuario'], nome_user)
+            return redirect('/')
+
+        print('não entrou')
+        return redirect('/login')     
     return render_template('login.html')
 
 @app.route('/cadastro', methods=['GET', 'POST'])
@@ -33,18 +43,22 @@ def cadastro():
         senha_user = request.form['senha-user']
         signin(user, email_user, senha_user)
         flash("Cadastro realizado com sucesso :)", "success")
-        return redirect(url_for('app.cadastro'))
+        return redirect('/')
     
     return render_template('signin.html')
 
-@app.route('/biblioteca')
-def minha_biblioteca():
-    return render_template('biblioteca.html')
+@app.route('/')
+def homepage():
+    if 'usuario' not in session:
+        return redirect('/login')
+    usuario = session['usuario']
+    albuns = carregar_albuns()
+    return render_template('musicotecahome.html', albuns=albuns, usuario=usuario)
 
 @app.route('/profile')
 def profile():
     if 'usuario' not in session:
-        redirect('/login')
+        return redirect('/login')
     usuario = session['usuario']
     albuns = carregar_albuns()
     favoritos_ids = carregar_favoritos(usuario)
@@ -57,9 +71,13 @@ def profile():
 
     return render_template('profile.html', favoritos=favoritos, usuario=usuario)
 
-@app.route('/album')
-def album():
-    return render_template('descricao_album.html')
+@app.route('/profile/biblioteca')
+def minha_biblioteca():
+    return render_template('biblioteca.html')
+
+@app.route('/profile/favoritos')
+def favoritos():
+    return render_template('favoritos.html')
 
 @app.route('/logout')
 def logout():
@@ -67,11 +85,11 @@ def logout():
     flash('Deslogado com sucesso, volte sempre!')
     return redirect('/login')
 
-@app.route('/favoritos')
-def favoritos():
-    return render_template('favoritos.html')
+@app.route('/album')
+def album():
+    return render_template('descricao_album.html')
 
-#======================FAVORITAR=====================
+#======================ROTAS FUNÇÕES=====================
 
 @app.route('/favoritar/<album_id>')
 def favoritar(album_id):
