@@ -2,19 +2,36 @@
 <html lang="en">
 <head>
     <style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+label {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  padding-top: 2%;
+}
+
+
+body{
+    background-image: url(/static/imgs/fundomusicoteca.png);
+    background-size: cover;
+    margin: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
 }
 
-label {
-    font-size: 1.3rem;
-    padding-top: 10px;
-    padding-bottom: 5px;
-    font-family: Outfit;
-    font-weight: 500;
+button{
+    margin-top: 2%;
 }
     </style>
 
@@ -43,7 +60,7 @@ label {
         <input type="text" name="artista" id="artista" maxlength="30" required>
 
         <label for="foto_bio">URL da foto da biografia:</label>
-        <input type="text" name="foto_bio" id="foto_bio" maxlength="30" required>
+        <textarea name="foto_bio" id="foto_bio" rows="7" cols="50" required></textarea>
 
         <label for="biografia">Biografia:</label>
         <textarea name="biografia" id="biografia" rows="7" cols="50" required></textarea>
