@@ -1,18 +1,19 @@
 from flask import render_template, url_for, redirect, session, request, flash
 import csv, os
 from . import app
-from .funcoes import carregar_albuns, carregar_favoritos, salvar_favorito, nome_associado, authenticator
+from .funcoes import carregar_albuns, carregar_favoritos, salvar_favorito, dados_associados, authenticator, edit_user
 from .servicos import salvar_album, salvar_musicas
 
 def signin(user, email, senha):
     if not os.path.exists('data/usuarios.csv'):
         with open('data/usuarios.csv', 'w', newline="", encoding="utf-8") as arquivo_user:
             writer = csv.writer(arquivo_user)
-            writer.writerow(['usuário', 'email', 'senha'])
+            writer.writerow(['usuário', 'email', 'senha', 'foto'])
 
+    foto = 'static/imgs/perfil-default.png'
     with open('data/usuarios.csv', 'a', newline="", encoding="utf-8") as arquivo_user:
         writer = csv.writer(arquivo_user)
-        writer.writerow([user, email, senha])
+        writer.writerow([user, email, senha, foto])
 
 
 #==========================ROTAS PÁGINAS================================
@@ -20,15 +21,17 @@ def signin(user, email, senha):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if(request.method == 'POST'):
-        user_email = request.form['email_login']
+        email = request.form['email_login']
         senha = request.form['senha_login']
         print("pegou infos")
-        if authenticator(user_email, senha):
-            nome_user = nome_associado(user_email)
-            session['usuario'] = nome_user
+        if authenticator(email, senha):
+            print("authenticator passou")
+            nome, foto = dados_associados(email)
+            session['usuario'] = nome
+            session['email'] = email
+            session['foto'] = foto
 
-            print('entrou')
-            print(session['usuario'], nome_user)
+            print("Sessão após login:", dict(session))
             return redirect('/')
 
         print('não entrou')
@@ -42,7 +45,7 @@ def cadastro():
         email_user = request.form['email-user']
         senha_user = request.form['senha-user']
         signin(user, email_user, senha_user)
-        flash("Cadastro realizado com sucesso :)", "success")
+        # flash("Cadastro realizado com sucesso :)", "success")
         return redirect('/')
     
     return render_template('signin.html')
@@ -73,11 +76,39 @@ def profile():
 
 @app.route('/profile/biblioteca')
 def minha_biblioteca():
-    return render_template('biblioteca.html')
+    if 'usuario' not in session:
+        return redirect('/login')
+    usuario = session['usuario']
+    return render_template('biblioteca.html', usuario=usuario)
 
 @app.route('/profile/favoritos')
 def favoritos():
-    return render_template('favoritos.html')
+    if 'usuario' not in session:
+        return redirect('/login')
+    usuario = session['usuario']
+    return render_template('favoritos.html', usuario=usuario)
+
+@app.route('/profile/edit', methods=['GET', 'POST'])
+def edit_profile():
+    if 'usuario' not in session:
+        return redirect('/login')
+    print("Sessão atual:", dict(session))
+    
+    usuario = session.get('usuario')
+    email = session.get('email')
+    foto = session.get('foto')
+    if request.method == 'POST':
+        print('entrou no post')
+        novo_usuario = request.form['novo_usuario']
+        novo_email = request.form['novo_email']
+        nova_senha = request.form['nova_senha']
+        nova_foto = request.form['nova_foto']
+        print('pegou infos')
+        edit_user(novo_usuario, novo_email, nova_senha, nova_foto)
+        print('editou')
+        return redirect('/profile')
+    return render_template('edit.html', usuario=usuario, email=email, foto=foto)
+    
 
 @app.route('/logout')
 def logout():

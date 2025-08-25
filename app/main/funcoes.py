@@ -59,12 +59,14 @@ def salvar_favorito(usuario, album_id, capa):
             writer.writerow([usuario, album_id, capa])
 
 
-def nome_associado(user_email):          
+def dados_associados(user_email):          
     with open("data/usuarios.csv", newline="", encoding="utf-8") as arquivo:
         leitor = csv.DictReader(arquivo)
         for linha in leitor:
             if linha["email"] == user_email:
-                return linha["usuário"]
+                nome = linha['usuário']
+                foto = linha['foto']
+                return nome, foto
             
 def authenticator(user_email, senha):
     if os.path.exists('data/usuarios.csv'):
@@ -75,4 +77,15 @@ def authenticator(user_email, senha):
                     return True
                 return False
     return False
+            
+def edit_user(novo_usuario, novo_email, nova_senha, nova_foto):
+    with open("data/usuarios.csv", newline="", encoding="utf-8") as arquivo:
+        leitor = csv.DictReader(arquivo)
+        for i in range(len(leitor)):
+            if session['usario'] == leitor[i][0]:
+                leitor[i][0] = novo_usuario
+                leitor[i][1] = novo_email
+                leitor[i][2] = nova_senha
+                leitor[i][3] = nova_foto
+                break
             
