@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/edit" method="POST" id="user-edit">
+        <label for="novo_usuario" class="form" id="user">Usuário:</label>
+        <input type="text" name="novo_usuario" value="{{usuario}}">
+
+        <label for="novo_email" class="form" id="email">Email:</label>
+        <input type="email" name="novo_email" value="{{email}}">
+
+        <label for="senha_atual" class="form" id="senha_atual">Senha atual:</label>
+        <input type="password" name="senha_atual">
+
+        <label for="nova_senha" class="form" id="nova_senha"> Nova senha:</label>
+        <input type="password" name="nova_senha">
+
+        
+        <label for="nova_foto" class="form" id="foto">Foto de perfil:</label>
+        <input type="url" name="nova_foto" value="{{foto}}">
+
+        <label>Enviar</label>
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>
