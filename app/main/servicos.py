@@ -73,37 +73,38 @@ def salvar_musicas(id,musicas):
 
   #LER O ARQUIVO CSV ONDE ESTÁ A LISTA DE ALBUNS
 # AQUI A FUNÇÃO VAI RECEBER OS VALORES E COLOCAR EM UM DIC PARA FICAR MAIS FACIL PRA SUBSTITUIR
-def carregar_album()->list:
+def carregar_album()->tuple:
     arq_album = open(caminho_album,'r', encoding='utf-8')
     lista_albuns = []
     linhas_album = arq_album.readlines()  
     for linha in linhas_album[1:]:
         id_album,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify = linha.strip().split(';')
-        album = {
-            'id': id_album,
-            'capa': capa,
-            'nome': nome,
-            'lancamento': lancamento,
-            'genero':genero,
-            'artista': artista,
-            'foto_bio': foto_bio,
-            'biografia': biografia,
-            'spotify': spotify
-            }
-        lista_albuns.append(album)
+        # album = {
+        #     'id': id_album,
+        #     'capa': capa,
+        #     'nome': nome,
+        #     'lancamento': lancamento,
+        #     'genero':genero,
+        #     'artista': artista,
+        #     'foto_bio': foto_bio,
+        #     'biografia': biografia,
+        #     'spotify': spotify
+        #     }
+        # lista_albuns.append(album)
     arq_album.close()
-    
+
+    return id_album,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify
+
+def carregar_discografia()->list:
     arq_musicas = open(caminho_musicas,'r', encoding='utf-8')
     linhas_musicas = arq_musicas.readlines()
+    faixas = []
     for l in linhas_musicas[1:]:
-            id_album,musicas = l.strip().split(';')
-            lista_albuns.append({
-                'id': id_album,
-                'musicas': musicas
-            })
-    arq_musicas.close()          
+            musicas = l.strip().split(';')
+            faixas.append(musicas)
+    arq_musicas.close()  
 
-    return lista_albuns
+    return musicas
 
 
 
