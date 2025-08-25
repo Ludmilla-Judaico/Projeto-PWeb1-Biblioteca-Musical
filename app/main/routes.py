@@ -2,7 +2,7 @@ from flask import render_template, url_for, redirect, session, request, flash
 import csv, os
 from . import app
 from .funcoes import carregar_albuns, carregar_favoritos, salvar_favorito, nome_associado, authenticator
-from .servicos import salvar_album, salvar_musicas
+from .servicos import salvar_album, salvar_musicas, carregar_album, carregar_discografia
 
 def signin(user, email, senha):
     if not os.path.exists('data/usuarios.csv'):
@@ -99,7 +99,9 @@ def logout():
 
 @app.route('/album')
 def album():
-    return render_template('descricacao_album.html', id_album==id_album, capa==capa, nome==nome, lancamento==lancamento, genero==genero, artista==artista, foto_bio==foto_bio, biografia==biografia, spotify==spotify)
+    id_album,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify = carregar_album()
+    musicas = carregar_discografia()
+    return render_template('descricao_album.html', id_album=id_album, capa=capa, nome=nome, lancamento=lancamento, genero=genero, artista=artista, foto_bio=foto_bio, biografia=biografia, spotify=spotify, musicas=musicas)
 
 #======================ROTAS FUNÇÕES=====================
 
@@ -128,5 +130,3 @@ def salvar ():
     musicas = request.form['musicas']
     armazenar_album = salvar_album(id_album,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
     armazenar_musicas = salvar_musicas(id_album,musicas)
-
-    return redirect("/album")
