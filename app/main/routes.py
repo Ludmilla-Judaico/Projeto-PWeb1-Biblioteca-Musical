@@ -2,7 +2,7 @@ from flask import render_template, url_for, redirect, session, request, flash
 import csv, os
 from . import app
 from .funcoes import carregar_albuns, carregar_favoritos, salvar_favorito, nome_associado, authenticator
-from .servicos import salvar_album, salvar_musicas, carregar_album, carregar_discografia
+from .servicos import *
 
 def signin(user, email, senha):
     if not os.path.exists('data/usuarios.csv'):
@@ -130,3 +130,5 @@ def salvar ():
     musicas = request.form['musicas']
     armazenar_album = salvar_album(id_album,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
     armazenar_musicas = salvar_musicas(id_album,musicas)
+
+    return None
