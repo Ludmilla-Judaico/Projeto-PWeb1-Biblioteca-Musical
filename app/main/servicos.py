@@ -106,6 +106,17 @@ def carregar_discografia()->list:
 
     return musicas
 
+def mostrar_capa() -> list:
+    capas = []
+    with open('data/albuns.csv', "r", newline='', encoding='utf-8') as arq:
+        reader = csv.DictReader(arq)
+        for row in reader:
+            capas.append({
+                'nome': row['nome'],
+                'capa': row['capa']
+            })
+    return capas
+
 
 
 

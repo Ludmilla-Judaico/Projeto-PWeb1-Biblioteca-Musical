@@ -28,7 +28,15 @@
     </nav>
     <aside class="sidebar"></aside>
 
-    <main></main>
+    <main>        
+        <ul>
+            {% for album in capas %}
+                <li>
+                    <img src="{{ album.capa }}" alt="{{album.nome}}" >
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
 
     </div>
 {% endblock %}
