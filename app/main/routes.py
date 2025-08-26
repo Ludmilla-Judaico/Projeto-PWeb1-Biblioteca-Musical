@@ -2,6 +2,7 @@ from flask import render_template, url_for, redirect, session, request, flash
 import csv, os
 from . import app
 from .funcoes import carregar_favoritos, salvar_favorito, dados_associados, authenticator, edit_user
+from .servicos import *
 from .servicos import salvar_album, salvar_musicas, carregar_album, carregar_discografia, mostrar_capa
 
 def signin(user, email, senha):
@@ -68,7 +69,9 @@ def homepage():
         return redirect('/login')
     usuario = session['usuario']
     albuns = carregar_album()
-    return render_template('musicotecahome.html', albuns=albuns, usuario=usuario)
+    capas = mostrar_capa()
+    print(f'capas: {capas}')
+    return render_template('musicotecahome.html', albuns=albuns, usuario=usuario, capas=capas)
 
 @app.route('/profile')
 def profile():
@@ -78,11 +81,6 @@ def profile():
     foto = session['foto']
     favoritos = carregar_favoritos(usuario)
 
-    print("Usuário logado:", usuario)
-    # print("Todos os álbuns:", [a["id"] for a in albuns])
-    # print("IDs de favoritos do usuário:", favoritos_ids)
-    # print("Albuns filtrados como favoritos:", [a["id"] for a in favoritos])
-
     return render_template('profile.html', favoritos=favoritos, usuario=usuario, foto=foto)
 
 @app.route('/profile/biblioteca')
@@ -91,7 +89,7 @@ def minha_biblioteca():
         return redirect('/login')
     usuario = session['usuario']
     foto = session['foto']
-    print(f'minha foto: {foto}')
+
     return render_template('biblioteca.html', usuario=usuario, foto=foto)
 
 @app.route('/profile/favoritos')
@@ -101,10 +99,10 @@ def favoritos():
     usuario = session['usuario']
     foto = session['foto']
     favoritos = carregar_favoritos(usuario)
-    id, capa = carregar_favoritos(usuario)
-    print(favoritos)
-    print('capa: ', capa)
-    return render_template('favoritos.html', usuario=usuario, foto=foto, favoritos=favoritos, id=id, capa=capa)
+    for fav in favoritos:
+        print(f'capa: {fav['capa']}')
+
+    return render_template('favoritos.html', usuario=usuario, foto=foto, favoritos=favoritos)
 
 @app.route('/profile/edit', methods=['GET', 'POST'])
 def edit_profile():
@@ -116,19 +114,16 @@ def edit_profile():
     email = session.get('email')
     foto = session.get('foto')
     if request.method == 'POST':
-        print('entrou no post')
         novo_usuario = request.form['novo_usuario']
         novo_email = request.form['novo_email']
         nova_senha = request.form['nova_senha']
         nova_foto = request.form['nova_foto']
-        print('pegou infos')
 
         edit_user(novo_usuario, novo_email, nova_senha, nova_foto)
 
         session['usuario'] = novo_usuario
         session['email'] = novo_email
         session['foto'] = nova_foto
-        print('editou')
 
         return redirect(url_for('app.profile'))
     return render_template('edit.html', usuario=usuario, email=email, foto=foto)
@@ -137,14 +132,13 @@ def edit_profile():
 @app.route('/logout')
 def logout():
     session.pop('usuario', None)
-    flash('Deslogado com sucesso, volte sempre!')
     return redirect('/login')
 
 @app.route('/album')
 def album():
-    id_album,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify = carregar_album()
+    info_album = carregar_album()
     musicas = carregar_discografia()
-    return render_template('descricao_album.html', id_album=id_album, capa=capa, nome=nome, lancamento=lancamento, genero=genero, artista=artista, foto_bio=foto_bio, biografia=biografia, spotify=spotify, musicas=musicas)
+    return render_template('descricao_album.html', info_album=info_album, musicas=musicas)
 
 #======================ROTAS FUNÇÕES=====================
 
@@ -152,17 +146,18 @@ def album():
 def favoritar(album_id):
     if 'usuario' not in session:
         flash('É necessário estar logado para favoritar um albúm!')
-        return redirect(url_for('login'))
+        return redirect(url_for('app.login'))
     
     capa = carregar_album()[1]
+    print(capa)
     usuario = session['usuario']
 
     salvar_favorito(usuario, album_id, capa)
-    return redirect('/profile')
+    return redirect('/profile/favoritos')
 
 @app.route('/destino', methods=["POST"])
 def salvar ():
-    id_album = request.form['id']
+    album_id = request.form['album_id']
     capa = request.form['capa']
     nome = request.form['nome']
     lancamento = request.form['lancamento']
@@ -172,10 +167,11 @@ def salvar ():
     biografia = request.form['biografia']
     spotify = request.form['spotify']
     musicas = request.form['musicas']
-    armazenar_album = salvar_album(id_album,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
-    armazenar_musicas = salvar_musicas(id_album,musicas)
+    salvar_album(album_id,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
+    salvar_musicas(album_id,musicas)
 
-@app.route('/')
-def capas():
-    capas = mostrar_capa()
-    return render_template('musicotecahome.html', capas=capas)
+# @app.route('/')
+# def capas():
+#     capas = mostrar_capa()
+#     print(f'capas: {capas}')
+#     return render_template('musicotecahome.html', capas=capas)

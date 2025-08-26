@@ -102,6 +102,7 @@ body{
 .albuns-fav img{
     width: 25vh;
     height: 25vh;
+    border-radius: 10%;
     transition: 1s;
 }
 

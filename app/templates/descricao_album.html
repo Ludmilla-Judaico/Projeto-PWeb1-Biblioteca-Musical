@@ -4,16 +4,17 @@
 
 {% block content %}
     <section>
+        {% for a in info_album %}
         <div class="container">
             <div class='box box-1'>
-                <img id="capa_cd" src="{{ capa }}">
+                <img id="capa_cd" src="{{ a.capa }}">
                 <img id="cd" src="{{ url_for('static', filename='imgs/Lana Del Rey -Born to Die CD.jpg') }}">
             </div>
 
             <div class='box box-2'>
-                <h1>{{ nome }}</h1>
-                <h3>{{ artista }}</h3>
-                <p>{{ genero }}, {{ lancamento}}</p>
+                <h1>{{ a.nome }}</h1>
+                <h3>{{ a.artista }}</h3>
+                <p>{{ a.genero }}, {{ a.lancamento }}</p>
                 <div class="rating">
                     <label class="heart-wrapper">
                     <input type="checkbox" class="heart-checkbox" name="favoritar" />
@@ -34,7 +35,7 @@
                  <div class="musicas">
                     <ol>
                         {% for m in musicas%}
-                        <li>{{ musicas[m] }}</li>
+                        <li>{{ m.musicas }}</li>
                         {% endfor %}
 
                     </ol>
@@ -43,15 +44,16 @@
 
             <div class='box box-3'>
                 <div class="biografia">
-                    <img id="imagem_bio" src="{{ foto_bio }}">
-                    <p id="texto_bio">{{ biografia }}</p>
+                    <img id="imagem_bio" src="{{ info_album['foto_bio'] }}">
+                    <p id="texto_bio">{{ a.biografia }}</p>
                 </div>
             </div>
 
             <div class='box box-4'>
-                <iframe data-testid="embed-iframe" style="border-radius:12px" src="{{ spotify }}" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                {{ a.spotify.replace(''', '') }}
             </div>
         </div>
+        {% endfor %}
 
             <!-- <h1 class="comentario">Comentários</h1>
 
