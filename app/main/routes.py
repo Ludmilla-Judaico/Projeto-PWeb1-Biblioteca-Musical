@@ -1,18 +1,19 @@
 from flask import render_template, url_for, redirect, session, request, flash
 import csv, os
 from . import app
-from .funcoes import carregar_albuns, carregar_favoritos, salvar_favorito, nome_associado, authenticator
+from .funcoes import carregar_favoritos, salvar_favorito, dados_associados, authenticator, edit_user
 from .servicos import *
 
 def signin(user, email, senha):
     if not os.path.exists('data/usuarios.csv'):
         with open('data/usuarios.csv', 'w', newline="", encoding="utf-8") as arquivo_user:
             writer = csv.writer(arquivo_user)
-            writer.writerow(['usuário', 'email', 'senha'])
+            writer.writerow(['usuário', 'email', 'senha', 'foto'])
 
+    foto = 'static/imgs/perfil-default.png'
     with open('data/usuarios.csv', 'a', newline="", encoding="utf-8") as arquivo_user:
         writer = csv.writer(arquivo_user)
-        writer.writerow([user, email, senha])
+        writer.writerow([user, email, senha, foto])
 
 
 #==========================ROTAS PÁGINAS================================
@@ -28,19 +29,21 @@ SENHA_ADMIN = "12345"
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if(request.method == 'POST'):
-        user_email = request.form['email_login']
+        email = request.form['email_login']
         senha = request.form['senha_login']
         print("pegou infos")
 
-        if user_email == EMAIL_ADMIN and senha == SENHA_ADMIN:
+        if email == EMAIL_ADMIN and senha == SENHA_ADMIN:
             return redirect('/admin')
 
-        if authenticator(user_email, senha):
-            nome_user = nome_associado(user_email)
-            session['usuario'] = nome_user
+        if authenticator(email, senha):
+            print("authenticator passou")
+            nome, foto = dados_associados(email)
+            session['usuario'] = nome
+            session['email'] = email
+            session['foto'] = foto
 
-            print('entrou')
-            print(session['usuario'], nome_user)
+            print("Sessão após login:", dict(session))
             return redirect('/')
 
         print('não entrou')
@@ -54,7 +57,7 @@ def cadastro():
         email_user = request.form['email-user']
         senha_user = request.form['senha-user']
         signin(user, email_user, senha_user)
-        flash("Cadastro realizado com sucesso :)", "success")
+        # flash("Cadastro realizado com sucesso :)", "success")
         return redirect('/')
     
     return render_template('signin.html')
@@ -64,7 +67,7 @@ def homepage():
     if 'usuario' not in session:
         return redirect('/login')
     usuario = session['usuario']
-    albuns = carregar_albuns()
+    albuns = carregar_album()
     return render_template('musicotecahome.html', albuns=albuns, usuario=usuario)
 
 @app.route('/profile')
@@ -72,36 +75,67 @@ def profile():
     if 'usuario' not in session:
         return redirect('/login')
     usuario = session['usuario']
-    albuns = carregar_albuns()
-    favoritos_ids = carregar_favoritos(usuario)
-    favoritos = [a for a in albuns if a['id'] in favoritos_ids]
+    foto = session['foto']
+    favoritos = carregar_favoritos(usuario)
 
-    print("Usuário logado:", usuario)
-    print("Todos os álbuns:", [a["id"] for a in albuns])
-    print("IDs de favoritos do usuário:", favoritos_ids)
-    print("Albuns filtrados como favoritos:", [a["id"] for a in favoritos])
-
-    return render_template('profile.html', favoritos=favoritos, usuario=usuario)
+    return render_template('profile.html', favoritos=favoritos, usuario=usuario, foto=foto)
 
 @app.route('/profile/biblioteca')
 def minha_biblioteca():
-    return render_template('biblioteca.html')
+    if 'usuario' not in session:
+        return redirect('/login')
+    usuario = session['usuario']
+    foto = session['foto']
+
+    return render_template('biblioteca.html', usuario=usuario, foto=foto)
 
 @app.route('/profile/favoritos')
 def favoritos():
-    return render_template('favoritos.html')
+    if 'usuario' not in session:
+        return redirect('/login')
+    usuario = session['usuario']
+    foto = session['foto']
+    favoritos = carregar_favoritos(usuario)
+    for fav in favoritos:
+        print(f'capa: {fav['capa']}')
+
+    return render_template('favoritos.html', usuario=usuario, foto=foto, favoritos=favoritos)
+
+@app.route('/profile/edit', methods=['GET', 'POST'])
+def edit_profile():
+    if 'usuario' not in session:
+        return redirect('/login')
+    print("Sessão atual:", dict(session))
+    
+    usuario = session.get('usuario')
+    email = session.get('email')
+    foto = session.get('foto')
+    if request.method == 'POST':
+        novo_usuario = request.form['novo_usuario']
+        novo_email = request.form['novo_email']
+        nova_senha = request.form['nova_senha']
+        nova_foto = request.form['nova_foto']
+
+        edit_user(novo_usuario, novo_email, nova_senha, nova_foto)
+
+        session['usuario'] = novo_usuario
+        session['email'] = novo_email
+        session['foto'] = nova_foto
+
+        return redirect(url_for('app.profile'))
+    return render_template('edit.html', usuario=usuario, email=email, foto=foto)
+    
 
 @app.route('/logout')
 def logout():
     session.pop('usuario', None)
-    flash('Deslogado com sucesso, volte sempre!')
     return redirect('/login')
 
 @app.route('/album')
 def album():
-    id_album,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify = carregar_album()
+    info_album = carregar_album()
     musicas = carregar_discografia()
-    return render_template('descricao_album.html', id_album=id_album, capa=capa, nome=nome, lancamento=lancamento, genero=genero, artista=artista, foto_bio=foto_bio, biografia=biografia, spotify=spotify, musicas=musicas)
+    return render_template('descricao_album.html', info_album=info_album, musicas=musicas)
 
 #======================ROTAS FUNÇÕES=====================
 
@@ -111,10 +145,11 @@ def favoritar(album_id):
         flash('É necessário estar logado para favoritar um albúm!')
         return redirect(url_for('login'))
     
+    capa = carregar_album()[1]
     usuario = session['usuario']
 
-    salvar_favorito(usuario, album_id)
-    return redirect('/profile')
+    salvar_favorito(usuario, album_id, capa)
+    return redirect('/profile/favoritos')
 
 @app.route('/destino', methods=["POST"])
 def salvar ():

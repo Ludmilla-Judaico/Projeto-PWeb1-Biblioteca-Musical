@@ -6,14 +6,14 @@
     <section>
         <div class="container">
             <div class='box box-1'>
-                <img id="capa_cd" src="{{ capa }}">
+                <img id="capa_cd" src="{{ info_album['capa'] }}">
                 <img id="cd" src="{{ url_for('static', filename='imgs/Lana Del Rey -Born to Die CD.jpg') }}">
             </div>
 
             <div class='box box-2'>
-                <h1>{{ nome }}</h1>
-                <h3>{{ artista }}</h3>
-                <p>{{ genero }}, {{ lancamento}}</p>
+                <h1>{{ info_album['nome'] }}</h1>
+                <h3>{{ info_album['artista'] }}</h3>
+                <p>{{ info_album['genero'] }}, {{ info_album['lancamento'] }}</p>
                 <div class="rating">
                     <label class="heart-wrapper">
                     <input type="checkbox" class="heart-checkbox" name="favoritar" />
@@ -43,13 +43,13 @@
 
             <div class='box box-3'>
                 <div class="biografia">
-                    <img id="imagem_bio" src="{{ foto_bio }}">
-                    <p id="texto_bio">{{ biografia }}</p>
+                    <img id="imagem_bio" src="{{ info_album['foto_bio'] }}">
+                    <p id="texto_bio">{{ info_album['biografia'] }}</p>
                 </div>
             </div>
 
             <div class='box box-4'>
-                {{ spotify }}
+                {{ info_album['spotify'] }}
             </div>
         </div>
 

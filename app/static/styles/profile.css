@@ -43,7 +43,7 @@ body{
     font-size: 20px;
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     align-items: center;
 }
 
@@ -60,6 +60,9 @@ body{
     border-radius: 50%;
 }
 
+.mini-menu .deslogar:hover{
+    color: red;
+}
 /*--------Boas vindas-------*/
 
 .boas-vindas{
@@ -99,6 +102,7 @@ body{
 .albuns-fav img{
     width: 25vh;
     height: 25vh;
+    border-radius: 10%;
     transition: 1s;
 }
 
@@ -194,9 +198,12 @@ body{
 }
 
 /*--------Mobile---------*/
-@media (max-width: 780px) {
-    .albuns figure{
-        grid-template-columns: 1rem 1rem 1rem;
-        margin-bottom: 6rem;
+@media (max-width: 850px) {
+    .mini-menu{
+        overflow: hidden;
+    }
+
+    .mini-menu a{
+        margin-left: 2rem;
     }
 }

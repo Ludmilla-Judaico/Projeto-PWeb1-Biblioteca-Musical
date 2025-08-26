@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/edit.css') }}">
+    <title>Document</title>
+</head>
+<body>
+    <section id="formulario">
+        <h1>Edite as informações desejadas :)</h1>
+        <form action="{{ url_for('app.edit_profile') }}" method="POST" id="user-edit">
+            <div class="infos">
+                <label for="novo_usuario" class="form" id="user">Nome de usuário:</label>
+                <input type="text" name="novo_usuario" value="{{usuario}}" class="inputs">
+
+                <!-- <label for="biografia" class="form">Sua biografia:</label>
+                <input type="text" name="biografia" value="{{biografia}}" class="inputs"> -->
+
+                <label for="novo_email" class="form" id="email">Email:</label>
+                <input type="email" name="novo_email" value="{{email}}" class="inputs">
+
+                <label for="nova_senha" class="form" id="nova_senha"> Nova senha:</label>
+                <input type="password" name="nova_senha" class="inputs">
+                
+                <label for="nova_foto" class="form" id="foto">Foto de perfil:</label>
+                <input type="url" name="nova_foto" value="{{foto}}" class="inputs">
+
+                <img src="{{foto}}" alt="foto atual">
+            </div>
+
+            <div class="submeter">
+                <input type="submit" value="Enviar alterações" class="sub">
+            </div>
+        </form>
+    </section>
+</body>
+</html>

@@ -79,21 +79,21 @@ def carregar_album()->tuple:
     linhas_album = arq_album.readlines()  
     for linha in linhas_album[1:]:
         id_album,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify = linha.strip().split(';')
-        # album = {
-        #     'id': id_album,
-        #     'capa': capa,
-        #     'nome': nome,
-        #     'lancamento': lancamento,
-        #     'genero':genero,
-        #     'artista': artista,
-        #     'foto_bio': foto_bio,
-        #     'biografia': biografia,
-        #     'spotify': spotify
-        #     }
-        # lista_albuns.append(album)
+        album = {
+            'id': id_album,
+            'capa': capa,
+            'nome': nome,
+            'lancamento': lancamento,
+            'genero':genero,
+            'artista': artista,
+            'foto_bio': foto_bio,
+            'biografia': biografia,
+            'spotify': spotify
+            }
+        lista_albuns.append(album)
     arq_album.close()
 
-    return id_album,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify
+    return lista_albuns
 
 def carregar_discografia()->list:
     arq_musicas = open(caminho_musicas,'r', encoding='utf-8')
