@@ -177,6 +177,5 @@ def salvar ():
 
 @app.route('/')
 def capas():
-    caminho_csv = os.path.join(current_app.root_path, '..', '..', 'albuns.csv')
     capas = mostrar_capa()
-    return render_template('musicotecahome.hmtl', capas=capas)
+    return render_template('musicotecahome.html', capas=capas)
