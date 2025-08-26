@@ -78,11 +78,6 @@ def profile():
     foto = session['foto']
     favoritos = carregar_favoritos(usuario)
 
-    print("Usuário logado:", usuario)
-    # print("Todos os álbuns:", [a["id"] for a in albuns])
-    # print("IDs de favoritos do usuário:", favoritos_ids)
-    # print("Albuns filtrados como favoritos:", [a["id"] for a in favoritos])
-
     return render_template('profile.html', favoritos=favoritos, usuario=usuario, foto=foto)
 
 @app.route('/profile/biblioteca')
@@ -91,7 +86,7 @@ def minha_biblioteca():
         return redirect('/login')
     usuario = session['usuario']
     foto = session['foto']
-    print(f'minha foto: {foto}')
+
     return render_template('biblioteca.html', usuario=usuario, foto=foto)
 
 @app.route('/profile/favoritos')
@@ -101,10 +96,10 @@ def favoritos():
     usuario = session['usuario']
     foto = session['foto']
     favoritos = carregar_favoritos(usuario)
-    id, capa = carregar_favoritos(usuario)
-    print(favoritos)
-    print('capa: ', capa)
-    return render_template('favoritos.html', usuario=usuario, foto=foto, favoritos=favoritos, id=id, capa=capa)
+    for fav in favoritos:
+        print(f'capa: {fav['capa']}')
+
+    return render_template('favoritos.html', usuario=usuario, foto=foto, favoritos=favoritos)
 
 @app.route('/profile/edit', methods=['GET', 'POST'])
 def edit_profile():
@@ -116,19 +111,16 @@ def edit_profile():
     email = session.get('email')
     foto = session.get('foto')
     if request.method == 'POST':
-        print('entrou no post')
         novo_usuario = request.form['novo_usuario']
         novo_email = request.form['novo_email']
         nova_senha = request.form['nova_senha']
         nova_foto = request.form['nova_foto']
-        print('pegou infos')
 
         edit_user(novo_usuario, novo_email, nova_senha, nova_foto)
 
         session['usuario'] = novo_usuario
         session['email'] = novo_email
         session['foto'] = nova_foto
-        print('editou')
 
         return redirect(url_for('app.profile'))
     return render_template('edit.html', usuario=usuario, email=email, foto=foto)
@@ -137,7 +129,6 @@ def edit_profile():
 @app.route('/logout')
 def logout():
     session.pop('usuario', None)
-    flash('Deslogado com sucesso, volte sempre!')
     return redirect('/login')
 
 @app.route('/album')
@@ -158,7 +149,7 @@ def favoritar(album_id):
     usuario = session['usuario']
 
     salvar_favorito(usuario, album_id, capa)
-    return redirect('/profile')
+    return redirect('/profile/favoritos')
 
 @app.route('/destino', methods=["POST"])
 def salvar ():

@@ -35,13 +35,15 @@ def carregar_favoritos(usuario):
     favoritos = []
     if not os.path.exists(caminho_favoritos):
         return favoritos
-    
     with open(caminho_favoritos, newline='', encoding='utf-8') as arquivo:
         leitor = csv.DictReader(arquivo)
         for linha in leitor:
             if linha['usuario'] == usuario:
-                favoritos.append(str(linha['album_id']))
-                favoritos.append(str(linha['capa']))
+                infos_album = []
+                favoritos.append({
+                    "album_id": linha["album_id"],
+                    "capa": linha["capa"]
+                })
     return favoritos
 
 def salvar_favorito(usuario, album_id, capa):

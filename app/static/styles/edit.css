@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+body{
+    background-image: url(/static/imgs/fundomusicoteca.png);
+    background-size: cover;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#formulario {
+    padding: 4rem 0 4rem 0;
+    color: #FFFF;
+    width: 430px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #e70092;
+    box-shadow: 0 8px 12px rgba(0,0,0,0.5);
+    border-radius: 15px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.infos{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 1.3rem;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-family: Outfit;
+    font-weight: 500;
+}
+
+.inputs {
+    border-radius: 20px;
+    font-family: Outfit;
+    font-weight: 400;
+    font-size: 1.15rem;
+    border: none;
+    width: 350px;
+    height: 30px;
+    padding: 17px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    box-sizing: border-box;
+}
+
+.inputs:focus{
+    font-size: 1.15rem;
+    font-family: Outfit;
+    font-weight: 400;
+    outline: none;
+    padding: 17px;
+}
+
+.sub {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    width: auto;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: none;
+    background-color: #cc0884;
+    color: #FFFF;
+    font-family: Outfit;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2)
+}
+
+.sub:hover{
+    background-color: #d3389a;
+}
+
+form img{
+    width: auto;
+    height: 30vh;
+    text-align: center;
+    margin: 10px;
+    border-radius: 10%;
+}
