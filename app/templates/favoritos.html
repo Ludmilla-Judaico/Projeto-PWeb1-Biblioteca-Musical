@@ -3,13 +3,12 @@
 {% block profile %}
 <!--------Favoritos------->
     <section class="favoritos">
-        
         {% if favoritos %}
         <h2 style="font-size: 30px;">Albúns favoritos</h2>
         <div class="albuns-fav">
             <figure>
                 {% for fav in favoritos %}
-                <a href=""><img src="{{ favoritos.capa }}" alt="{{ favoritos.nome }}"></a>
+                <a href=""><img src="{{ capa }}" alt="{{ fav.nome }}"></a>
                 {% endfor %}
             </figure>
         </div>

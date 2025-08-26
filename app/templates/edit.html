@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/edit" method="POST" id="user-edit">
+    <form action="{{ url_for('app.edit_profile') }}" method="POST" id="user-edit">
         <label for="novo_usuario" class="form" id="user">Usuário:</label>
         <input type="text" name="novo_usuario" value="{{usuario}}">
 

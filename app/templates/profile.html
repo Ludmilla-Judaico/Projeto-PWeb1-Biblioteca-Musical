@@ -1,12 +1,16 @@
-{% extends "base.html"%}
+{% extends "base.html" %}
 {% block title %}Profile{% endblock %}
 {% block style %}{{ url_for('static', filename='styles/profile.css') }}{% endblock %}
 
     {% block content %}
 <!--------Capa------->
         <section class="capa">
-            <img src="{{ url_for('static', filename='imgs/perfil-default.png') }}" alt="foto de perfil">
-            <div class="info-usuario">
+            {% if foto.startswith('https') %}
+                <img src="{{ foto }}" alt="foto de perfil">
+            {% else %}
+                <img src="{{ url_for('static', filename=foto.replace('static/', '')) }}" alt="foto de perfil">
+            {% endif %}
+                <div class="info-usuario">
                 <h1> {{usuario}} </h1>
                 <div>
                     <p class="seguidores">0 seguidores</p>
@@ -20,9 +24,8 @@
             <a href="">Atividade</a>
             <a href="/profile/biblioteca">Biblioteca</a>
             <a href="/profile/favoritos">Favoritos</a>
-            <a href="">Reports</a>
             <a href="">Retrospectiva</a>
-            <a href="{{ url_for('app.logout') }}">Deslogar</a>
+            <a href="{{ url_for('app.logout') }}" class="deslogar">Deslogar</a>
         </nav>
 
     {% block profile %} 
