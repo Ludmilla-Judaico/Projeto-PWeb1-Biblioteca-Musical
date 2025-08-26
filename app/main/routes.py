@@ -131,7 +131,7 @@ def logout():
     session.pop('usuario', None)
     return redirect('/login')
 
-@app.route('/album')
+@app.route('/album/<album_id>')
 def album():
     info_album = carregar_album()
     musicas = carregar_discografia()
@@ -143,9 +143,10 @@ def album():
 def favoritar(album_id):
     if 'usuario' not in session:
         flash('É necessário estar logado para favoritar um albúm!')
-        return redirect(url_for('login'))
+        return redirect(url_for('app.login'))
     
     capa = carregar_album()[1]
+    print(capa)
     usuario = session['usuario']
 
     salvar_favorito(usuario, album_id, capa)
@@ -153,7 +154,7 @@ def favoritar(album_id):
 
 @app.route('/destino', methods=["POST"])
 def salvar ():
-    id_album = request.form['id']
+    id_album = request.form['id_album']
     capa = request.form['capa']
     nome = request.form['nome']
     lancamento = request.form['lancamento']
@@ -166,4 +167,4 @@ def salvar ():
     armazenar_album = salvar_album(id_album,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
     armazenar_musicas = salvar_musicas(id_album,musicas)
 
-    return None
+    return redirect('/admin')
