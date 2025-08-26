@@ -2,7 +2,7 @@ from flask import render_template, url_for, redirect, session, request, flash
 import csv, os
 from . import app
 from .funcoes import carregar_albuns, carregar_favoritos, salvar_favorito, dados_associados, authenticator, edit_user
-from .servicos import salvar_album, salvar_musicas
+from .servicos import salvar_album, salvar_musicas, carregar_album, carregar_discografia
 
 def signin(user, email, senha):
     if not os.path.exists('data/usuarios.csv'):
@@ -18,12 +18,24 @@ def signin(user, email, senha):
 
 #==========================ROTAS PÁGINAS================================
 
+@app.route('/admin')
+def admin():
+    return render_template('admin.html')
+
+EMAIL_ADMIN = "admin@email.com"
+SENHA_ADMIN = "12345"
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if(request.method == 'POST'):
         email = request.form['email_login']
         senha = request.form['senha_login']
         print("pegou infos")
+
+        if user_email == EMAIL_ADMIN and senha == SENHA_ADMIN:
+            return redirect('/admin')
+
         if authenticator(email, senha):
             print("authenticator passou")
             nome, foto = dados_associados(email)
@@ -118,7 +130,9 @@ def logout():
 
 @app.route('/album')
 def album():
-    return render_template('descricao_album.html')
+    id_album,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify = carregar_album()
+    musicas = carregar_discografia()
+    return render_template('descricao_album.html', id_album=id_album, capa=capa, nome=nome, lancamento=lancamento, genero=genero, artista=artista, foto_bio=foto_bio, biografia=biografia, spotify=spotify, musicas=musicas)
 
 #======================ROTAS FUNÇÕES=====================
 
@@ -135,14 +149,15 @@ def favoritar(album_id):
 
 @app.route('/destino', methods=["POST"])
 def salvar ():
-    id = request.form['id']
+    id_album = request.form['id']
     capa = request.form['capa']
     nome = request.form['nome']
     lancamento = request.form['lancamento']
     genero = request.form['genero']
     artista = request.form['artista']
-    foto_bio = request.form['genefoto_bioro']
+    foto_bio = request.form['foto_bio']
     biografia = request.form['biografia']
     spotify = request.form['spotify']
     musicas = request.form['musicas']
-    armazenar = salvar_album(id,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
+    armazenar_album = salvar_album(id_album,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
+    armazenar_musicas = salvar_musicas(id_album,musicas)
