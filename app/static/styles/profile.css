@@ -56,7 +56,7 @@ body{
 }
 
 .mini-menu a:hover{
-    background-color: lightpink;
+    color: lightpink;
     border-radius: 50%;
 }
 
