@@ -125,3 +125,7 @@ def favoritar(album_id):
 
     salvar_favorito(usuario, album_id)
     return redirect('/profile')
+
+@app.route('/404')
+def erro_404():
+    return render_template('erros/404.html')
