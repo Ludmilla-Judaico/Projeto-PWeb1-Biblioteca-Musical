@@ -1,21 +1,11 @@
 from flask import render_template, url_for, redirect, session, request, flash
-import csv, os
 from . import app
-from .funcoes import *
+from .funcoes.albuns import *
+from .funcoes.fav import *
+from .funcoes.user import *
+from .funcoes.biblioteca import *
 from .servicos import *
 from .comparacao import *
-
-def signin(user, email, senha):
-    if not os.path.exists('data/usuarios.csv'):
-        with open('data/usuarios.csv', 'w', newline="", encoding="utf-8") as arquivo_user:
-            writer = csv.writer(arquivo_user)
-            writer.writerow(['usuário', 'email', 'senha', 'foto'])
-
-    foto = 'static/imgs/perfil-default.png'
-    with open('data/usuarios.csv', 'a', newline="", encoding="utf-8") as arquivo_user:
-        writer = csv.writer(arquivo_user)
-        writer.writerow([user, email, senha, foto])
-
 
 #==========================ROTAS PÁGINAS================================
 
@@ -87,8 +77,9 @@ def minha_biblioteca():
         return redirect('/login')
     usuario = session['usuario']
     foto = session['foto']
+    biblioteca = carregar_biblioteca(usuario)
 
-    return render_template('biblioteca.html', usuario=usuario, foto=foto)
+    return render_template('biblioteca.html', usuario=usuario, foto=foto, biblioteca=biblioteca, check_in_biblioteca=check_in_biblioteca)
 
 @app.route('/profile/favoritos')
 def favoritos():
@@ -132,19 +123,14 @@ def logout():
 
 @app.route('/album/<album_id>')
 def album(album_id):
+    info_album = carregar_album()
+    musicas = carregar_discografia()
+    usuario = session['usuario']
+    inicializar_biblioteca()
+    print(info_album)
 
-    musicas = carregar_discografia(album_id)
-
-    review = carregar_review()
-
-    album = comparar_id(album_id)
-    
-    if album != None and musicas != None:
-        return render_template('descricao_album.html', musicas=musicas, album=album, check_in_fav=check_in_fav, len=len)
-    else:
-        return redirect('/')
-
-#======================ROTAS FUNÇÕES=====================
+    return render_template('descricao_album.html', usuario=usuario, info_album=info_album, musicas=musicas,
+                            album_id=album_id, check_in_fav=check_in_fav, check_in_biblioteca=check_in_biblioteca)
 
 @app.route('/favoritar/<album_id>')
 def favoritar(album_id):
@@ -161,6 +147,22 @@ def favoritar(album_id):
     else:
         salvar_favorito(usuario, album_id, capa)
     return redirect('/profile/favoritos')
+
+@app.route('/add_biblioteca/<album_id>')
+def add_biblioteca(album_id):
+    if 'usuario' not in session:
+        flash('É necessário estar logado para adicionar um albúm à biblioteca!')
+        return redirect(url_for('app.login'))
+    inicializar_biblioteca()
+    
+    capa = next(a['capa'] for a in carregar_album() if a['album_id'] == album_id)
+    usuario = session['usuario']
+
+    if check_in_biblioteca(album_id, usuario):
+        remover_da_biblioteca(album_id)
+    else:
+        salvar_na_biblioteca(usuario, album_id, capa)
+    return redirect('/profile/biblioteca')
 
 
 @app.route('/destino', methods=["POST"])

@@ -15,14 +15,6 @@ body {
     height: 100vh;
 }
 
-.menudireito {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: right;
-    gap: 20px;
-}
-
 #explorar {
 color: rgb(255, 255, 255);
 }

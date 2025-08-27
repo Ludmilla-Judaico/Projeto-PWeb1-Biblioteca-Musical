@@ -36,14 +36,17 @@ header{
     align-items: center;
 }
 
-.menudireito{
-    /* text-align: end; */
+.menudireito {
     margin-right: 10px;
     padding-bottom: 7px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+    gap: 20px;
 }
 
 .menudireito a{
-    /* margin: 0 1rem 0 1rem; */
     font-weight: 600;
     text-decoration: none;
     color: white;
