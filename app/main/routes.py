@@ -171,8 +171,7 @@ def salvar ():
 
 @app.route('/review', methods=["POST"])
 def review():
-    album_id = request.form['album_id']
     review = request.form['review']
-    salvar_comentario(album_id,review)
+    salvar_comentario(review)
 
     return redirect('/')

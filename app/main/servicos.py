@@ -10,7 +10,7 @@ caminho_review = 'data/review.csv'
 #   #CRIAR OS ALBUNS
 # NO LUGAR DOS INPUTS COLOCAR OS FORMULARIOS
 def salvar_album(album_id,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify):
-    dados = [['album_id','capa','nome','lancamento','genero','artista','foto_bio','biografia','spotify']]
+    dados = []
     album = []
     album.append(album_id)
     album.append(capa)
@@ -31,7 +31,7 @@ def salvar_album(album_id,capa,nome,lancamento,genero,artista,foto_bio,biografia
 
 
 def salvar_musicas(album_id,musicas):
-    colecao = [['album_id','musicas']]
+    colecao = []
     faixas = []
     musica = musicas.strip().split(';')
     faixas.append(album_id)
@@ -43,46 +43,15 @@ def salvar_musicas(album_id,musicas):
         escritor.writerows(colecao)
 
 
-def salvar_comentario (album_id,review):
-     review = [['album_id', 'review']]
-     review.append([album_id,review])
+def salvar_comentario (review):
+     comentario = []
+     comentario.append([review])
 
-     with open(caminho_review, "a", newline="", encoding="utf-8") as arq:
+     with open(caminho_review, "w", newline="", encoding="utf-8") as arq:
         escritor = csv.writer(arq, delimiter=';')
-        escritor.writerows(review)
+        escritor.writerows(comentario)
+        print('Deu certo')
      
-
-
-
-# with open(caminho_review, "w", newline="", encoding="utf-8") as arq:
-#     escritor = csv.writer(arq, delimiter=';')
-#     escritor.writerows(colecao)
-
-
-# def musicas(id,musicas):
-#     colecao = [["album_id","musicas" ]]
-#     faixas = []
-#     for m in musicas:
-#          musica = m.strip().split(';')
-#          faixas.append(musica)
-#     colecao.append(id)
-#     colecao.append(faixas)
-
-#     with open(caminho_musicas, "a", newline="", encoding="utf-8") as arq:
-#         escritor = csv.writer(arq, delimiter=';')
-#         colecao = musicas(id,musicas)
-#         escritor.writerows(colecao)
-
-# comentarios = [["id_album", "comentario"]]
-# while True:
-
-
-
-  #trocar o 'w' pelo 'a' quando for usar de verdade
-
-# with open(caminho_review, "w", newline="", encoding="utf-8") as arq:
-#     escritor = csv.writer(arq, delimiter=';')
-#     escritor.writerows(colecao)
 
   #LER O ARQUIVO CSV ONDE ESTÁ A LISTA DE ALBUNS
 # AQUI A FUNÇÃO VAI RECEBER OS VALORES E COLOCAR EM UM DIC PARA FICAR MAIS FACIL PRA SUBSTITUIR
@@ -120,10 +89,6 @@ def carregar_discografia()->list:
 
     return musicas
 
-
-
-
-# lista_albuns = carregar_album()
 
 # for d in lista_albuns:
 #      if d['id'] == album_id :
