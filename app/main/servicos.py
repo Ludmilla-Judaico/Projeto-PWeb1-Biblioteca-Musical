@@ -28,9 +28,16 @@ def salvar_album(capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
 
     id_automatico += 1
 
-    with open(caminho_album, "a", newline="", encoding="utf-8") as arq:
-        escritor = csv.writer(arq, delimiter=';')
-        escritor.writerows(dados)
+
+    if not os.path.exists(caminho_musicas):
+        with open(caminho_album, "w", newline="", encoding="utf-8") as arq:
+            escritor = csv.writer(arq, delimiter=';')
+            escritor.writerows(['capa','nome','lancamento','genero','artista','foto_bio','biografia','spotify'])
+
+        
+        with open(caminho_album, "a", newline="", encoding="utf-8") as arq:
+            escritor = csv.writer(arq, delimiter=';')
+            escritor.writerows(dados)
 
     return dados
 
@@ -47,9 +54,15 @@ def salvar_musicas(musicas):
 
     id_automatico += 1
 
-    with open(caminho_musicas, "a", newline="", encoding="utf-8") as arq:
-        escritor = csv.writer(arq, delimiter=';')
-        escritor.writerows(colecao)
+    if not os.path.exists(caminho_musicas):
+        with open(caminho_musicas, "w", newline="", encoding="utf-8") as arq:
+            escritor = csv.writer(arq, delimiter=';')
+            escritor.writerows(['album_id','musicas'])
+
+    else:
+        with open(caminho_musicas, "a", newline="", encoding="utf-8") as arq:
+            escritor = csv.writer(arq, delimiter=';')
+            escritor.writerows(colecao)
 
 
 def salvar_comentario (album_id,review):
@@ -67,10 +80,16 @@ def salvar_comentario (album_id,review):
     lista_info.append([review])
     comentario.append(lista_info)
 
-    with open(caminho_review, "a", newline="", encoding="utf-8") as arq:
-        escritor = csv.writer(arq, delimiter=';')
-        escritor.writerows(comentario)
-        print(album_id)
+    if not os.path.exists(caminho_review):
+        with open(caminho_review, "w", newline="", encoding="utf-8") as arq:
+            escritor = csv.writer(arq, delimiter=';')
+            escritor.writerows(['album_id','review'])
+            print(album_id)
+    else:
+         with open(caminho_review, "a", newline="", encoding="utf-8") as arq:
+            escritor = csv.writer(arq, delimiter=';')
+            escritor.writerows(comentario)
+            print(album_id)
 
      
 
