@@ -29,7 +29,7 @@ def inicializar_favoritos():
         os.makedirs(os.path.dirname(caminho_favoritos), exist_ok=True)
         with open(caminho_favoritos, "w", newline="", encoding="utf-8") as arquivo:
             writer = csv.writer(arquivo)
-            writer.writerow(["usuario", "album_id", "capa"])
+            writer.writerow(["usuário", "album_id", "capa"])
 
 def carregar_favoritos(usuario):
     favoritos = []
@@ -38,7 +38,7 @@ def carregar_favoritos(usuario):
     with open(caminho_favoritos, newline='', encoding='utf-8') as arquivo:
         leitor = csv.DictReader(arquivo)
         for linha in leitor:
-            if linha['usuario'] == usuario:
+            if linha['usuário'] == usuario:
                 favoritos.append({
                     "album_id": linha["album_id"],
                     "capa": linha["capa"]
@@ -52,13 +52,35 @@ def salvar_favorito(usuario, album_id, capa):
     with open(caminho_favoritos, newline="", encoding="utf-8") as arquivo:
         leitor = csv.DictReader(arquivo)
         for linha in leitor:
-            if linha["usuario"] == usuario:
+            if linha["usuário"] == usuario:
                 fav.append(linha["album_id"])
     
     if album_id not in fav:
         with open(caminho_favoritos, "a", newline="", encoding="utf-8") as arquivo:
             writer = csv.writer(arquivo)
             writer.writerow([usuario, album_id, capa])
+
+def check_in_fav(album_id, usuario):
+    with open(caminho_favoritos, 'r', newline='', encoding='utf-8') as arquivo:
+        albuns_favs = csv.DictReader(arquivo)
+        for linha in albuns_favs:
+            if (linha['album_id'] == album_id) and (linha['usuário'] == usuario):
+                return True
+    return False
+
+def remover_favorito(album_id):
+    manter = []
+    with open(caminho_favoritos, "r", newline="", encoding="utf-8") as arquivo:
+        leitor = csv.DictReader(arquivo)
+        for linha in leitor:
+            if not(linha['album_id'] == album_id):
+                manter.append(linha)
+
+    with open(caminho_favoritos, 'w', newline='', encoding='utf-8') as arquivo:
+        escritor = csv.DictWriter(arquivo, fieldnames=['usuário', 'album_id', 'capa'])
+        escritor.writeheader()
+        escritor.writerows(manter)
+
 
 
 def dados_associados(user_email):          

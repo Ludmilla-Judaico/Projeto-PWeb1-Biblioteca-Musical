@@ -18,7 +18,9 @@
                 <div class="rating">
                     <label class="heart-wrapper">
                     <input type="checkbox" class="heart-checkbox" name="favoritar" />
-                    <span ><a class="heart" href="{{ url_for('app.favoritar', album_id=album_id) }}">❤</a></span>
+                    <a href="{{ url_for('app.favoritar', album_id=a.album_id) }}">
+                        <span class="heart {% if check_in_fav(a.album_id, usuario) %}favoritado{% endif %}">❤</span>
+                    </a>
                     </label>
                     <input type="radio" id="star5" name="rating" value="5" />
                     <label for="star5" title="5 estrelas">★</label>

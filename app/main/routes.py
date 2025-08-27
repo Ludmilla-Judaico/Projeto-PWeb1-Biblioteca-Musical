@@ -1,7 +1,7 @@
 from flask import render_template, url_for, redirect, session, request, flash
 import csv, os
 from . import app
-from .funcoes import carregar_favoritos, salvar_favorito, dados_associados, authenticator, edit_user
+from .funcoes import *
 from .servicos import *
 
 def signin(user, email, senha):
@@ -96,10 +96,7 @@ def favoritos():
     usuario = session['usuario']
     foto = session['foto']
     favoritos = carregar_favoritos(usuario)
-    for fav in favoritos:
-        print(f'capa: {fav['capa']}')
-
-    return render_template('favoritos.html', usuario=usuario, foto=foto, favoritos=favoritos)
+    return render_template('favoritos.html', usuario=usuario, foto=foto, favoritos=favoritos, check_in_fav=check_in_fav)
 
 @app.route('/profile/edit', methods=['GET', 'POST'])
 def edit_profile():
@@ -138,7 +135,7 @@ def album(album_id):
     musicas = carregar_discografia()
     print(info_album)
 
-    return render_template('descricao_album.html', info_album=info_album, musicas=musicas, album_id=album_id)
+    return render_template('descricao_album.html', info_album=info_album, musicas=musicas, album_id=album_id, check_in_fav=check_in_fav)
 
 #======================ROTAS FUNÇÕES=====================
 
@@ -147,13 +144,17 @@ def favoritar(album_id):
     if 'usuario' not in session:
         flash('É necessário estar logado para favoritar um albúm!')
         return redirect(url_for('app.login'))
+    inicializar_favoritos()
     
-    capa = carregar_album()[1]
-    print(capa)
+    capa = next(a['capa'] for a in carregar_album() if a['album_id'] == album_id)
     usuario = session['usuario']
 
-    salvar_favorito(usuario, album_id, capa)
+    if check_in_fav(album_id, usuario):
+        remover_favorito(album_id)
+    else:
+        salvar_favorito(usuario, album_id, capa)
     return redirect('/profile/favoritos')
+
 
 @app.route('/destino', methods=["POST"])
 def salvar ():
