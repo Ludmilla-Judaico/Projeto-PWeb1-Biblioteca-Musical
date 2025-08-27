@@ -1,8 +1,9 @@
 from flask import render_template, url_for, redirect, session, request, flash
 import csv, os
 from . import app
-from .funcoes import *
-from .servicos import *
+from .funcoes.albuns import *
+from .funcoes.fav import *
+from .funcoes.user import *
 
 def signin(user, email, senha):
     if not os.path.exists('data/usuarios.csv'):
@@ -133,9 +134,10 @@ def logout():
 def album(album_id):
     info_album = carregar_album()
     musicas = carregar_discografia()
+    usuario = session['usuario']
     print(info_album)
 
-    return render_template('descricao_album.html', info_album=info_album, musicas=musicas, album_id=album_id, check_in_fav=check_in_fav)
+    return render_template('descricao_album.html', usuario=usuario, info_album=info_album, musicas=musicas, album_id=album_id, check_in_fav=check_in_fav)
 
 #======================ROTAS FUNÇÕES=====================
 
