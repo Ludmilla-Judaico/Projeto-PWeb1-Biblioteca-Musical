@@ -6,15 +6,13 @@ caminho_album = 'data/albuns.csv'
 caminho_musicas = 'data/musicas.csv'
 caminho_review = 'data/review.csv'
 
-id = 0
 
 #   #CRIAR OS ALBUNS
 # NO LUGAR DOS INPUTS COLOCAR OS FORMULARIOS
-def salvar_album(capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify):
-    # global id += 1
-    dados = [['album_id','capa','nome','lancamento','genero','artista','foto_bio','biografia''spotify']]
+def salvar_album(album_id,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify):
+    dados = [['album_id','capa','nome','lancamento','genero','artista','foto_bio','biografia','spotify']]
     album = []
-    album.append(id)
+    album.append(album_id)
     album.append(capa)
     album.append(nome)
     album.append(lancamento)
@@ -43,6 +41,16 @@ def salvar_musicas(album_id,musicas):
     with open(caminho_musicas, "a", newline="", encoding="utf-8") as arq:
         escritor = csv.writer(arq, delimiter=';')
         escritor.writerows(colecao)
+
+
+def salvar_comentario (album_id,review):
+     review = [['album_id', 'review']]
+     review.append([album_id,review])
+
+     with open(caminho_review, "a", newline="", encoding="utf-8") as arq:
+        escritor = csv.writer(arq, delimiter=';')
+        escritor.writerows(review)
+     
 
 
 
@@ -85,28 +93,30 @@ def carregar_album():
     for linha in linhas_album:
         album = {
             'album_id': linha['album_id'],
-            'capa': linha['capa'],
+            'capa': linha['capa'].strip('"').strip("'"),
             'nome': linha['nome'],
             'lancamento': linha['lancamento'],
             'genero': linha['genero'],
             'artista': linha['artista'],
-            'foto_bio': linha['foto_bio'],
+            'foto_bio': linha['foto_bio'].strip('"').strip("'"),
             'biografia': linha['biografia'],
             'spotify': linha['spotify']
             }
         lista_albuns.append(album)
+        print(album['capa'])
     arq_album.close()
 
     return lista_albuns
 
 def carregar_discografia()->list:
     arq_musicas = open(caminho_musicas,'r', encoding='utf-8')
-    linhas_musicas = arq_musicas.readlines()
+    linhas_musicas = csv.DictReader(arq_musicas, delimiter=";")
     faixas = []
-    for l in linhas_musicas[1:]:
-            musicas = l.strip().split(';')
+    for m in linhas_musicas:
+            musicas = m
             faixas.append(musicas)
-    arq_musicas.close()  
+    arq_musicas.close()
+    print(faixas) 
 
     return musicas
 

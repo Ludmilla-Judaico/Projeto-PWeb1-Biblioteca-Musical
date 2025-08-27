@@ -34,7 +34,7 @@
 
                  <div class="musicas">
                     <ol>
-                        {% for m in musicas%}
+                        {% for m in musicas %}
                         <li>{{ m.musicas }}</li>
                         {% endfor %}
 
@@ -44,62 +44,26 @@
 
             <div class='box box-3'>
                 <div class="biografia">
-                    <img id="imagem_bio" src="{{ info_album['foto_bio'] }}">
+                    <img id="imagem_bio" src="{{ a.foto_bio }}">
                     <p id="texto_bio">{{ a.biografia }}</p>
                 </div>
             </div>
 
             <div class='box box-4'>
-                {{ a.spotify.replace(''', '') }}
+                {{ a.spotify|safe }}
             </div>
         </div>
         {% endfor %}
 
-            <!-- <h1 class="comentario">Comentários</h1>
+        <div class="review" action="/destino" method="POST">
+            <form class="review">
+                <label for="review" title="review">Comentário</label>
+                <textarea name="review" id="review" rows="4" cols="20" placeholder="Eai o que você achou do album?"></textarea>
 
-        {% for c in comentarios %}
-        <div class="container-2">
-            <div class='box box-5'>
-                <img class="foto_perfil" src="{{ url_for('static', filename='imgs/ft de perfil teste.jpg')}}">
-                <form class="comentario" action="/destino" method="post">
-                    <label for="comentario"></label>
-                    <textarea id="comentario" name="comentario" rows="5" cols="33" placeholder="Eai, o que você achou dessa discografia?"></textarea>
-                </form>
-            </div>
-        {% endfor %}
+                <button type="submit">Enviar</button>
+                
+            </form>
+        </div>
 
-
-
-            <div class='box box-6'><img class="foto_perfil" src="{{ url_for('static', filename='imgs/ft de perfil teste.jpg')}}">
-                <form class="comentario" action="/destino" method="post">
-                    <label for="comentario"></label>
-                    <textarea id="comentario" name="comentario" rows="5" cols="33" placeholder="Eai, o que você achou dessa discografia?"></textarea>
-                </form>
-            </div>
-            <div class='box box-7'><img class="foto_perfil" src="{{ url_for('static', filename='imgs/ft de perfil teste.jpg')}}">
-                <form class="comentario" action="/destino" method="post">
-                    <label for="comentario"></label>
-                    <textarea id="comentario" name="comentario" rows="5" cols="33" placeholder="Eai, o que você achou dessa discografia?"></textarea>
-                </form>
-            </div>
-            <div class='box box-8'><img class="foto_perfil" src="{{ url_for('static', filename='imgs/ft de perfil teste.jpg')}}">
-                <form class="comentario" action="/destino" method="post">
-                    <label for="comentario"></label>
-                    <textarea id="comentario" name="comentario" rows="5" cols="33" placeholder="Eai, o que você achou dessa discografia?"></textarea>
-                </form>
-            </div>
-            <div class='box box-9'><img class="foto_perfil" src="{{ url_for('static', filename='imgs/ft de perfil teste.jpg')}}">
-                <form class="comentario" action="/destino" method="post">
-                    <label for="comentario"></label>
-                    <textarea id="comentario" name="comentario" rows="5" cols="33" placeholder="Eai, o que você achou dessa discografia?"></textarea>
-                </form>
-            </div>
-            <div class='box box-10'><img class="foto_perfil" src="{{ url_for('static', filename='imgs/ft de perfil teste.jpg')}}">
-                <form class="comentario" action="/destino" method="post">
-                    <label for="comentario"></label>
-                    <textarea id="comentario" name="comentario" rows="5" cols="33" placeholder="Eai, o que você achou dessa discografia?"></textarea>
-                </form>
-            </div>
-        </div> -->
     </section>
 {% endblock %}

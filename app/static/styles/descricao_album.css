@@ -158,6 +158,13 @@ h1.comentario {
   border-radius: 100%;
 }
 
+.review {
+    margin: 3%;
+    width: 100%;
+    max-width: 500px;
+    font-size: 1.3em;
+}
+
 textarea {
   width: 100%;
   max-width: 100%;
@@ -177,4 +184,10 @@ textarea:focus {
   border-color: #4a90e2;
   outline: none;
 }
+
+button{
+  color: #4a90e2;
+  border-radius: 5%;
+}
+
 /* FIM DO CONTAINER 2 */

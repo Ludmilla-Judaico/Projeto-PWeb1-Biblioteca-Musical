@@ -131,7 +131,7 @@ def logout():
     session.pop('usuario', None)
     return redirect('/login')
 
-@app.route('/album/<album_id>')
+@app.route('/album')
 def album():
     info_album = carregar_album()
     musicas = carregar_discografia()
@@ -164,7 +164,15 @@ def salvar ():
     biografia = request.form['biografia']
     spotify = request.form['spotify']
     musicas = request.form['musicas']
-    armazenar_album = salvar_album(id_album,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
-    armazenar_musicas = salvar_musicas(id_album,musicas)
+    salvar_album(id_album,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
+    salvar_musicas(id_album,musicas)
 
     return redirect('/admin')
+
+@app.route('/review', methods=["POST"])
+def review():
+    album_id = request.form['album_id']
+    review = request.form['review']
+    salvar_comentario(album_id,review)
+
+    return redirect('/')
