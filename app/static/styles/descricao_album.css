@@ -94,13 +94,7 @@ section{
   color: rgb(255, 217, 0);
 }
 
-.heart-checkbox:checked + .heart {
-  color: red;
-}
 
-.heart:hover {
-  color: red;
-}
 
 .heart {
   color: #aaa;
@@ -108,8 +102,17 @@ section{
   text-decoration: none;
 }
 
-.heart.favoritado {
+.heart:hover {
+  color: red;
+}
+
+.heart-favoritado {
     color: red;
+    text-decoration: none;
+}
+
+.heart-favoritado:hover{
+  color:#aaa;
 }
 
 .box-3 {
