@@ -133,14 +133,14 @@ def logout():
 @app.route('/album/<album_id>')
 def album(album_id):
 
-    musicas = carregar_discografia()
+    musicas = carregar_discografia(album_id)
 
     review = carregar_review()
 
     album = comparar_id(album_id)
     
-    if album:
-        return render_template('descricao_album.html', musicas=musicas, album=album)
+    if album != None and musicas != None:
+        return render_template('descricao_album.html', musicas=musicas, album=album, check_in_fav=check_in_fav, len=len)
     else:
         return redirect('/')
 

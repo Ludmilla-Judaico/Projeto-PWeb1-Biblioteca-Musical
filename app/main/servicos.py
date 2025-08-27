@@ -83,18 +83,24 @@ def carregar_album():
     for linha in linhas_album:
         album.append(linha)
     arq_album.close()
-
     return album
 
-def carregar_discografia()->list:
+def carregar_discografia(album_id)->list:
     arq_musicas = open(caminho_musicas,'r', encoding='utf-8')
     linhas_musicas = csv.DictReader(arq_musicas, delimiter=";")
     faixas = []
     for m in linhas_musicas:
-            musicas = m
-            faixas.append(musicas)
+            if m['album_id'] == str(album_id):
+                m['musicas'] = m['musicas'].strip('[]')
+                lista = [item.strip().strip("'").strip('"') for item in m['musicas'].split(";")]
+                faixas.append({
+                    'album_id': m['album_id'],
+                    'musicas': lista
+                })
     arq_musicas.close()
+    print(faixas)
     return faixas
+
 
 def carregar_review()->list:
     arq_review = open(caminho_review, 'r')
@@ -105,7 +111,6 @@ def carregar_review()->list:
             comentarios.append(review)
     arq_review.close()
     print(comentarios)
-
     return comentarios
 
 
