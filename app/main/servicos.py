@@ -11,8 +11,8 @@ id = 0
 #   #CRIAR OS ALBUNS
 # NO LUGAR DOS INPUTS COLOCAR OS FORMULARIOS
 def salvar_album(capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify):
-    # global id += 1
-    dados = [['album_id','capa','nome','lancamento','genero','artista','foto_bio','biografia''spotify']]
+    id += 1
+    dados = [['album_id','capa','nome','lancamento','genero','artista','foto_bio','biografia','spotify']]
     album = []
     album.append(id)
     album.append(capa)

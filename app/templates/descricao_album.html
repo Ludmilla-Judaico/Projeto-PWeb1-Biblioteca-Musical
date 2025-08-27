@@ -18,7 +18,7 @@
                 <div class="rating">
                     <label class="heart-wrapper">
                     <input type="checkbox" class="heart-checkbox" name="favoritar" />
-                    <span class="heart"><a href="{{ url_for('app.favoritar', album_id=1) }}">❤</a></span>
+                    <span class="heart"><a href="{{ url_for('app.favoritar', album_id=album_id) }}">❤</a></span>
                     </label>
                     <input type="radio" id="star5" name="rating" value="5" />
                     <label for="star5" title="5 estrelas">★</label>
@@ -50,7 +50,7 @@
             </div>
 
             <div class='box box-4'>
-                {{ a.spotify.replace(''', '') }}
+                {{ a.spotify.replace("'", '') }}
             </div>
         </div>
         {% endfor %}

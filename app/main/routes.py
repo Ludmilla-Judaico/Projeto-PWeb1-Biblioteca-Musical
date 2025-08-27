@@ -131,11 +131,14 @@ def logout():
     session.pop('usuario', None)
     return redirect('/login')
 
+
 @app.route('/album/<album_id>')
-def album():
+def album(album_id):
     info_album = carregar_album()
     musicas = carregar_discografia()
-    return render_template('descricao_album.html', info_album=info_album, musicas=musicas)
+    print(info_album)
+
+    return render_template('descricao_album.html', info_album=info_album, musicas=musicas, album_id=album_id)
 
 #======================ROTAS FUNÇÕES=====================
 
@@ -164,7 +167,7 @@ def salvar ():
     biografia = request.form['biografia']
     spotify = request.form['spotify']
     musicas = request.form['musicas']
-    armazenar_album = salvar_album(id_album,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
-    armazenar_musicas = salvar_musicas(id_album,musicas)
+    salvar_album(id_album,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
+    salvar_musicas(id_album,musicas)
 
     return redirect('/admin')

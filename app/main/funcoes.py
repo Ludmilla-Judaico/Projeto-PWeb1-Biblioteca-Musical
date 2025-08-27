@@ -39,7 +39,6 @@ def carregar_favoritos(usuario):
         leitor = csv.DictReader(arquivo)
         for linha in leitor:
             if linha['usuario'] == usuario:
-                infos_album = []
                 favoritos.append({
                     "album_id": linha["album_id"],
                     "capa": linha["capa"]
@@ -78,7 +77,7 @@ def authenticator(user_email, senha):
             for linha in leitor:
                 if (linha['email'] == user_email) and (linha['senha'] == senha):
                     return True
-                return False
+            return False
     return False
             
 def edit_user(novo_usuario=None, novo_email=None, nova_senha=None, nova_foto=None):
