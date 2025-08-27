@@ -121,13 +121,12 @@ def logout():
 @app.route('/album/<album_id>')
 def album(album_id):
     info_album = carregar_album()
-    musicas = carregar_discografia()
+    musicas = carregar_discografia(album_id)
     usuario = session['usuario']
     inicializar_biblioteca()
     print(info_album)
 
-    return render_template('descricao_album.html', usuario=usuario, info_album=info_album, musicas=musicas,
-                            album_id=album_id, check_in_fav=check_in_fav, check_in_biblioteca=check_in_biblioteca)
+    return render_template('descricao_album.html', usuario=usuario, info_album=info_album, musicas=musicas, album_id=album_id, check_in_fav=check_in_fav, check_in_biblioteca=check_in_biblioteca)
 
 @app.route('/favoritar/<album_id>')
 def favoritar(album_id):
@@ -168,7 +167,7 @@ def add_biblioteca(album_id):
 
 @app.route('/destino', methods=["POST"])
 def salvar ():
-    id_album = request.form['id_album']
+    # id_album = request.form['id_album']
     capa = request.form['capa']
     nome = request.form['nome']
     lancamento = request.form['lancamento']
@@ -178,8 +177,8 @@ def salvar ():
     biografia = request.form['biografia']
     spotify = request.form['spotify']
     musicas = request.form['musicas']
-    salvar_album(id_album,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
-    salvar_musicas(id_album,musicas)
+    salvar_album(capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
+    salvar_musicas(musicas)
 
     flash('Álbum cadastrado com sucesso!')
     return redirect('/admin')
