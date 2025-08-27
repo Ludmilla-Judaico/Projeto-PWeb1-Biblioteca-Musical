@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 
 {% block title %}404{% endblock %}
+{% block style %}{{ url_for('static', filename='styles/erros.css') }}{% endblock %}
 
 {% block content %}
     <h1>Erro 404</h1>
+    <h2>Página não encontrada ;-;</h2>
+    <h3>Mas Keep Calm and Relax! Isso não é bug do milênio (ufa!)...</h3>
+    <a href="/"><button>Voltar ao início</button></a>
 {% endblock %}
