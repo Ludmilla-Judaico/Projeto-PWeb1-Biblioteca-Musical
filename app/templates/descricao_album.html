@@ -60,7 +60,16 @@
                 {{ a.spotify|safe }}
             </div>
         </div>
+
+        <div class="biblioteca">
+        {% if check_in_biblioteca(a.album_id, usuario) %}
+            <a href="{{ url_for('app.add_biblioteca', album_id=a.album_id)}}"><button>Remover da biblioteca</button></a>
+        {% else %}
+            <a href="{{ url_for('app.add_biblioteca', album_id=a.album_id)}}"><button>Adicionar à sua biblioteca</button></a>
+        {% endif %}
+        </div>
         {% endfor %}
+        
 
         <div class="review" action="/destino" method="POST">
             <form class="review">
