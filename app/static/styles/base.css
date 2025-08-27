@@ -1,37 +1,60 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
+.outfit-regular {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.outfit-semibold {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.outfit-bold {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
 *{
     margin: 0%;
     box-sizing: border-box;
+    font-family: Outfit;
 }
 
 header{
     background-color: #ff00a1;
-    padding: 1%;
-    font-size: 25px;
+    padding-top: 10px;
+    font-size: 1.15rem;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
 
 .menudireito{
-    text-align: end;
+    /* text-align: end; */
+    margin-right: 10px;
+    padding-bottom: 7px;
 }
 
 .menudireito a{
-    margin: 0 1rem 0 1rem;
+    /* margin: 0 1rem 0 1rem; */
+    font-weight: 600;
     text-decoration: none;
     color: white;
     transition: 0.5s;
 }
 
-.menudireito #editar:hover, .menudireito #explorar:hover{
-    background-color: lightpink;
-    border-radius: 50%;
+.menudireito a:hover{
+    color: #fde6f5;
 }
 
-header .logo {
-    width: 120px;
-    height: 60px;
+#logo {
+    margin-left: 10px;
+    width: 100px;
 }
