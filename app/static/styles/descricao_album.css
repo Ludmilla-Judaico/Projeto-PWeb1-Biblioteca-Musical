@@ -22,18 +22,19 @@ section{
 }
 
 #capa_cd {
-    /* width: 100%; */
+    width: 100%;
     width: 450px;
     display: block;
+    margin-top: 1em;
 }
 
 #cd {
     width: 100%;
-    max-width: 380px;
+    max-width: 600px;
     margin-right: 10%;
     position: absolute;
     left: 48%;
-    top: 1%;
+    top: 15px;
     z-index: -1;
     border-radius: 80%;
     border-color: rgb(0, 0, 0);
