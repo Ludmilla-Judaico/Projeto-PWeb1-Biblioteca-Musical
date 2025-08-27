@@ -1,6 +1,14 @@
 {% extends "profile.html" %}
 
 {% block profile %}
+    {% set mensagens = get_flashed_messages() %}
+    {% if mensagens %}
+        {% for msg in mensagens %}  
+        <div class="flash">
+            {{ msg }}
+        </div>
+         {% endfor %}   
+    {% endif %}
      <section class="albuns">
         {% if biblioteca %}
             <h2> Albúns comentados </h2>
@@ -12,7 +20,6 @@
                 </figure>
                 <a href="{{ url_for('app.add_biblioteca', album_id=a.album_id)}}"><button>Remover da biblioteca</button></a>
 
-                <img src="{{url_for('static', filename='cd-aberto.png')}}" class="cd-aberto">
             </div>
             {% endfor %}
         {% else %}

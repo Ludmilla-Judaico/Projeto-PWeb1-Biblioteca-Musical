@@ -3,15 +3,14 @@
 {% block title %}Cadastre-se{% endblock %}
 
 {% block content %}
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-            <div class="alert alert-{{ category }}">
-                {{ message }}
-            </div>
+    {% set mensagens = get_flashed_messages() %}
+    {% if mensagens %}
+        <div class="flash">
+            {% for msg in mensagens %}  
+                <p>{{ msg }}</p>
             {% endfor %}
-        {% endif %}
-    {% endwith %}
+        </div>
+    {% endif %}
 
     <div id="base">
         <img src="{{ url_for('static', filename='imgs/logo.png')}}" alt="logo-musicoteca">

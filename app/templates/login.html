@@ -8,11 +8,19 @@
 </head>
 <body>
     {% block content %}
+    {% set mensagens = get_flashed_messages(with_categories=true) %}
+    {% if mensagens %}
+        {% for category, msg in mensagens %}  
+        <div class="flash {{category}}">
+            {{ msg }}
+        </div>
+         {% endfor %}
+    {% endif %}
         <div id="base">
             <img src="{{ url_for('static', filename='imgs/logo.png')}}" alt="logo-musicoteca">
             <form action="/login" method="POST">
                 <div id="input_form">
-                    <label for="email_login">Login:</label>
+                    <label for="email_login">Email:</label>
                     <input type="email" name="email_login" class="inputs">
         
                     <label for="senha_login">Senha:</label>

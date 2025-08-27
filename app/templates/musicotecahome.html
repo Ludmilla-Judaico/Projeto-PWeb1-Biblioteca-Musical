@@ -27,7 +27,11 @@
     </nav>
     <aside class="sidebar"></aside>
 
-    <main></main>
+    <main>
+        {% for album in albuns %}
+            <a href="album/{{album.album_id}}"><img src="{{album.capa}}"></a>
+        {% endfor %}
+    </main>
 
     </div>
 {% endblock %}
