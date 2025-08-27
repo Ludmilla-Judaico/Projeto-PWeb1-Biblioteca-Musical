@@ -46,14 +46,7 @@ header{
     gap: 20px;
 }
 
-/* .menudireito{
-    text-align: end;
-    margin-right: 10px;
-    padding-bottom: 7px;
-} */
-
 .menudireito a{
-    /* margin: 0 1rem 0 1rem; */
     font-weight: 600;
     text-decoration: none;
     color: white;

@@ -1,21 +1,8 @@
 from flask import render_template, url_for, redirect, session, request, flash
-import csv, os
 from . import app
 from .funcoes.albuns import *
 from .funcoes.fav import *
 from .funcoes.user import *
-
-def signin(user, email, senha):
-    if not os.path.exists('data/usuarios.csv'):
-        with open('data/usuarios.csv', 'w', newline="", encoding="utf-8") as arquivo_user:
-            writer = csv.writer(arquivo_user)
-            writer.writerow(['usuário', 'email', 'senha', 'foto'])
-
-    foto = 'static/imgs/perfil-default.png'
-    with open('data/usuarios.csv', 'a', newline="", encoding="utf-8") as arquivo_user:
-        writer = csv.writer(arquivo_user)
-        writer.writerow([user, email, senha, foto])
-
 
 #==========================ROTAS PÁGINAS================================
 

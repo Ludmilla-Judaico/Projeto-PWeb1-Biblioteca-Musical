@@ -14,6 +14,7 @@ def signin(user, email, senha):
         writer = csv.writer(arquivo_user)
         writer.writerow([user, email, senha, foto])
 
+#==============================
 def dados_associados(user_email):          
     with open(caminho_usuarios, newline="", encoding="utf-8") as arquivo:
         leitor = csv.DictReader(arquivo)
@@ -23,6 +24,7 @@ def dados_associados(user_email):
                 foto = linha['foto']
                 return nome, foto
             
+#===============================            
 def authenticator(user_email, senha):
     if os.path.exists(caminho_usuarios):
         with open(caminho_usuarios, newline='', encoding='utf-8') as arquivo:
@@ -33,6 +35,7 @@ def authenticator(user_email, senha):
             return False
     return False
             
+#===============================
 def edit_user(novo_usuario=None, novo_email=None, nova_senha=None, nova_foto=None):
     with open(caminho_usuarios, "r", newline="", encoding="utf-8") as arquivo:
         linhas = []
@@ -62,4 +65,3 @@ def edit_user(novo_usuario=None, novo_email=None, nova_senha=None, nova_foto=Non
         session['email'] = novo_email
     if nova_foto:
         session['foto'] = nova_foto
-            

@@ -6,6 +6,7 @@ caminho_album = 'data/albuns.csv'
 caminho_musicas = 'data/musicas.csv'
 caminho_review = 'data/review.csv'
 
+#=================================FUNÇÕES===================================
 
 #   #CRIAR OS ALBUNS
 # NO LUGAR DOS INPUTS COLOCAR OS FORMULARIOS
@@ -29,7 +30,7 @@ def salvar_album(album_id,capa,nome,lancamento,genero,artista,foto_bio,biografia
 
     return dados
 
-
+#=========================================
 def salvar_musicas(album_id,musicas):
     colecao = [['album_id','musicas']]
     faixas = []
@@ -42,7 +43,7 @@ def salvar_musicas(album_id,musicas):
         escritor = csv.writer(arq, delimiter=';')
         escritor.writerows(colecao)
 
-
+#==========================================
 def salvar_comentario (album_id,review):
      review = [['album_id', 'review']]
      review.append([album_id,review])
@@ -86,6 +87,8 @@ def salvar_comentario (album_id,review):
 
   #LER O ARQUIVO CSV ONDE ESTÁ A LISTA DE ALBUNS
 # AQUI A FUNÇÃO VAI RECEBER OS VALORES E COLOCAR EM UM DIC PARA FICAR MAIS FACIL PRA SUBSTITUIR
+
+#================================================
 def carregar_album():
     arq_album = open(caminho_album,'r', encoding='utf-8')
     lista_albuns = []
@@ -108,6 +111,7 @@ def carregar_album():
 
     return lista_albuns
 
+#============================================
 def carregar_discografia()->list:
     arq_musicas = open(caminho_musicas,'r', encoding='utf-8')
     linhas_musicas = csv.DictReader(arq_musicas, delimiter=";")

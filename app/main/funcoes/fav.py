@@ -1,6 +1,7 @@
 import csv, os
-
 caminho_favoritos = 'data/favoritos.csv'
+
+#============================FUNÇÕES==============================
 
 def inicializar_favoritos():
     if not os.path.exists(caminho_favoritos):
@@ -9,6 +10,7 @@ def inicializar_favoritos():
             writer = csv.writer(arquivo)
             writer.writerow(["usuário", "album_id", "capa"])
 
+#================================
 def carregar_favoritos(usuario):
     favoritos = []
     if not os.path.exists(caminho_favoritos):
@@ -23,6 +25,7 @@ def carregar_favoritos(usuario):
                 })
     return favoritos
 
+#================================
 def salvar_favorito(usuario, album_id, capa):
     inicializar_favoritos()
 
@@ -38,6 +41,7 @@ def salvar_favorito(usuario, album_id, capa):
             writer = csv.writer(arquivo)
             writer.writerow([usuario, album_id, capa])
 
+#==================================
 def check_in_fav(album_id, usuario):
     with open(caminho_favoritos, 'r', newline='', encoding='utf-8') as arquivo:
         albuns_favs = csv.DictReader(arquivo)
@@ -46,6 +50,7 @@ def check_in_fav(album_id, usuario):
                 return True
     return False
 
+#===================================
 def remover_favorito(album_id):
     manter = []
     with open(caminho_favoritos, "r", newline="", encoding="utf-8") as arquivo:
