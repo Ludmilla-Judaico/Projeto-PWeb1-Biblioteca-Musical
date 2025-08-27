@@ -131,11 +131,14 @@ def logout():
     session.pop('usuario', None)
     return redirect('/login')
 
-@app.route('/album')
-def album():
+
+@app.route('/album/<album_id>')
+def album(album_id):
     info_album = carregar_album()
     musicas = carregar_discografia()
-    return render_template('descricao_album.html', info_album=info_album, musicas=musicas)
+    print(info_album)
+
+    return render_template('descricao_album.html', info_album=info_album, musicas=musicas, album_id=album_id)
 
 #======================ROTAS FUNÇÕES=====================
 

@@ -26,7 +26,11 @@
                 <label for="nova_foto" class="form" id="foto">Foto de perfil:</label>
                 <input type="url" name="nova_foto" value="{{foto}}" class="inputs">
 
-                <img src="{{foto}}" alt="foto atual">
+                {% if foto.startswith('static/') %}
+                    <img src="{{ url_for('static', filename=foto.replace('static/', '')) }}" alt="foto de perfil">
+                {% else %}
+                    <img src="{{ foto }}" alt="foto de perfil">
+                {% endif %}
             </div>
 
             <div class="submeter">

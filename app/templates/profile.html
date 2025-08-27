@@ -5,10 +5,10 @@
     {% block content %}
 <!--------Capa------->
         <section class="capa">
-            {% if foto.startswith('https') %}
-                <img src="{{ foto }}" alt="foto de perfil">
-            {% else %}
+            {% if foto.startswith('static/') %}
                 <img src="{{ url_for('static', filename=foto.replace('static/', '')) }}" alt="foto de perfil">
+            {% else %}
+                <img src="{{ foto }}" alt="foto de perfil">
             {% endif %}
                 <div class="info-usuario">
                 <h1> {{usuario}} </h1>
