@@ -3,6 +3,7 @@ from . import app
 from .funcoes.albuns import *
 from .funcoes.fav import *
 from .funcoes.user import *
+from .funcoes.biblioteca import *
 
 #==========================ROTAS PÁGINAS================================
 
@@ -74,8 +75,9 @@ def minha_biblioteca():
         return redirect('/login')
     usuario = session['usuario']
     foto = session['foto']
+    biblioteca = carregar_biblioteca(usuario)
 
-    return render_template('biblioteca.html', usuario=usuario, foto=foto)
+    return render_template('biblioteca.html', usuario=usuario, foto=foto, biblioteca=biblioteca, check_in_biblioteca=check_in_biblioteca)
 
 @app.route('/profile/favoritos')
 def favoritos():
@@ -122,11 +124,11 @@ def album(album_id):
     info_album = carregar_album()
     musicas = carregar_discografia()
     usuario = session['usuario']
+    inicializar_biblioteca()
     print(info_album)
 
-    return render_template('descricao_album.html', usuario=usuario, info_album=info_album, musicas=musicas, album_id=album_id, check_in_fav=check_in_fav)
-
-#======================ROTAS FUNÇÕES=====================
+    return render_template('descricao_album.html', usuario=usuario, info_album=info_album, musicas=musicas,
+                            album_id=album_id, check_in_fav=check_in_fav, check_in_biblioteca=check_in_biblioteca)
 
 @app.route('/favoritar/<album_id>')
 def favoritar(album_id):
@@ -143,6 +145,22 @@ def favoritar(album_id):
     else:
         salvar_favorito(usuario, album_id, capa)
     return redirect('/profile/favoritos')
+
+@app.route('/add_biblioteca/<album_id>')
+def add_biblioteca(album_id):
+    if 'usuario' not in session:
+        flash('É necessário estar logado para adicionar um albúm à biblioteca!')
+        return redirect(url_for('app.login'))
+    inicializar_biblioteca()
+    
+    capa = next(a['capa'] for a in carregar_album() if a['album_id'] == album_id)
+    usuario = session['usuario']
+
+    if check_in_biblioteca(album_id, usuario):
+        remover_da_biblioteca(album_id)
+    else:
+        salvar_na_biblioteca(usuario, album_id, capa)
+    return redirect('/profile/biblioteca')
 
 
 @app.route('/destino', methods=["POST"])
