@@ -9,12 +9,7 @@ caminho_review = 'data/review.csv'
 
 #   #CRIAR OS ALBUNS
 # NO LUGAR DOS INPUTS COLOCAR OS FORMULARIOS
-<<<<<<< HEAD
-def salvar_album(capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify):
-    id += 1
-=======
 def salvar_album(album_id,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify):
->>>>>>> 20ea8df5815073cec10a420109d6c7dc48984bcd
     dados = [['album_id','capa','nome','lancamento','genero','artista','foto_bio','biografia','spotify']]
     album = []
     album.append(album_id)
