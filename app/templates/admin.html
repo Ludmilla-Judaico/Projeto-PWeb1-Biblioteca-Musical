@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+label {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  padding-top: 2%;
+}
+
+
+body{
+    background-image: url(/static/imgs/fundomusicoteca.png);
+    background-size: cover;
+    margin: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+button{
+    margin-top: 2%;
+}
+    </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+</head>
+<body>
+    <form action="/destino" method="post">
+        <label for="id_album">id da música:</label>
+        <input type="text" name="id_album" id="id" maxlength="30" required>
+
+        <label for="capa">URL da capa do album:</label>
+        <textarea name="capa" id="url" rows="7" cols="50" required></textarea>
+
+        <label for="nome">Nome do album:</label>
+        <input type="text" name="nome" id="nome" maxlength="30" required>
+
+        <label for="lancamento">Ano de lançamento do album:</label>
+        <input type="text" name="lancamento" id="lancamento" maxlength="30" required>
+
+        <label for="genero">Genero do album:</label>
+        <input type="text" name="genero" id="genero" maxlength="30" required>
+
+        <label for="artista">Nome do artista:</label>
+        <input type="text" name="artista" id="artista" maxlength="30" required>
+
+        <label for="foto_bio">URL da foto da biografia:</label>
+        <textarea name="foto_bio" id="foto_bio" rows="7" cols="50" required></textarea>
+
+        <label for="biografia">Biografia:</label>
+        <textarea name="biografia" id="biografia" rows="7" cols="50" required></textarea>
+
+        <label for="spotify">Iframe do spotify:</label>
+        <textarea name="spotify" id="spotify" rows="7" cols="50" required></textarea>
+
+        <label for="musicas">Digite as músicas (separe por pronto-virgula ';'):</label>
+        <textarea name="musicas" id="musicas" rows="7" cols="50" required></textarea>
+
+        <button type="submit">Enviar</button>
+  
+    </form>
+</body>
+</html>

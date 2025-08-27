@@ -23,62 +23,38 @@
 
 *{
     margin: 0%;
-    font-family: Outfit;
     box-sizing: border-box;
+    font-family: Outfit;
 }
 
-header {
+header{
     background-color: #ff00a1;
+    padding-top: 10px;
+    font-size: 1.15rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-#logo {
-    width: 100px;
-    padding-left: 15px;
-    padding-top: 8px;
-    padding-bottom: 2px;
+.menudireito{
+    /* text-align: end; */
+    margin-right: 10px;
+    padding-bottom: 7px;
 }
 
-a {
-    font-weight: 700;
+.menudireito a{
+    /* margin: 0 1rem 0 1rem; */
+    font-weight: 600;
     text-decoration: none;
     color: white;
+    transition: 0.5s;
 }
 
-#opcoes-header {
-    margin-right: 20px;
-}
-
-a:hover{
+.menudireito a:hover{
     color: #fde6f5;
 }
 
-
-.menu{
-    background-color: #ff00a1;
-    padding: 1%;
-    font-size: 25px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+#logo {
+    margin-left: 10px;
+    width: 100px;
 }
-
-/* .menu .navegacao{
-    text-align: end;
-}
-
-.menu .navegacao a{
-    margin: 0 1rem 0 1rem;
-    text-decoration: none;
-    color: white;
-} */
-
-/* .menu .perfil-botão{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-}
-
-

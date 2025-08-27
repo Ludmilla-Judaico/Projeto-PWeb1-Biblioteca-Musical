@@ -1,4 +1,6 @@
-
+body{
+    background-image: url(/static/imgs/fundomusicoteca.png);
+}
 /*--------Capa--------*/
 .capa{
     background-color: #e70092;
@@ -36,17 +38,37 @@
 /*---------Mini Menu--------*/
 .mini-menu{
     background-color: #ff00a1;
-    padding-left: 2rem;
+    padding-left: 1rem;
+    height: 3rem;
     font-size: 20px;
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .mini-menu a{
-    margin-left: 1rem;
+    margin-left: 3rem;
     text-decoration: none;
     color: white;
+    font-size: 20px;
+    transition: 0.5s;
+}
+
+.mini-menu a:hover{
+    background-color: lightpink;
+    border-radius: 50%;
+}
+
+.mini-menu .deslogar:hover{
+    color: red;
+}
+/*--------Boas vindas-------*/
+
+.boas-vindas{
+    margin: 4rem 2rem 4rem 2rem;
+    font-size: 40px;
+    text-align: center;
 }
 
 /*---------Favoritos---------*/
@@ -80,6 +102,7 @@
 .albuns-fav img{
     width: 25vh;
     height: 25vh;
+    border-radius: 10%;
     transition: 1s;
 }
 
@@ -87,9 +110,9 @@
     width: 30vh;
     height: 30vh;
 }
- .albuns-fav figure a{
+.albuns-fav figure a{
     margin: 1rem;
- }
+}
 
 /*---------Albúns----------*/
 .albuns{
@@ -175,9 +198,12 @@
 }
 
 /*--------Mobile---------*/
-@media (max-width: 780px) {
-    .albuns figure{
-        grid-template-columns: 1rem 1rem 1rem;
-        margin-bottom: 6rem;
+@media (max-width: 850px) {
+    .mini-menu{
+        overflow: hidden;
+    }
+
+    .mini-menu a{
+        margin-left: 2rem;
     }
 }

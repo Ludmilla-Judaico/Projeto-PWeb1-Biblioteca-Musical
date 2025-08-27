@@ -1,16 +1,20 @@
-{% extends "base.html"%}
+{% extends "base.html" %}
 {% block title %}Profile{% endblock %}
 {% block style %}{{ url_for('static', filename='styles/profile.css') }}{% endblock %}
 
     {% block content %}
 <!--------Capa------->
         <section class="capa">
-            <img src="{{ url_for('static', filename='imgs/perfil.png') }}" alt="foto de perfil">
-            <div class="info-usuario">
-                <h1>Miguelito</h1>
+            {% if foto.startswith('static/') %}
+                <img src="{{ url_for('static', filename=foto.replace('static/', '')) }}" alt="foto de perfil">
+            {% else %}
+                <img src="{{ foto }}" alt="foto de perfil">
+            {% endif %}
+                <div class="info-usuario">
+                <h1> {{usuario}} </h1>
                 <div>
-                    <p class="seguidores">365 seguidores</p>
-                    <p class="seguindo">126 seguindo</p>
+                    <p class="seguidores">0 seguidores</p>
+                    <p class="seguindo">0 seguindo</p>
                 </div>
             </div>
         </section>
@@ -18,36 +22,16 @@
 <!-------Mini Menu------->
         <nav class="mini-menu">
             <a href="">Atividade</a>
-            <a href="">Biblioteca</a>
-            <a href="">Favoritos</a>
-            <a href="">Reports</a>
+            <a href="/profile/biblioteca">Biblioteca</a>
+            <a href="/profile/favoritos">Favoritos</a>
             <a href="">Retrospectiva</a>
+            <a href="{{ url_for('app.logout') }}" class="deslogar">Deslogar</a>
         </nav>
 
-<!--------Favoritos------->
-    <section class="favoritos">
-        <h2>Albúns favoritos</h2>
-        {% if favoritos %}
-        <div class="albuns-fav">
-            <figure>
-                {% for fav in favoritos %}
-                <a href=""><img src="{{ favoritos.img_url }}" alt="{{ favoritos.nome }}"></a>
-                {% endfor %}
-            </figure>
-        </div>
-        {% else %}
-        <p>Comece a favoritar álbuns para que seu perfil fique cada vez mais bonito!</p>
-        {% endif %}
-    </section>
+    {% block profile %} 
+        <section class="boas-vindas">
+            <p>Olá, {{usuario}}! Boas vindas ao seu perfil!</p>
+        </section>
+    {% endblock %}
 
-<!--------Albúns--------->
-    <section class="albuns">
-        <h2> Albúns comentados </h2>
-        <div class="grupos">
-            <figure class="albuns-agrupados" id="grupo1">
-                
-                <a href=""><img src="" alt=""></a>
-            </figure>
-            <img src="{{url_for('static', filename='cd-aberto.png')}}" class="cd-aberto">
-        </div>
 {% endblock %}

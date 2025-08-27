@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title%}{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% block style %}{% endblock %}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -12,10 +12,10 @@
 <!--------Menu-------->
     <header>
         <img id="logo" src="{{ url_for('static', filename='imgs/logo.png') }}" alt="logo da musicoteca">
-        <div id="opcoes-header">
-            <a id="explorar" href="/" class="links">Explorar</a>
-            <a id="minhabiblioteca" href="" class="links">Minha Biblioteca</a>
-            <a href="/profile"><i class="fa-solid fa-user" id="iconeperfil"></i></a>
+        <div class="menudireito">
+            <a id="explorar" href="/">Explorar</a>
+            <a id="editar" href="/profile/edit">Editar Perfil</a>
+            <a href="/profile" id="iconeperfil"><i class="fa-solid fa-user"></i></a>
         </div>
     </header>
 {% block content %}{% endblock %}

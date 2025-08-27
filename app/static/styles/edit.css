@@ -1,26 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-.outfit-regular {
-  font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.outfit-semibold {
-  font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 600;
-  font-style: normal;
-}
-
-.outfit-bold {
-  font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
-}
-
 body{
     background-image: url(/static/imgs/fundomusicoteca.png);
     background-size: cover;
@@ -31,7 +10,8 @@ body{
     justify-content: center;
 }
 
-#base {
+#formulario {
+    padding: 4rem 0 4rem 0;
     color: #FFFF;
     width: 430px;
     display: flex;
@@ -51,7 +31,7 @@ form {
     
 }
 
-#input_form{
+.infos{
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -77,6 +57,7 @@ label {
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     box-sizing: border-box;
 }
+
 .inputs:focus{
     font-size: 1.15rem;
     font-family: Outfit;
@@ -85,13 +66,14 @@ label {
     padding: 17px;
 }
 
-.btn-base {
+.sub {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
     width: auto;
     padding: 12px;
+    margin-bottom: 15px;
     border-radius: 10px;
     border: none;
     background-color: #cc0884;
@@ -101,45 +83,14 @@ label {
     box-shadow: 0 4px 6px rgba(0,0,0,0.2)
 }
 
-.btn-base:hover{
+.sub:hover{
     background-color: #d3389a;
 }
 
-#base img {
-    padding-top: 75px;
-    width: 250px;
-}
-
-#mudar-senha {
-    color: rgba(255, 255, 255, 0.9);
-    opacity: 0.5;
-    opacity: unset;
-    font-family: Outfit;
-    font-weight: 400;
-    font-size: 1.4rem;
-    padding: 10px;
-}
-
-#btn-cadastrese {
-    width: 200px;
-}
-
-.cadastre-se {
-    font-family: Outfit;
-    font-weight: 400;
-    font-style: normal;
-    color: #FFFF;
-    font-size: 1.3rem;
-    margin-top: 10px;
-}
-
-#link-cadastrese{
-    padding-top: 0;
-    font-weight: 600;
-    color: #FFFF;
-    text-decoration: none;
-}
-
-#btn-criar-conta {
-    margin-bottom: 30px;
+form img{
+    width: auto;
+    height: 30vh;
+    text-align: center;
+    margin: 10px;
+    border-radius: 10%;
 }

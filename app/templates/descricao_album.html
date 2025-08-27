@@ -4,20 +4,21 @@
 
 {% block content %}
     <section>
+        {% for a in info_album %}
         <div class="container">
             <div class='box box-1'>
-                <img id="capa_cd" src="{{ album.capa }}">
+                <img id="capa_cd" src="{{ a.capa }}">
                 <img id="cd" src="{{ url_for('static', filename='imgs/Lana Del Rey -Born to Die CD.jpg') }}">
             </div>
 
             <div class='box box-2'>
-                <h1>{{ album.nome }}</h1>
-                <h3>{{ album.artista }}</h3>
-                <p>{{ album.genero }}, {{ album.lancamento}}</p>
+                <h1>{{ a.nome }}</h1>
+                <h3>{{ a.artista }}</h3>
+                <p>{{ a.genero }}, {{ a.lancamento }}</p>
                 <div class="rating">
                     <label class="heart-wrapper">
                     <input type="checkbox" class="heart-checkbox" name="favoritar" />
-                    <span class="heart"><a href="{{ url_for('app.favoritar', album_id=1) }}">❤</a></span>
+                    <span ><a class="heart" href="{{ url_for('app.favoritar', album_id=album_id) }}">❤</a></span>
                     </label>
                     <input type="radio" id="star5" name="rating" value="5" />
                     <label for="star5" title="5 estrelas">★</label>
@@ -33,8 +34,8 @@
 
                  <div class="musicas">
                     <ol>
-                        {% for m in musicas%}
-                        <li>{{ musicas.musicas[m] }}</li>
+                        {% for m in musicas %}
+                        <li>{{ m.musicas }}</li>
                         {% endfor %}
 
                     </ol>
@@ -43,61 +44,26 @@
 
             <div class='box box-3'>
                 <div class="biografia">
-                    <img id="imagem_bio" src="{{ album.foto_bio }}">
-                    <p id="texto_bio">{{ album.biografia }}</p>
+                    <img id="imagem_bio" src="{{ a.foto_bio }}">
+                    <p id="texto_bio">{{ a.biografia }}</p>
                 </div>
             </div>
 
             <div class='box box-4'>
-                <iframe data-testid="embed-iframe" style="border-radius:12px" src="{{ album.spotify }}" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                {{ a.spotify|safe }}
             </div>
         </div>
-
-            <h1 class="comentario">Comentários</h1>
-
-        {% for c in comentarios %}
-        <div class="container-2">
-            <div class='box box-5'>
-                <img class="foto_perfil" src="{{ url_for('static', filename='imgs/ft de perfil teste.jpg')}}">
-                <form class="comentario" action="/destino" method="post">
-                    <label for="comentario"></label>
-                    <textarea id="comentario" name="comentario" rows="5" cols="33" placeholder="Eai, o que você achou dessa discografia?"></textarea>
-                </form>
-            </div>
         {% endfor %}
 
+        <div class="review" action="/destino" method="POST">
+            <form class="review">
+                <label for="review" title="review">Comentário</label>
+                <textarea name="review" id="review" rows="4" cols="20" placeholder="Eai o que você achou do album?"></textarea>
 
-
-            <div class='box box-6'><img class="foto_perfil" src="{{ url_for('static', filename='imgs/ft de perfil teste.jpg')}}">
-                <form class="comentario" action="/destino" method="post">
-                    <label for="comentario"></label>
-                    <textarea id="comentario" name="comentario" rows="5" cols="33" placeholder="Eai, o que você achou dessa discografia?"></textarea>
-                </form>
-            </div>
-            <div class='box box-7'><img class="foto_perfil" src="{{ url_for('static', filename='imgs/ft de perfil teste.jpg')}}">
-                <form class="comentario" action="/destino" method="post">
-                    <label for="comentario"></label>
-                    <textarea id="comentario" name="comentario" rows="5" cols="33" placeholder="Eai, o que você achou dessa discografia?"></textarea>
-                </form>
-            </div>
-            <div class='box box-8'><img class="foto_perfil" src="{{ url_for('static', filename='imgs/ft de perfil teste.jpg')}}">
-                <form class="comentario" action="/destino" method="post">
-                    <label for="comentario"></label>
-                    <textarea id="comentario" name="comentario" rows="5" cols="33" placeholder="Eai, o que você achou dessa discografia?"></textarea>
-                </form>
-            </div>
-            <div class='box box-9'><img class="foto_perfil" src="{{ url_for('static', filename='imgs/ft de perfil teste.jpg')}}">
-                <form class="comentario" action="/destino" method="post">
-                    <label for="comentario"></label>
-                    <textarea id="comentario" name="comentario" rows="5" cols="33" placeholder="Eai, o que você achou dessa discografia?"></textarea>
-                </form>
-            </div>
-            <div class='box box-10'><img class="foto_perfil" src="{{ url_for('static', filename='imgs/ft de perfil teste.jpg')}}">
-                <form class="comentario" action="/destino" method="post">
-                    <label for="comentario"></label>
-                    <textarea id="comentario" name="comentario" rows="5" cols="33" placeholder="Eai, o que você achou dessa discografia?"></textarea>
-                </form>
-            </div>
+                <button type="submit">Enviar</button>
+                
+            </form>
         </div>
+
     </section>
 {% endblock %}
