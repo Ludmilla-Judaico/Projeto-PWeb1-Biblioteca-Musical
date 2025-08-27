@@ -6,8 +6,8 @@
     <section>
             <div class="container">
                 <div class='box box-1'>
-                    <img id="capa_cd" src="{{ album.capa }}">
-                    <img id="cd" src="{{ url_for('static', filename='imgs/Lana Del Rey -Born to Die CD.jpg') }}">
+                    <img id="capa_cd" style="width: 450px; height: 390px; object-fit: cover;" src="{{ album.capa }}">
+                    <img id="cd" style="width: 430px; height: auto;" src="{{ url_for('static', filename='imgs/cd_girando.png') }}">
                 </div>
 
                 <div class='box box-2'>
@@ -35,10 +35,8 @@
 
                     <div class="musicas">
                         <ol>
-                            {% set contador = 1 %}
-                            {% for m in musicas %}
-                            <li>{{ musicas }}</li>
-                            {% set contador = contador + 1 %}
+                            {% for musica in musicas %}
+                            <li>{{ musica }}</li>
                             {% endfor %}
                         </ol>
                     </div>

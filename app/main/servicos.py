@@ -66,9 +66,6 @@ def salvar_musicas(musicas):
 
 
 def salvar_comentario (album_id,review):
-
-    verificar = carregar_review()
-
     # for i in range(len(verificar)):
     #     if verificar['album_id'] == (album_id)
 
@@ -104,19 +101,16 @@ def carregar_album():
     arq_album.close()
     return album
 
-def carregar_discografia(album_id)->list:
-    arq_musicas = open(caminho_musicas,'r', encoding='utf-8')
-    linhas_musicas = csv.DictReader(arq_musicas, delimiter=";")
-    faixas = []
-    for m in linhas_musicas:
+
+def carregar_discografia(album_id) -> list:
+    with open(caminho_musicas, 'r', encoding='utf-8') as arq_musicas:
+        leitor = csv.DictReader(arq_musicas, delimiter=";")
+        for m in leitor:
             if m['album_id'] == str(album_id):
-                m['musicas'] = m['musicas'].strip('[]')
-                lista = [item.strip().strip("'").strip('"') for item in m['musicas'].split(";")]
-                faixas.append({
-                    'album_id': m['album_id'],
-                    'musicas': lista
-                })
-    arq_musicas.close()
+                # remove colchetes
+                musicas_str = m['musicas'].strip('[]')
+                # separa corretamente por vírgula e limpa aspas/espacos
+                faixas = [item.strip().strip("'").strip('"') for item in musicas_str.split(",")]
     print(faixas)
     return faixas
 
