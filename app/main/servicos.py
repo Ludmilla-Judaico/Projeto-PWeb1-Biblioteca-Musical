@@ -52,18 +52,25 @@ def salvar_musicas(musicas):
         escritor.writerows(colecao)
 
 
-def salvar_comentario (review):
-     
-     global id_automatico
+def salvar_comentario (album_id,review):
 
-     comentario = [["album_id", "review"]]
-     comentario.append([id_automatico,review])
+    verificar = carregar_review()
 
-     id_automatico += 1
+    # for i in range(len(verificar)):
+    #     if verificar['album_id'] == (album_id)
 
-     with open(caminho_review, "w", newline="", encoding="utf-8") as arq:
+# TERMINAR DE VERIFICAR SE JÁ EXISTE ALGUMA REVIEW NO MESMO ID, PARA COLOCAR TUDO NA MESMA LISTA
+
+    comentario = []
+    lista_info = []
+    lista_info.append(album_id)
+    lista_info.append([review])
+    comentario.append(lista_info)
+
+    with open(caminho_review, "a", newline="", encoding="utf-8") as arq:
         escritor = csv.writer(arq, delimiter=';')
         escritor.writerows(comentario)
+        print(album_id)
 
      
 
@@ -71,25 +78,13 @@ def salvar_comentario (review):
 # AQUI A FUNÇÃO VAI RECEBER OS VALORES E COLOCAR EM UM DIC PARA FICAR MAIS FACIL PRA SUBSTITUIR
 def carregar_album():
     arq_album = open(caminho_album,'r', encoding='utf-8')
-    lista_albuns = []
-    linhas_album = csv.DictReader(arq_album, delimiter=";")  
+    linhas_album = csv.DictReader(arq_album, delimiter=";") 
+    album = []
     for linha in linhas_album:
-        album = {
-            'album_id': linha['album_id'],
-            'capa': linha['capa'].strip('"').strip("'"),
-            'nome': linha['nome'],
-            'lancamento': linha['lancamento'],
-            'genero': linha['genero'],
-            'artista': linha['artista'],
-            'foto_bio': linha['foto_bio'].strip('"').strip("'"),
-            'biografia': linha['biografia'],
-            'spotify': linha['spotify']
-            }
-        lista_albuns.append(album)
-        print(album['capa'])
+        album.append(linha)
     arq_album.close()
 
-    return lista_albuns
+    return album
 
 def carregar_discografia()->list:
     arq_musicas = open(caminho_musicas,'r', encoding='utf-8')
@@ -99,9 +94,20 @@ def carregar_discografia()->list:
             musicas = m
             faixas.append(musicas)
     arq_musicas.close()
-    print(faixas) 
+    return faixas
 
-    return musicas
+def carregar_review()->list:
+    arq_review = open(caminho_review, 'r')
+    linhas_review = csv.DictReader(arq_review, delimiter=";")
+    comentarios = []
+    for c in linhas_review:
+            review = c
+            comentarios.append(review)
+    arq_review.close()
+    print(comentarios)
+
+    return comentarios
+
 
 
 # for d in lista_albuns:

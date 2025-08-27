@@ -3,6 +3,7 @@ import csv, os
 from . import app
 from .funcoes import carregar_favoritos, salvar_favorito, dados_associados, authenticator, edit_user
 from .servicos import *
+from .comparacao import *
 
 def signin(user, email, senha):
     if not os.path.exists('data/usuarios.csv'):
@@ -134,11 +135,17 @@ def logout():
 
 @app.route('/album/<album_id>')
 def album(album_id):
-    info_album = carregar_album()
-    musicas = carregar_discografia()
-    print(info_album)
 
-    return render_template('descricao_album.html', info_album=info_album, musicas=musicas, album_id=album_id)
+    musicas = carregar_discografia()
+
+    review = carregar_review()
+
+    album = comparar_id(album_id)
+    
+    if album:
+        return render_template('descricao_album.html', musicas=musicas, album=album)
+    else:
+        return redirect('/')
 
 #======================ROTAS FUNÇÕES=====================
 
@@ -174,7 +181,8 @@ def salvar ():
 
 @app.route('/review', methods=["POST"])
 def review():
+    album_id = request.form['album_id']
     review = request.form['review']
-    salvar_comentario(review)
+    salvar_comentario(album_id,review)
 
     return redirect('/')
