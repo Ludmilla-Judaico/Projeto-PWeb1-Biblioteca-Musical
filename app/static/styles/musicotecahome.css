@@ -1,11 +1,3 @@
-@font-face {
-  font-family: 'San Francisco';
-  src: url('sf woff/san_francisco-webfont.woff') format('woff'),
-       url('sf woff/san_francisco-webfont.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
-
 body {
     margin: 0;
     padding: 0;
@@ -46,6 +38,10 @@ aside.sidebar {
 nav {
     grid-area: nav;
     background-color: #e70092;
+    background-image: url('../imgs/fones.png');
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: contain;
 }
 
 main {
@@ -67,6 +63,17 @@ input.pesquisar {
     height: 30px;
     font-size: 14px;
     border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 5px;
+}
+
+input.pesquisar:focus{
+    font-size: 14px;
+    font-family: Outfit;
+    font-weight: 400;
+    outline: none;
+    padding-left: 10px;
+    padding-right: 5px;
 }
 
 p {
@@ -77,7 +84,6 @@ p.subtitulo {
     color: white;
     display: inline;
     font-weight: bold;
-    text-decoration: underline;
     padding: 0;
     margin: 0;
 }
@@ -102,7 +108,7 @@ div.selecionar {
     width: 16px;
     height: 16px;
     background-color: transparent;
-    border-width: 1px;
+    border-width: 2.4px;
     border-color: white;
     border-style: solid;
     border-radius: 4px;
@@ -126,10 +132,4 @@ div.selecionar {
   left: 1px;
   top: -4px;
   font-size: 16px;
-}
-
-img.fones {
-    margin-top: 30px;
-    width: 200px;
-    height: auto;
 }
