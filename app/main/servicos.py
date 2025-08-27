@@ -6,13 +6,16 @@ caminho_album = 'data/albuns.csv'
 caminho_musicas = 'data/musicas.csv'
 caminho_review = 'data/review.csv'
 
-
+id_automatico = 1
 #   #CRIAR OS ALBUNS
 # NO LUGAR DOS INPUTS COLOCAR OS FORMULARIOS
-def salvar_album(album_id,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify):
+def salvar_album(capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify):
+
+    global id_automatico
+
     dados = []
     album = []
-    album.append(album_id)
+    album.append(id_automatico)
     album.append(capa)
     album.append(nome)
     album.append(lancamento)
@@ -23,20 +26,26 @@ def salvar_album(album_id,capa,nome,lancamento,genero,artista,foto_bio,biografia
     album.append(spotify)
     dados.append(album)
 
+    id_automatico += 1
+
     with open(caminho_album, "a", newline="", encoding="utf-8") as arq:
         escritor = csv.writer(arq, delimiter=';')
         escritor.writerows(dados)
 
     return dados
 
+def salvar_musicas(musicas):
 
-def salvar_musicas(album_id,musicas):
+    global id_automatico
+
     colecao = []
     faixas = []
     musica = musicas.strip().split(';')
-    faixas.append(album_id)
+    faixas.append(id_automatico)
     faixas.append(musica)
     colecao.append(faixas)
+
+    id_automatico += 1
 
     with open(caminho_musicas, "a", newline="", encoding="utf-8") as arq:
         escritor = csv.writer(arq, delimiter=';')
@@ -44,13 +53,18 @@ def salvar_musicas(album_id,musicas):
 
 
 def salvar_comentario (review):
-     comentario = []
-     comentario.append([review])
+     
+     global id_automatico
+
+     comentario = [["album_id", "review"]]
+     comentario.append([id_automatico,review])
+
+     id_automatico += 1
 
      with open(caminho_review, "w", newline="", encoding="utf-8") as arq:
         escritor = csv.writer(arq, delimiter=';')
         escritor.writerows(comentario)
-        print('Deu certo')
+
      
 
   #LER O ARQUIVO CSV ONDE ESTÁ A LISTA DE ALBUNS
