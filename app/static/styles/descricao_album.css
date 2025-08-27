@@ -108,6 +108,10 @@ section{
   text-decoration: none;
 }
 
+.heart.favoritado {
+    color: red;
+}
+
 .box-3 {
   background-color: #7991bd;
   border-radius: 5%;

@@ -8,7 +8,7 @@
         <div class="albuns-fav">
             <figure>
                 {% for fav in favoritos %}
-                <a href=""><img src="{{ fav.capa }}" alt="{{ fav.album_id }}"></a>
+                <a href="{{ url_for('app.album', album_id=fav.album_id) }}"><img src="{{ fav.capa }}" alt="{{ fav.album_id }}"></a>
                 {% endfor %}
             </figure>
         </div>
