@@ -171,3 +171,11 @@ def salvar ():
     salvar_musicas(id_album,musicas)
 
     return redirect('/admin')
+
+@app.route('/review', methods=["POST"])
+def review():
+    album_id = request.form['album_id']
+    review = request.form['review']
+    salvar_comentario(album_id,review)
+
+    return redirect('/')
