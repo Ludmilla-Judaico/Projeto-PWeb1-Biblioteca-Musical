@@ -6,12 +6,9 @@ caminho_album = 'data/albuns.csv'
 caminho_musicas = 'data/musicas.csv'
 caminho_review = 'data/review.csv'
 
-<<<<<<< HEAD:app/main/servicos.py
 id_automatico = 1
-=======
 #=================================FUNÇÕES===================================
 
->>>>>>> 7be84e6d3ad3eeb865b323b99aa7a5c3c2b409bb:app/main/funcoes/albuns.py
 #   #CRIAR OS ALBUNS
 # NO LUGAR DOS INPUTS COLOCAR OS FORMULARIOS
 def salvar_album(capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify):
@@ -46,17 +43,11 @@ def salvar_album(capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
 
     return dados
 
-<<<<<<< HEAD:app/main/servicos.py
-def salvar_musicas(musicas):
 
-    global id_automatico
-
-    colecao = []
-=======
 #=========================================
-def salvar_musicas(album_id,musicas):
+def salvar_musicas(musicas):
+    global id_automatico
     colecao = [['album_id','musicas']]
->>>>>>> 7be84e6d3ad3eeb865b323b99aa7a5c3c2b409bb:app/main/funcoes/albuns.py
     faixas = []
     musica = musicas.strip().split(';')
     faixas.append(id_automatico)
@@ -112,11 +103,7 @@ def carregar_album():
     for linha in linhas_album:
         album.append(linha)
     arq_album.close()
-<<<<<<< HEAD:app/main/servicos.py
     return album
-=======
-
-    return lista_albuns
 
 #============================================
 def carregar_discografia()->list:
@@ -130,7 +117,6 @@ def carregar_discografia()->list:
     print(faixas) 
 
     return musicas
->>>>>>> 7be84e6d3ad3eeb865b323b99aa7a5c3c2b409bb:app/main/funcoes/albuns.py
 
 
 def carregar_discografia(album_id) -> list:

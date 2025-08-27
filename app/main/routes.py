@@ -4,8 +4,6 @@ from .funcoes.albuns import *
 from .funcoes.fav import *
 from .funcoes.user import *
 from .funcoes.biblioteca import *
-from .servicos import *
-from .comparacao import *
 
 #==========================ROTAS PÁGINAS================================
 
