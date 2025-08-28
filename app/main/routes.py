@@ -56,6 +56,8 @@ def homepage():
         return redirect('/login')
     usuario = session['usuario']
     albuns = carregar_album()
+    print(f'album: {albuns}')
+
     return render_template('musicotecahome.html', albuns=albuns, usuario=usuario)
 
 @app.route('/profile')
