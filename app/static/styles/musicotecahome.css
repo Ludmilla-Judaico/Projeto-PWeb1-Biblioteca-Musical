@@ -23,10 +23,6 @@ color: rgb(255, 255, 255);
     margin: 0.1px;
 }
 
-/* aside.sidebar {
-    grid-area: sidebar;
-} */
-
 nav {
     grid-area: nav;
     background-color: #e70092;
@@ -44,12 +40,23 @@ main {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20%;
+}
+
+main img{
+    width: 100%;
+    max-width: 30vh;
+    border-radius: 15px;
+    height: auto;
+    margin: 3rem;
 }
 
 form.pesquisar {
     padding: 10px;
     border-radius: 25px;
+}
+
+label, .subtitulo{
+    padding-bottom: 0.5rem;
 }
 
 input.pesquisar {
@@ -146,3 +153,4 @@ div.selecionar {
 .filtrar-btn:hover {
   background-color: #ffdbef;
 }
+

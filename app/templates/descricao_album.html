@@ -25,7 +25,7 @@
                     <div class="rating">
                         <label class="heart-wrapper">
                         <input type="checkbox" class="heart-checkbox" name="favoritar" />
-                        <a href="{{ url_for('app.favoritar', album_id=album.album_id) }}">
+                        <a style="text-decoration: none;" href="{{ url_for('app.favoritar', album_id=album.album_id) }}">
                             <span class="heart {% if check_in_fav(album.album_id, usuario) %}favoritado{% endif %}">❤</span>
                         </a>
                         </label>
@@ -82,7 +82,7 @@
         <section class="comentarios">
             {% for c in comentarios %}
             <div class="coment">
-                <p>{{c.review}}</p>
+                <p>{{c.review.replace('[', '').replace(']', '').replace("'", '')}}</p>
             </div>
             {% endfor %}
         </section>
