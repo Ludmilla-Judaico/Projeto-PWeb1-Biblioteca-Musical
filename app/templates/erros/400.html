@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}400{% endblock %}
+{% block style %}{{ url_for('static', filename='styles/erros.css') }}{% endblock %}
+
+{% block content %}
+    <div id="texto-erro">
+        <h1>ERRO 400 x-x</h1>
+        <h2>Requisição Inválida ;-;</h2>
+        <h3>Mas Keep Calm and Relax! Isso não é bug do milênio (ufa!)...</h3>
+        <a href="/"><button>Voltar ao início</button></a>
+    </div>
+{% endblock %}
