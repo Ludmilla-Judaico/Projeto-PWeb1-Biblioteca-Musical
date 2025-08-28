@@ -115,22 +115,47 @@ body{
 }
 
 /*---------Albúns----------*/
-.albuns{
-    margin: 0 2rem 2rem 2rem;
-}
-
 .albuns h2{
     font-weight: 400;
     margin-left: 1rem;
 }
 
+.albuns{
+    margin: 4rem 2rem 4rem 2rem;
+}
+
 .albuns div{
-    margin: 0 3rem 2rem 3rem;
+    margin: 2rem 3rem 2rem 3rem;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
+
+.albuns figure{
+    position: relative;
+    display: inline-block;
+    box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.315);
+}
+
+.albuns .lixeira{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: red;
+    font-size: 20px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    padding: 5px;
+    text-align: center;
+}
+
+.albuns img{
+    width: 30vh;
+    height: 30vh;
+    border-radius: 12px;
+}
+
 
 .flash{
     font-family: Outfit;
@@ -146,72 +171,4 @@ body{
     border: 1.7px, solid palevioletred;
     background-color: lightpink;
     color: palevioletred;
-}
-
-/*-----------Desktop----------*/
-@media (min-width:1240px) {
-    .albuns figure{
-        display: grid;
-        grid-template-columns: 1rem 1rem 1rem 1rem 1rem;
-        gap: 30%;
-        transition: 2s;
-    }
-
-    .albuns figure:hover{
-        gap: 100%;
-        text-align: center;
-        transform: translateX(-15px);
-    }
-
-    .albuns figure img{
-        width: 30vh;
-        height: 30vh;
-        box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.315);
-        transition: 2s;
-    }
-
-    .albuns figure img:hover{
-        width: 35vh;
-        height: 35vh;
-    }
-}
-
-/*------------Tablet------------*/
-@media (min-width:780px) and (max-width: 1240px) { 
-    .albuns .grupos figure{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        gap: 2rem;
-        margin-bottom: 2rem;
-        overflow: hidden;
-    }
-
-    .albuns .grupos figure:hover{
-        overflow: auto;
-    }
-
-    .albuns figure img{
-        width: 30vh;
-        height: 30vh;
-        box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.315);
-        transition: 2s;
-    }
-
-    .albuns figure img:hover{
-        width: 35vh;
-        height: 35vh;
-    }
-
-}
-
-/*--------Mobile---------*/
-@media (max-width: 850px) {
-    .mini-menu{
-        overflow: hidden;
-    }
-
-    .mini-menu a{
-        margin-left: 2rem;
-    }
 }
