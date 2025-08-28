@@ -86,7 +86,7 @@
         {% if check_in_biblioteca(album.album_id, usuario) %}
             <a href="{{ url_for('app.add_biblioteca', album_id=album.album_id)}}"><button>Remover da biblioteca</button></a>
         {% else %}
-            <a href="{{ url_for('app.add_biblioteca', album_id=album.album_id)}}"><button>Adicionar à sua biblioteca</button></a>
+            <a href="{{ url_for('app.add_biblioteca', album_id=album.album_id)}}"><button class="btn-enviar-comment">Adicionar à sua biblioteca</button></a>
         {% endif %}
         </div>
 
@@ -96,7 +96,7 @@
                 <label for="review" title="review">Comentário</label>
                 <textarea name="review" id="review" rows="4" cols="20" placeholder="Eai o que você achou do album?"></textarea>
 
-                <button type="submit">Enviar</button>
+                <button type="submit" class="btn-enviar-comment">Enviar</button>
 
             </form>
         </div>
