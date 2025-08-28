@@ -120,6 +120,12 @@ def edit_profile():
         flash('Informações atualizadas com sucesso!')
         return redirect(url_for('app.profile'))
     return render_template('edit.html', usuario=usuario, email=email, foto=foto)
+
+
+@app.route('/profile/atividade')
+def atividade():
+    reviews = carregar_review()
+    return render_template('atividade.html', reviews=reviews)
     
 
 @app.route('/logout')
@@ -145,17 +151,20 @@ def favoritar(album_id):
     if 'usuario' not in session:
         return redirect(url_for('app.login'))
     inicializar_favoritos()
-    
-    capa = next(a['capa'] for a in carregar_album() if a['album_id'] == album_id)
     usuario = session['usuario']
+    
+    try:
+        capa = next(a['capa'] for a in carregar_album() if a['album_id'] == album_id)
+    except StopIteration:
+        flash('Álbum não encontrado!')
+        return redirect(url_for('app.homepage'))
 
     if check_in_fav(album_id, usuario):
-        remover_favorito(album_id)
+        remover_favorito(album_id, usuario)
         flash('Álbum removido dos favoritos')
-        return redirect('/album/<album_id>')
+        return redirect(url_for('app.album', album_id=album_id))
     else:
         salvar_favorito(usuario, album_id, capa)
-        flash('Álbum favoritado com sucesso!')
         return redirect('/profile/favoritos')
 
 @app.route('/add_biblioteca/<album_id>')
@@ -169,7 +178,6 @@ def add_biblioteca(album_id):
 
     if check_in_biblioteca(album_id, usuario):
         remover_da_biblioteca(album_id)
-        flash('Álbum removido da biblioteca')
         return redirect('/profile/biblioteca')
     else:
         salvar_na_biblioteca(usuario, album_id, capa)
@@ -179,7 +187,6 @@ def add_biblioteca(album_id):
 
 @app.route('/destino', methods=["POST"])
 def salvar ():
-    # id_album = request.form['id_album']
     capa = request.form['capa']
     nome = request.form['nome']
     lancamento = request.form['lancamento']
@@ -195,11 +202,12 @@ def salvar ():
     flash('Álbum cadastrado com sucesso!')
     return redirect('/admin')
 
-@app.route('/review', methods=["POST"])
+@app.route("/review", methods=["POST"])
 def review():
-    album_id = request.form['album_id']
-    review = request.form['review']
-    salvar_comentario(album_id,review)
+    if request.method == "POST":
+        album_id = request.form["album_id"]
+        review = request.form["review"]
+        salvar_comentario(album_id,review)
 
     return redirect('/')
 

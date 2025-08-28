@@ -2,14 +2,6 @@
 
 {% block profile %}
 <!--------Favoritos------->
-    {% set mensagens = get_flashed_messages() %}
-    {% if mensagens %}
-        {% for msg in mensagens %}  
-        <div class="flash">
-            {{ msg }}
-        </div>
-         {% endfor %}
-    {% endif %}
     <section class="favoritos">
         {% if favoritos %}
         <h2 style="font-size: 30px;">Albúns favoritos</h2>

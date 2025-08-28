@@ -2,10 +2,28 @@ section{
     padding: 2%; 
 }
 
+.flash{
+    font-family: Outfit;
+    font-size: 20px;
+    width: 35%;
+    height: 40px;
+    border-radius: 0px;
+    margin: 0 0 10px 0;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border: 1.7px, solid palevioletred;
+    background-color: lightpink;
+    color: palevioletred;
+}
+
 /* INICIO DO CONTAINER 1 */
 .container{
     display:flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     gap: 3%;
 }
@@ -61,7 +79,6 @@ section{
 .musicas ol{
     column-count: 2;
     column-gap: 0.1em;
-    /* background-color: blueviolet; */
 }
 
 .musicas li:hover{
@@ -95,34 +112,32 @@ section{
   color: rgb(255, 217, 0);
 }
 
-
-
-.heart {
+.heart{
   color: #aaa;
   transition: color 0.3s;
-  text-decoration: none;
 }
 
-.heart:hover {
+.heart:hover{
   color: red;
 }
 
-.heart-favoritado {
+.favoritado{
     color: red;
-    text-decoration: none;
 }
 
-.heart-favoritado:hover{
+.favoritado:hover{
   color:#aaa;
 }
 
 .box-3 {
   background-color: #7991bd;
-  border-radius: 5%;
+  border-radius: 15px;
 }
 
 #imagem_bio {
   width: 200px;
+  height: 200px;
+  object-fit: cover;
 }
 
 .biografia {
@@ -219,6 +234,12 @@ button{
   font-family: Outfit;
   font-weight: 600;
   box-shadow: 0 4px 6px rgba(0,0,0,0.2)
+}
+
+.biblioteca {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .biblioteca a{

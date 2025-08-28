@@ -107,7 +107,6 @@ def carregar_album():
     for linha in linhas_album:
         album.append(linha)
     arq_album.close()
-    print(f'album: {album}')
     return album
 
 #============================================
@@ -131,7 +130,6 @@ def carregar_discografia(album_id) -> list:
                 musicas_str = m['musicas'].strip('[]')
                 # separa corretamente por vírgula e limpa aspas/espacos
                 faixas = [item.strip().strip("'").strip('"') for item in musicas_str.split(",")]
-    print(faixas)
     return faixas
 
 
