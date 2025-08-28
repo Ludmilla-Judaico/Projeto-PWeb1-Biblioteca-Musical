@@ -153,21 +153,5 @@
     border-radius: 12px;
 }
 
-.flash{
-    font-family: Outfit;
-    font-size: 20px;
-    width: 35%;
-    height: 40px;
-    border-radius: 0px;
-    margin: 0 0 10px 0;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    border: 1.7px, solid palevioletred;
-    background-color: lightpink;
-    color: palevioletred;
-}
-
 /*------------------Atividade----------------*/
 
