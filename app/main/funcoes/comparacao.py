@@ -1,4 +1,4 @@
-from .servicos import carregar_album, carregar_discografia, carregar_review
+from albuns import carregar_album, carregar_discografia, carregar_review
 
 def comparar_id (album_id):
     albuns = carregar_album()

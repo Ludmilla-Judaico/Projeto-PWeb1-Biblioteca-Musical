@@ -5,6 +5,7 @@ from .funcoes.fav import *
 from .funcoes.user import *
 from .funcoes.biblioteca import *
 
+
 #==========================ROTAS PÁGINAS================================
 
 @app.route('/admin')
@@ -121,13 +122,14 @@ def logout():
 
 @app.route('/album/<album_id>')
 def album(album_id):
-    info_album = carregar_album()
-    musicas = carregar_discografia()
+    album = comparar_id(album_id)
+
+    musicas = carregar_discografia(album_id)
+
     usuario = session['usuario']
     inicializar_biblioteca()
-    print(info_album)
 
-    return render_template('descricao_album.html', usuario=usuario, info_album=info_album, musicas=musicas,
+    return render_template('descricao_album.html', usuario=usuario, album=album, musicas=musicas,
                             album_id=album_id, check_in_fav=check_in_fav, check_in_biblioteca=check_in_biblioteca)
 
 @app.route('/favoritar/<album_id>')

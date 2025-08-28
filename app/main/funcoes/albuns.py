@@ -71,8 +71,6 @@ def salvar_comentario (album_id,review):
     # for i in range(len(verificar)):
     #     if verificar['album_id'] == (album_id)
 
-# TERMINAR DE VERIFICAR SE JÁ EXISTE ALGUMA REVIEW NO MESMO ID, PARA COLOCAR TUDO NA MESMA LISTA
-
     comentario = []
     lista_info = []
     lista_info.append(album_id)
@@ -143,7 +141,19 @@ def carregar_review()->list:
     print(comentarios)
     return comentarios
 
+def comparar_id (album_id):
+    albuns = carregar_album()
+    for album in albuns:
+        if album['album_id'] == str(album_id):
+            return album
+    return None
 
+def comparar_discografia(album_id):
+        musicas = carregar_discografia()
+        for m in musicas:
+             if m['album_id'] == str(album_id):
+                  return m
+        return None
 
 # for d in lista_albuns:
 #      if d['id'] == album_id :
