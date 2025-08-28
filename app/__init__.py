@@ -23,4 +23,7 @@ def create_app():
     def getway_invalido(err):
         return render_template("erros/502.html"), 502
 
+    @app.errorhandler(400)
+    def req_invalida(err):
+        return render_template("erros/400.html"), 400
     return app

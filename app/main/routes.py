@@ -56,7 +56,10 @@ def homepage():
         return redirect('/login')
     usuario = session['usuario']
     albuns = carregar_album()
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8651bbabe3c9d6868f85bcbe938a1efc6df330e6
     return render_template('musicotecahome.html', albuns=albuns, usuario=usuario)
 
 @app.route('/profile')
@@ -191,10 +194,18 @@ def salvar ():
     flash('Álbum cadastrado com sucesso!')
     return redirect('/admin')
 
-@app.route('/review', methods=["POST"])
+@app.route('/review', methods=['GET', 'POST'])
 def review():
-    album_id = request.form['album_id']
-    review = request.form['review']
-    salvar_comentario(album_id,review)
+    if request.method == 'POST':
+        album_id = request.form['album_id']
+        review = request.form['review']
+        salvar_comentario(album_id,review)
 
-    return redirect('/')
+        return redirect('/')
+
+#==========================ROTAS ERROS================================
+
+@app.errorhandler(404)
+def page_not_found(err):
+    print("Handler 404 chamado!")
+    return render_template("erros/404.html"), err.code
