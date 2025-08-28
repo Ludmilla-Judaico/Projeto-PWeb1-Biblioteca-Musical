@@ -1,0 +1,11 @@
+{% extends "profile.html" %}
+
+{% block profile %}
+    {% if reviews %}
+        {% for c in reviews %}
+            <div>
+                <p>{{c}}</p>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
