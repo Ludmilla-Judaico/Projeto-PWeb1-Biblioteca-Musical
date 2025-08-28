@@ -11,31 +11,26 @@
                 </div>
 
                 <div class='box box-2'>
-                <h1>{{ album.nome }}</h1>
-                <h3>{{ album.artista }}</h3>
-                <p>{{ album.genero }}, {{ album.lancamento }}</p>
-                <div class="rating">
-                    <label class="heart-wrapper">
-                    <input type="checkbox" class="heart-checkbox" name="favoritar" />
-                    <a href="{{ url_for('app.favoritar', album_id=album.album_id) }}" class="
-                    {% if check_in_fav(album.album_id, usuario) %}
-                    heart-favoritado
-                    {% else %}
-                    heart
-                    {% endif %}">
-                        <span>❤</span>
-                    </a>
-                    </label>
-                    <input type="radio" id="star5" name="rating" value="5" />
-                    <label for="star5" title="5 estrelas">★</label>
-                    <input type="radio" id="star4" name="rating" value="4" />
-                    <label for="star4" title="4 estrelas">★</label>
-                    <input type="radio" id="star3" name="rating" value="3" />
-                    <label for="star3" title="3 estrelas">★</label>
-                    <input type="radio" id="star2" name="rating" value="2" />
-                    <label for="star2" title="2 estrelas">★</label>
-                    <input type="radio" id="star1" name="rating" value="1" />
-                    <label for="star1" title="1 estrela">★</label>
+                    <h1>{{ album.nome }}</h1>
+                    <h3>{{ album.artista }}</h3>
+                    <p>{{ album.genero }}, {{ album.lancamento }}</p>
+                    <div class="rating">
+                        <label class="heart-wrapper">
+                        <input type="checkbox" class="heart-checkbox" name="favoritar" />
+                        <a href="{{ url_for('app.favoritar', album_id=album.album_id) }}">
+                            <span class="heart {% if check_in_fav(album.album_id, usuario) %}favoritado{% endif %}">❤</span>
+                        </a>
+                        </label>
+                        <input type="radio" id="star5" name="rating" value="5" />
+                        <label for="star5" title="5 estrelas">★</label>
+                        <input type="radio" id="star4" name="rating" value="4" />
+                        <label for="star4" title="4 estrelas">★</label>
+                        <input type="radio" id="star3" name="rating" value="3" />
+                        <label for="star3" title="3 estrelas">★</label>
+                        <input type="radio" id="star2" name="rating" value="2" />
+                        <label for="star2" title="2 estrelas">★</label>
+                        <input type="radio" id="star1" name="rating" value="1" />
+                        <label for="star1" title="1 estrela">★</label>
                 </div>
 
                     <div class="musicas">
@@ -54,35 +49,28 @@
                     </div>
                 </div>
 
-              <div class='box box-4'>
-                {{ album.spotify|safe }}
+                <div class='box box-4'>
+                    {{ album.spotify|safe }}
+                </div>
             </div>
-        </div>
 
         <div>
+
+        <div class="biblioteca">
         {% if check_in_biblioteca(album.album_id, usuario) %}
             <a href="{{ url_for('app.add_biblioteca', album_id=album.album_id)}}" class="biblioteca"><button>Remover da biblioteca</button></a>
         {% else %}
-<<<<<<< HEAD
             <a href="{{ url_for('app.add_biblioteca', album_id=album.album_id)}}"><button class="btn-enviar-comment">Adicionar à sua biblioteca</button></a>
-=======
-            <a href="{{ url_for('app.add_biblioteca', album_id=album.album_id)}}" class="biblioteca"><button>Adicionar à sua biblioteca</button></a>
->>>>>>> 487748163dbc47a47764c8b9664d61bb367e2312
         {% endif %}
         </div>
 
         <div class="review">
-            <form class="review" action="/review" method="post">
-                <input type="hidden" name="album_id" value="{{ album.album_id }}">
+            <form class="review" action="/destino" method="POST">
                 <label for="review" title="review">Comentário</label>
                 <textarea name="review" id="review" rows="4" cols="20" placeholder="Eai o que você achou do album?"></textarea>
 
-<<<<<<< HEAD
                 <button type="submit" class="btn-enviar-comment">Enviar</button>
 
-=======
-                <button type="submit">Enviar</button>
->>>>>>> 487748163dbc47a47764c8b9664d61bb367e2312
             </form>
         </div>
 
