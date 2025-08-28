@@ -10,8 +10,10 @@
          {% endfor %}   
     {% endif %}
      <section class="albuns">
+
         {% if biblioteca %}
             <h2> Albúns comentados </h2>
+            <div>
             {% for a in biblioteca %}
             <div class="grupos">
     
@@ -25,5 +27,7 @@
         {% else %}
             <p style="font-size: 30px; margin: 4rem 2rem 4rem 2rem;">Você ainda não tem albúns salvos na biblioteca!</p>
         {% endif %}
+            </div>
 
+     </section>
 {% endblock %}

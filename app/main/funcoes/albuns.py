@@ -6,11 +6,12 @@ caminho_album = 'data/albuns.csv'
 caminho_musicas = 'data/musicas.csv'
 caminho_review = 'data/review.csv'
 
-id_automatico_album = 1
+
 #=================================FUNÇÕES===================================
 
-#   #CRIAR OS ALBUNS
-# NO LUGAR DOS INPUTS COLOCAR OS FORMULARIOS
+  #CRIAR OS ALBUNS
+
+id_automatico_album = 1
 def salvar_album(capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify):
 
     global id_automatico_album
@@ -30,7 +31,7 @@ def salvar_album(capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
 
     id_automatico_album += 1
 
-
+# AQUI ELE VERIFICA SE O ARQUIVO EXISTE, CASO NÃO ELE CRIA
     if not os.path.exists(caminho_musicas):
         with open(caminho_album, "w", newline="", encoding="utf-8") as arq:
             escritor = csv.writer(arq, delimiter=';')
@@ -58,6 +59,7 @@ def salvar_musicas(musicas):
 
     id_automatico_musicas += 1
 
+# AQUI ELE VERIFICA SE O ARQUIVO EXISTE, CASO NÃO ELE CRIA
     if not os.path.exists(caminho_musicas):
         with open(caminho_musicas, "w", newline="", encoding="utf-8") as arq:
             escritor = csv.writer(arq, delimiter=';')
@@ -71,8 +73,6 @@ def salvar_musicas(musicas):
 
 #==========================================
 def salvar_comentario (album_id,review):
-    # for i in range(len(verificar)):
-    #     if verificar['album_id'] == (album_id)
 
     comentario = []
     lista_info = []
@@ -80,6 +80,7 @@ def salvar_comentario (album_id,review):
     lista_info.append([review])
     comentario.append(lista_info)
 
+# AQUI ELE VERIFICA SE O ARQUIVO EXISTE, CASO NÃO ELE CRIA
     if not os.path.exists(caminho_review):
         with open(caminho_review, "w", newline="", encoding="utf-8") as arq:
             escritor = csv.writer(arq, delimiter=';')
@@ -96,6 +97,9 @@ def salvar_comentario (album_id,review):
 # AQUI A FUNÇÃO VAI RECEBER OS VALORES E COLOCAR EM UM DIC PARA FICAR MAIS FACIL PRA SUBSTITUIR
 
 #================================================
+
+# AQUI ELE LÊ OS ARQUIVOS CSV
+
 def carregar_album():
     arq_album = open(caminho_album,'r', encoding='utf-8')
     linhas_album = csv.DictReader(arq_album, delimiter=";") 
@@ -114,8 +118,6 @@ def carregar_discografia()->list:
             musicas = m
             faixas.append(musicas)
     arq_musicas.close()
-    print(faixas) 
-
     return musicas
 
 
@@ -140,8 +142,9 @@ def carregar_review()->list:
             review = c
             comentarios.append(review)
     arq_review.close()
-    print(comentarios)
     return comentarios
+
+# AQUI ELE COMPARA OS IDS
 
 def comparar_id (album_id):
     albuns = carregar_album()
@@ -149,8 +152,3 @@ def comparar_id (album_id):
         if album['album_id'] == str(album_id):
             return album
     return None
-
-# for d in lista_albuns:
-#      if d['id'] == album_id :
-#             return f"<h1>{album['nome']}</h1><img src='{album['img']}' />"
-#      return "Álbum não encontrado"
