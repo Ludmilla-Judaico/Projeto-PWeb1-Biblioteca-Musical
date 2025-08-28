@@ -79,6 +79,12 @@
                 <button type="submit">Enviar</button>
             </form>
         </div>
-
+        <section class="comentarios">
+            {% for c in comentarios %}
+            <div class="coment">
+                <p>{{c.review}}</p>
+            </div>
+            {% endfor %}
+        </section>
     </section>
 {% endblock %}

@@ -111,12 +111,6 @@ def edit_profile():
         flash('Informações atualizadas com sucesso!')
         return redirect(url_for('app.profile'))
     return render_template('edit.html', usuario=usuario, email=email, foto=foto)
-
-
-@app.route('/profile/atividade')
-def atividade():
-    reviews = carregar_review()
-    return render_template('atividade.html', reviews=reviews)
     
 
 @app.route('/logout')
@@ -132,10 +126,12 @@ def album(album_id):
     musicas = carregar_discografia(album_id)
 
     usuario = session['usuario']
+    comentarios = carregar_review()
+    comentarios_album = [c for c in comentarios if c['album_id'] == album_id]
     inicializar_biblioteca()
 
     return render_template('descricao_album.html', usuario=usuario, album=album, musicas=musicas,
-                            album_id=album_id, check_in_fav=check_in_fav, check_in_biblioteca=check_in_biblioteca)
+                            album_id=album_id, check_in_fav=check_in_fav, check_in_biblioteca=check_in_biblioteca, comentarios=comentarios_album)
 
 @app.route('/favoritar/<album_id>')
 def favoritar(album_id):
