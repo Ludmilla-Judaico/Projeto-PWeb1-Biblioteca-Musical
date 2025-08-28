@@ -132,11 +132,17 @@ div.selecionar {
   font-size: 16px;
 }
 
-main img{
-    width: 100%;       
-    height: 100%;
-    max-height: 35vh;      
-    max-width: 35vh; 
-    object-fit: cover; 
-    border-radius: 10px;
+.filtrar-btn {
+  background-color: white;
+  color: #e70092;
+  border: none;
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.filtrar-btn:hover {
+  background-color: #ffdbef;
 }

@@ -4,6 +4,7 @@ from .funcoes.albuns import *
 from .funcoes.fav import *
 from .funcoes.user import *
 from .funcoes.biblioteca import *
+from .funcoes.filtragem import *
 
 
 #==========================ROTAS PÁGINAS================================
@@ -55,10 +56,16 @@ def homepage():
     if 'usuario' not in session:
         return redirect('/login')
     usuario = session['usuario']
-    albuns = carregar_album()
-    print(f'album: {albuns}')
-
     return render_template('musicotecahome.html', albuns=albuns, usuario=usuario)
+
+# filtragem
+@app.route('/filtro', methods=['GET'])
+def filtrar():
+    albuns = carregar_album()
+    generos = request.args.getlist('genero')
+    lancamentos = request.args.getlist('lancamento')
+    albuns_filtrados = filtrar_albuns(albuns, generos, lancamentos)
+    return render_template('musicotecahome.html', alb=albuns_filtrados)
 
 @app.route('/profile')
 def profile():
@@ -195,3 +202,12 @@ def review():
     salvar_comentario(album_id,review)
 
     return redirect('/')
+
+#==========================ROTAS ERROS================================
+
+@app.errorhandler(404)
+def page_not_found(err):
+    print("Handler 404 chamado!")
+    return render_template("erros/404.html"), err.code
+
+ 
