@@ -54,6 +54,7 @@
                 </div>
             </div>
 
+        <div>
         <!-- <div class="review">
             <form class="review" action="/review" method="post">
                 <input type="hidden" name="album_id" value="{{ album.album_id }}">
@@ -64,9 +65,9 @@
 
         <div class="biblioteca">
         {% if check_in_biblioteca(album.album_id, usuario) %}
-            <a href="{{ url_for('app.add_biblioteca', album_id=album.album_id)}}"><button>Remover da biblioteca</button></a>
+            <a href="{{ url_for('app.add_biblioteca', album_id=album.album_id)}}" class="biblioteca"><button>Remover da biblioteca</button></a>
         {% else %}
-            <a href="{{ url_for('app.add_biblioteca', album_id=album.album_id)}}"><button>Adicionar à sua biblioteca</button></a>
+            <a href="{{ url_for('app.add_biblioteca', album_id=album.album_id)}}" class="biblioteca"><button>Adicionar à sua biblioteca</button></a>
         {% endif %}
         </div>
 
@@ -76,7 +77,6 @@
                 <textarea name="review" id="review" rows="4" cols="20" placeholder="Eai o que você achou do album?"></textarea>
 
                 <button type="submit">Enviar</button>
-
             </form>
         </div>
 
