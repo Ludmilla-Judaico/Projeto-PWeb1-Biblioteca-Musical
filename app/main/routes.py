@@ -178,7 +178,6 @@ def add_biblioteca(album_id):
 
 @app.route('/destino', methods=["POST"])
 def salvar ():
-    # id_album = request.form['id_album']
     capa = request.form['capa']
     nome = request.form['nome']
     lancamento = request.form['lancamento']
@@ -194,11 +193,11 @@ def salvar ():
     flash('Álbum cadastrado com sucesso!')
     return redirect('/admin')
 
-@app.route('/review', methods=['GET', 'POST'])
+@app.route("/review", methods=["POST"])
 def review():
-    if request.method == 'POST':
-        album_id = request.form['album_id']
-        review = request.form['review']
+    if request.method == "POST":
+        album_id = request.form["album_id"]
+        review = request.form["review"]
         salvar_comentario(album_id,review)
 
         return redirect('/')
