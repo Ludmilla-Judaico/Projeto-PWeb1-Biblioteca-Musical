@@ -165,7 +165,7 @@ def add_biblioteca(album_id):
 
 @app.route('/destino', methods=["POST"])
 def salvar ():
-    id_album = request.form['id_album']
+    # id_album = request.form['id_album']
     capa = request.form['capa']
     nome = request.form['nome']
     lancamento = request.form['lancamento']
@@ -175,8 +175,8 @@ def salvar ():
     biografia = request.form['biografia']
     spotify = request.form['spotify']
     musicas = request.form['musicas']
-    salvar_album(id_album,capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
-    salvar_musicas(id_album,musicas)
+    salvar_album(capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
+    salvar_musicas(musicas)
 
     return redirect('/admin')
 
@@ -187,10 +187,3 @@ def review():
     salvar_comentario(album_id,review)
 
     return redirect('/')
-
-#==========================ROTAS ERROS================================
-
-@app.errorhandler(404)
-def page_not_found(err):
-    print("Handler 404 chamado!")
-    return render_template("erros/404.html"), err.code

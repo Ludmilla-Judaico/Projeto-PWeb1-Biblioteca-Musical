@@ -4,6 +4,12 @@
 
 {% block content %}
     <section>
+<<<<<<< HEAD
+            <div class="container">
+                <div class='box box-1'>
+                    <img id="capa_cd" style="width: 450px; height: 390px; object-fit: cover;" src="{{ album.capa }}">
+                    <img id="cd" style="width: 430px; height: auto;" src="{{ url_for('static', filename='imgs/cd_girando.png') }}">
+=======
         {% for a in info_album %}
         <div class="container">
             <div class='box box-1'>
@@ -37,25 +43,58 @@
                     <label for="star2" title="2 estrelas">★</label>
                     <input type="radio" id="star1" name="rating" value="1" />
                     <label for="star1" title="1 estrela">★</label>
+>>>>>>> 7be84e6d3ad3eeb865b323b99aa7a5c3c2b409bb
                 </div>
 
-                 <div class="musicas">
-                    <ol>
-                        {% for m in musicas %}
-                        <li>{{ m.musicas }}</li>
-                        {% endfor %}
+                <div class='box box-2'>
+                    <h1>{{ album.nome }}</h1>
+                    <h3>{{ album.artista }}</h3>
+                    <p>{{ album.genero }}, {{ album.lancamento }}</p>
+                    <div class="rating">
+                        <label class="heart-wrapper">
+                        <input type="checkbox" class="heart-checkbox" name="favoritar" />
+                        <a href="{{ url_for('app.favoritar', album_id=album.album_id) }}">
+                            <span class="heart {% if check_in_fav(album.album_id, usuario) %}favoritado{% endif %}">❤</span>
+                        </a>
+                        </label>
+                        <input type="radio" id="star5" name="rating" value="5" />
+                        <label for="star5" title="5 estrelas">★</label>
+                        <input type="radio" id="star4" name="rating" value="4" />
+                        <label for="star4" title="4 estrelas">★</label>
+                        <input type="radio" id="star3" name="rating" value="3" />
+                        <label for="star3" title="3 estrelas">★</label>
+                        <input type="radio" id="star2" name="rating" value="2" />
+                        <label for="star2" title="2 estrelas">★</label>
+                        <input type="radio" id="star1" name="rating" value="1" />
+                        <label for="star1" title="1 estrela">★</label>
+                </div>
 
-                    </ol>
-                 </div>
-            </div>
+                    <div class="musicas">
+                        <ol>
+                            {% for musica in musicas %}
+                            <li>{{ musica }}</li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </div>
 
-            <div class='box box-3'>
-                <div class="biografia">
-                    <img id="imagem_bio" src="{{ a.foto_bio }}">
-                    <p id="texto_bio">{{ a.biografia }}</p>
+                <div class='box box-3'>
+                    <div class="biografia">
+                        <img id="imagem_bio" src="{{ album.foto_bio }}">
+                        <p id="texto_bio">{{ album.biografia }}</p>
+                    </div>
+                </div>
+
+                <div class='box box-4'>
+                    {{ album.spotify|safe }}
                 </div>
             </div>
 
+<<<<<<< HEAD
+        <div class="review">
+            <form class="review" action="/review" method="post">
+                <input type="hidden" name="album_id" value="{{ album.album_id }}">
+=======
             <div class='box box-4'>
                 {{ a.spotify|safe }}
             </div>
@@ -73,11 +112,12 @@
 
         <div class="review" action="/destino" method="POST">
             <form class="review">
+>>>>>>> 7be84e6d3ad3eeb865b323b99aa7a5c3c2b409bb
                 <label for="review" title="review">Comentário</label>
                 <textarea name="review" id="review" rows="4" cols="20" placeholder="Eai o que você achou do album?"></textarea>
 
                 <button type="submit">Enviar</button>
-                
+
             </form>
         </div>
 
