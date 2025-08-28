@@ -8,11 +8,11 @@ def create_app():
     app.register_blueprint(app_bp)
     
     @app.errorhandler(404)
-    def not_found(e):
+    def not_found(err):
         return render_template("erros/404.html"), 404
     
     @app.errorhandler(405)
-    def method_not_allowed(e):
+    def method_not_allowed(err):
         return render_template("erros/405.html"), 405
     
     @app.errorhandler(500)
