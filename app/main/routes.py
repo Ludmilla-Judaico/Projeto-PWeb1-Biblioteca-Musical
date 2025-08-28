@@ -56,10 +56,6 @@ def homepage():
         return redirect('/login')
     usuario = session['usuario']
     albuns = carregar_album()
-<<<<<<< HEAD
-
-=======
->>>>>>> 8651bbabe3c9d6868f85bcbe938a1efc6df330e6
     return render_template('musicotecahome.html', albuns=albuns, usuario=usuario)
 
 @app.route('/profile')
@@ -115,6 +111,12 @@ def edit_profile():
         flash('Informações atualizadas com sucesso!')
         return redirect(url_for('app.profile'))
     return render_template('edit.html', usuario=usuario, email=email, foto=foto)
+
+
+@app.route('/profile/atividade')
+def atividade():
+    reviews = carregar_review()
+    return render_template('atividade.html', reviews=reviews)
     
 
 @app.route('/logout')
@@ -154,7 +156,6 @@ def favoritar(album_id):
         return redirect(url_for('app.album', album_id=album_id))
     else:
         salvar_favorito(usuario, album_id, capa)
-        flash('Álbum favoritado com sucesso!')
         return redirect('/profile/favoritos')
 
 @app.route('/add_biblioteca/<album_id>')
@@ -168,7 +169,6 @@ def add_biblioteca(album_id):
 
     if check_in_biblioteca(album_id, usuario):
         remover_da_biblioteca(album_id)
-        flash('Álbum removido da biblioteca')
         return redirect('/profile/biblioteca')
     else:
         salvar_na_biblioteca(usuario, album_id, capa)
