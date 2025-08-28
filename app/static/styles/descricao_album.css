@@ -195,8 +195,23 @@ textarea:focus {
 }
 
 button{
-  color: #4a90e2;
-  border-radius: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  width: auto;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: #ff00a1;
+  color: #FFFF;
+  font-family: Outfit;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2)
+}
+
+.biblioteca a{
+  text-decoration: none;
 }
 
 /* FIM DO CONTAINER 2 */
