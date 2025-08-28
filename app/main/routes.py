@@ -1,4 +1,4 @@
-from flask import render_template, url_for, redirect, session, request, flash
+from flask import render_template, url_for, redirect, session, request, flash, abort
 from . import app
 from .funcoes.albuns import *
 from .funcoes.fav import *
@@ -21,22 +21,20 @@ def login():
     if(request.method == 'POST'):
         email = request.form['email_login']
         senha = request.form['senha_login']
-        print("pegou infos")
 
         if email == EMAIL_ADMIN and senha == SENHA_ADMIN:
+            flash('Admin logado!')
             return redirect('/admin')
 
         if authenticator(email, senha):
-            print("authenticator passou")
             nome, foto = dados_associados(email)
             session['usuario'] = nome
             session['email'] = email
             session['foto'] = foto
 
-            print("Sessão após login:", dict(session))
             return redirect('/')
 
-        print('não entrou')
+        flash('Email ou senha inválidos, tente novamente', 'error')
         return redirect('/login')     
     return render_template('login.html')
 
@@ -47,7 +45,7 @@ def cadastro():
         email_user = request.form['email-user']
         senha_user = request.form['senha-user']
         signin(user, email_user, senha_user)
-        # flash("Cadastro realizado com sucesso :)", "success")
+        flash("Cadastro realizado com sucesso :)", "sucess")
         return redirect('/')
     
     return render_template('signin.html')
@@ -110,6 +108,7 @@ def edit_profile():
         session['email'] = novo_email
         session['foto'] = nova_foto
 
+        flash('Informações atualizadas com sucesso!')
         return redirect(url_for('app.profile'))
     return render_template('edit.html', usuario=usuario, email=email, foto=foto)
     
@@ -135,7 +134,6 @@ def album(album_id):
 @app.route('/favoritar/<album_id>')
 def favoritar(album_id):
     if 'usuario' not in session:
-        flash('É necessário estar logado para favoritar um albúm!')
         return redirect(url_for('app.login'))
     inicializar_favoritos()
     
@@ -144,14 +142,16 @@ def favoritar(album_id):
 
     if check_in_fav(album_id, usuario):
         remover_favorito(album_id)
+        flash('Álbum removido dos favoritos')
+        return redirect('/album/<album_id>')
     else:
         salvar_favorito(usuario, album_id, capa)
-    return redirect('/profile/favoritos')
+        flash('Álbum favoritado com sucesso!')
+        return redirect('/profile/favoritos')
 
 @app.route('/add_biblioteca/<album_id>')
 def add_biblioteca(album_id):
     if 'usuario' not in session:
-        flash('É necessário estar logado para adicionar um albúm à biblioteca!')
         return redirect(url_for('app.login'))
     inicializar_biblioteca()
     
@@ -160,9 +160,12 @@ def add_biblioteca(album_id):
 
     if check_in_biblioteca(album_id, usuario):
         remover_da_biblioteca(album_id)
+        flash('Álbum removido da biblioteca')
+        return redirect('/profile/biblioteca')
     else:
         salvar_na_biblioteca(usuario, album_id, capa)
-    return redirect('/profile/biblioteca')
+        flash('Álbum salvo na biblioteca')
+        return redirect('/profile/biblioteca')
 
 
 @app.route('/destino', methods=["POST"])
@@ -180,6 +183,7 @@ def salvar ():
     salvar_album(capa,nome,lancamento,genero,artista,foto_bio,biografia,spotify)
     salvar_musicas(musicas)
 
+    flash('Álbum cadastrado com sucesso!')
     return redirect('/admin')
 
 @app.route('/review', methods=["POST"])
@@ -189,3 +193,10 @@ def review():
     salvar_comentario(album_id,review)
 
     return redirect('/')
+
+#==========================ROTAS ERROS================================
+
+@app.errorhandler(404)
+def page_not_found(err):
+    print("Handler 404 chamado!")
+    return render_template("erros/404.html"), err.code

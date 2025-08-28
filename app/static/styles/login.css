@@ -29,6 +29,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 #base {
@@ -41,6 +42,38 @@ body{
     background-color: #e70092;
     box-shadow: 0 8px 12px rgba(0,0,0,0.5);
     border-radius: 15px;
+}
+
+.flash.error{
+    font-family: Outfit;
+    font-size: 20px;
+    width: 35%;
+    height: 40px;
+    border-radius: 0px;
+    margin: 0 0 10px 0;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border: 1.7px, solid #dd3535;
+    background-color: #ff7b7b;
+    color: #dd3535;
+}
+
+.flash.sucess{
+    font-family: Outfit;
+    font-size: 20px;
+    width: 35%;
+    height: 40px;
+    border-radius: 0px;
+    margin: 0 0 10px 0;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border: 1.7px, solid green;
+    background-color: lightgreen;
+    color: green;
 }
 
 form {
