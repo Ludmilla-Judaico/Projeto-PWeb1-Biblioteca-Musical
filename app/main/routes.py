@@ -136,14 +136,18 @@ def favoritar(album_id):
     if 'usuario' not in session:
         return redirect(url_for('app.login'))
     inicializar_favoritos()
-    
-    capa = next(a['capa'] for a in carregar_album() if a['album_id'] == album_id)
     usuario = session['usuario']
+    
+    try:
+        capa = next(a['capa'] for a in carregar_album() if a['album_id'] == album_id)
+    except StopIteration:
+        flash('Álbum não encontrado!')
+        return redirect(url_for('app.homepage'))
 
     if check_in_fav(album_id, usuario):
-        remover_favorito(album_id)
+        remover_favorito(album_id, usuario)
         flash('Álbum removido dos favoritos')
-        return redirect('/album/<album_id>')
+        return redirect(url_for('app.album', album_id=album_id))
     else:
         salvar_favorito(usuario, album_id, capa)
         flash('Álbum favoritado com sucesso!')
