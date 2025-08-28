@@ -207,7 +207,7 @@ textarea {
   padding: 12px;
   font-size: 16px;
   font-family: Arial, sans-serif;
-  border: 1px solid #ccc;
+  border: 1px solid #245399;
   border-radius: 8px;
   resize: vertical;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -247,6 +247,8 @@ button{
 }
 
 /* FIM DO CONTAINER 2 */
+
+/* COMENTARIOS */
 .comentarios {
   display: flex;
   flex-direction: row;

@@ -91,15 +91,21 @@ def salvar_comentario (album_id,review):
             escritor = csv.writer(arq, delimiter=';')
             escritor.writerows(comentario)
 
-     
 
-  #LER O ARQUIVO CSV ONDE ESTÁ A LISTA DE ALBUNS
-# AQUI A FUNÇÃO VAI RECEBER OS VALORES E COLOCAR EM UM DIC PARA FICAR MAIS FACIL PRA SUBSTITUIR
-
-#================================================
-
+#teste para cadastro==============================================
+#capa: https://cdn-images.dzcdn.net/images/cover/379aa0302d0df5bdd9e4a01829ca36d6/500x500-000000-80-0-0.jpg
+# nome: Sonder Son
+# lancamento: 2017
+# genero: R&B
+# artista: Brent Faiyaz
+# foto_bio: https://i.pinimg.com/736x/cc/09/f9/cc09f900551c455b82d29977282d8675.jpg
+# biografia: Brent Wood, conhecido como Brent Faiyaz, é um cantor e compositor americano de Columbia, Maryland,
+# que ganhou destaque com Crew (2016) e lançou o debut Sonder Son em 2017, marcado por R&B atmosférico e letras introspectivas.
+# musicas: Over Luv;Burn One (Interlude);First World Problemz/Nobody Carez;Missing Out;Stay
+# Down;L.A.;Talk 2 U;Sonder Son (Interlude);So Far Gone/Fast Life Bluez;Needed;All I Want
+ 
+#==========================================================
 # AQUI ELE LÊ OS ARQUIVOS CSV
-
 def carregar_album():
     arq_album = open(caminho_album,'r', encoding='utf-8')
     linhas_album = csv.DictReader(arq_album, delimiter=";") 
@@ -120,7 +126,7 @@ def carregar_discografia()->list:
     arq_musicas.close()
     return musicas
 
-
+#=========================================
 def carregar_discografia(album_id) -> list:
     with open(caminho_musicas, 'r', encoding='utf-8') as arq_musicas:
         leitor = csv.DictReader(arq_musicas, delimiter=";")
@@ -132,7 +138,7 @@ def carregar_discografia(album_id) -> list:
                 faixas = [item.strip().strip("'").strip('"') for item in musicas_str.split(",")]
     return faixas
 
-
+#=======================================
 def carregar_review()->list:
     arq_review = open(caminho_review, 'r')
     linhas_review = csv.DictReader(arq_review, delimiter=";")

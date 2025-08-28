@@ -17,6 +17,7 @@ EMAIL_ADMIN = "admin@email.com"
 SENHA_ADMIN = "12345"
 
 
+#=============================================
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if(request.method == 'POST'):
@@ -39,6 +40,7 @@ def login():
         return redirect('/login')     
     return render_template('login.html')
 
+#===============================================
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
     if request.method == 'POST':
@@ -51,14 +53,16 @@ def cadastro():
     
     return render_template('signin.html')
 
+#=================================================
 @app.route('/')
 def homepage():
     if 'usuario' not in session:
         return redirect('/login')
     usuario = session['usuario']
+    albuns = carregar_album()
     return render_template('musicotecahome.html', albuns=albuns, usuario=usuario)
 
-# filtragem
+#=========================== filtragem
 @app.route('/filtro', methods=['GET'])
 def filtrar():
     albuns = carregar_album()
@@ -67,6 +71,7 @@ def filtrar():
     albuns_filtrados = filtrar_albuns(albuns, generos, lancamentos)
     return render_template('musicotecahome.html', alb=albuns_filtrados)
 
+#=========================================
 @app.route('/profile')
 def profile():
     if 'usuario' not in session:
@@ -77,6 +82,7 @@ def profile():
 
     return render_template('profile.html', favoritos=favoritos, usuario=usuario, foto=foto)
 
+#=============================================
 @app.route('/profile/biblioteca')
 def minha_biblioteca():
     if 'usuario' not in session:
@@ -87,6 +93,7 @@ def minha_biblioteca():
 
     return render_template('biblioteca.html', usuario=usuario, foto=foto, biblioteca=biblioteca, check_in_biblioteca=check_in_biblioteca)
 
+#============================================
 @app.route('/profile/favoritos')
 def favoritos():
     if 'usuario' not in session:
@@ -96,38 +103,43 @@ def favoritos():
     favoritos = carregar_favoritos(usuario)
     return render_template('favoritos.html', usuario=usuario, foto=foto, favoritos=favoritos, check_in_fav=check_in_fav)
 
+#=============================================
+#teste para edição de perfil
+#https://i.pinimg.com/1200x/28/ae/a6/28aea64b2f51e799f657d4e7337d859c.jpg
 @app.route('/profile/edit', methods=['GET', 'POST'])
 def edit_profile():
     if 'usuario' not in session:
         return redirect('/login')
-    print("Sessão atual:", dict(session))
     
+    #pega informações salvas na sessão para servirem como value, assim o usuário pode alterar só o que deseja
     usuario = session.get('usuario')
     email = session.get('email')
     foto = session.get('foto')
     if request.method == 'POST':
+        #pega as novas informações no formulário
         novo_usuario = request.form['novo_usuario']
         novo_email = request.form['novo_email']
         nova_senha = request.form['nova_senha']
         nova_foto = request.form['nova_foto']
 
+        #chama a função com as novas infos
         edit_user(novo_usuario, novo_email, nova_senha, nova_foto)
 
+        #atualizada a sessão com as novas infos
         session['usuario'] = novo_usuario
         session['email'] = novo_email
         session['foto'] = nova_foto
 
-        flash('Informações atualizadas com sucesso!')
         return redirect(url_for('app.profile'))
     return render_template('edit.html', usuario=usuario, email=email, foto=foto)
     
-
+#==========================================================
 @app.route('/logout')
 def logout():
     session.pop('usuario', None)
     return redirect('/login')
 
-
+#===============================================
 @app.route('/album/<album_id>')
 def album(album_id):
     album = comparar_id(album_id)
@@ -142,6 +154,7 @@ def album(album_id):
     return render_template('descricao_album.html', usuario=usuario, album=album, musicas=musicas,
                             album_id=album_id, check_in_fav=check_in_fav, check_in_biblioteca=check_in_biblioteca, comentarios=comentarios_album)
 
+#===============================================================
 @app.route('/favoritar/<album_id>')
 def favoritar(album_id):
     if 'usuario' not in session:
@@ -149,10 +162,11 @@ def favoritar(album_id):
     inicializar_favoritos()
     usuario = session['usuario']
     
+    #evita erro, tenta achar a capa, se não achar redireciona para a homepage
     try:
+        #pega a primeira capa com o id igual ao parametro da rota
         capa = next(a['capa'] for a in carregar_album() if a['album_id'] == album_id)
     except StopIteration:
-        flash('Álbum não encontrado!')
         return redirect(url_for('app.homepage'))
 
     if check_in_fav(album_id, usuario):
@@ -163,6 +177,7 @@ def favoritar(album_id):
         salvar_favorito(usuario, album_id, capa)
         return redirect('/profile/favoritos')
 
+#========================================================
 @app.route('/add_biblioteca/<album_id>')
 def add_biblioteca(album_id):
     if 'usuario' not in session:
@@ -180,7 +195,7 @@ def add_biblioteca(album_id):
         flash('Álbum salvo na biblioteca')
         return redirect('/profile/biblioteca')
 
-
+#====================================================
 @app.route('/destino', methods=["POST"])
 def salvar ():
     capa = request.form['capa']
@@ -198,6 +213,7 @@ def salvar ():
     flash('Álbum cadastrado com sucesso!')
     return redirect('/admin')
 
+#=================================================
 @app.route("/review", methods=["POST"])
 def review():
     if request.method == "POST":
@@ -205,7 +221,7 @@ def review():
         review = request.form["review"]
         salvar_comentario(album_id,review)
 
-    return redirect('/')
+        return redirect('/album/album_id')
 
 #==========================ROTAS ERROS================================
 

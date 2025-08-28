@@ -1,6 +1,8 @@
 import csv, os
 caminho_biblioteca = 'data/biblioteca.csv'
 
+#=======================FUNÇÕES==========================
+#==================================================
 def carregar_biblioteca(usuario):
     minha_biblioteca = []
     if not os.path.exists(caminho_biblioteca):
@@ -15,6 +17,8 @@ def carregar_biblioteca(usuario):
                 })
     return minha_biblioteca
 
+#==========================================================
+#caso o csv da biblioteca não exista
 def inicializar_biblioteca():
     if not os.path.exists(caminho_biblioteca):
         os.makedirs(os.path.dirname(caminho_biblioteca), exist_ok=True)
@@ -22,6 +26,7 @@ def inicializar_biblioteca():
             writer = csv.writer(arquivo)
             writer.writerow(["usuário", "album_id", "capa"])
 
+#======================================================
 def salvar_na_biblioteca(usuario, album_id, capa):
     inicializar_biblioteca()
 
@@ -37,6 +42,8 @@ def salvar_na_biblioteca(usuario, album_id, capa):
             writer = csv.writer(arquivo)
             writer.writerow([usuario, album_id, capa])
 
+#=====================================================
+#checa se o album ja está na biblioteca do usuario
 def check_in_biblioteca(album_id, usuario):
     with open(caminho_biblioteca, 'r', newline='', encoding='utf-8') as arquivo:
         minha_biblioteca = csv.DictReader(arquivo)
@@ -45,6 +52,10 @@ def check_in_biblioteca(album_id, usuario):
                 return True
     return False
 
+#=========================================================
+#Lê o arquivo csv da biblioteca e itera por todas as linhas do arquivo, colocando todas em uma lista. 
+#Se ele achar o id do álbum no csv, ele pula essa linha e não coloca ele na lista
+#Ao final ele reescreve o arquivo utilizando essa lista que não possui a linha do álbum que desejava remover
 def remover_da_biblioteca(album_id):
     manter = []
     with open(caminho_biblioteca, "r", newline="", encoding="utf-8") as arquivo:

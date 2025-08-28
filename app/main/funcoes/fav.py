@@ -50,7 +50,8 @@ def check_in_fav(album_id, usuario):
                 return True
     return False
 
-#===================================
+#============================================
+#Mesma lógica da biblioteca
 def remover_favorito(album_id, usuario):
     manter = []
     with open(caminho_favoritos, "r", newline="", encoding="utf-8") as arquivo:

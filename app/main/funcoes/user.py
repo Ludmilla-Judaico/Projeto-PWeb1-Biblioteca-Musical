@@ -9,7 +9,7 @@ def signin(user, email, senha):
             writer = csv.writer(arquivo_user)
             writer.writerow(['usuário', 'email', 'senha', 'foto'])
 
-    foto = 'static/imgs/perfil-default.png'
+    foto = 'static/imgs/perfil-default.jpg'
     with open(caminho_usuarios, 'a', newline="", encoding="utf-8") as arquivo_user:
         writer = csv.writer(arquivo_user)
         writer.writerow([user, email, senha, foto])
@@ -35,14 +35,19 @@ def authenticator(user_email, senha):
             return False
     return False
             
-#===============================
+#==============================================================
+#none evita bugs caso o usuário não informe todas as áreas
 def edit_user(novo_usuario=None, novo_email=None, nova_senha=None, nova_foto=None):
     with open(caminho_usuarios, "r", newline="", encoding="utf-8") as arquivo:
         linhas = []
         leitor = csv.DictReader(arquivo)
+        #colunas, chaves do csv
         dados = leitor.fieldnames
         for linha in leitor:
+            #itera por toda as linhas do csv e procura a que está o usuário igual ao da session atual
+            #e altera na linha do usuário
             if session['usuario'] == linha['usuário']:
+                #caso o usuário não altere nada, o if não entra
                 if novo_usuario:
                     linha['usuário'] = novo_usuario
                 if novo_email:
@@ -53,12 +58,12 @@ def edit_user(novo_usuario=None, novo_email=None, nova_senha=None, nova_foto=Non
                     linha['foto'] = nova_foto
             linhas.append(linha)
 
-    with open(caminho_usuarios, "w", newline="", encoding="utf-8") as arquivo:
-        
+    with open(caminho_usuarios, "w", newline="", encoding="utf-8") as arquivo: 
         escritor = csv.DictWriter(arquivo, fieldnames=dados)
         escritor.writeheader()
         escritor.writerows(linhas)
 
+    #garante que a session será atualizada
     if novo_usuario:
         session['usuario'] = novo_usuario
     if novo_email:
