@@ -61,7 +61,6 @@ section{
 .musicas ol{
     column-count: 2;
     column-gap: 0.1em;
-    /* background-color: blueviolet; */
 }
 
 .musicas li:hover{
@@ -95,24 +94,20 @@ section{
   color: rgb(255, 217, 0);
 }
 
-
-
-.heart {
+.heart{
   color: #aaa;
   transition: color 0.3s;
-  text-decoration: none;
 }
 
-.heart:hover {
+.heart:hover{
   color: red;
 }
 
-.heart-favoritado {
+.favoritado{
     color: red;
-    text-decoration: none;
 }
 
-.heart-favoritado:hover{
+.favoritado:hover{
   color:#aaa;
 }
 

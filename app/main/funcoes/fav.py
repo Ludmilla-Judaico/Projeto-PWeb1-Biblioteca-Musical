@@ -51,12 +51,12 @@ def check_in_fav(album_id, usuario):
     return False
 
 #===================================
-def remover_favorito(album_id):
+def remover_favorito(album_id, usuario):
     manter = []
     with open(caminho_favoritos, "r", newline="", encoding="utf-8") as arquivo:
         leitor = csv.DictReader(arquivo)
         for linha in leitor:
-            if not(linha['album_id'] == album_id):
+            if not(linha['album_id'] == album_id and linha['usuário'] == usuario):
                 manter.append(linha)
 
     with open(caminho_favoritos, 'w', newline='', encoding='utf-8') as arquivo:
