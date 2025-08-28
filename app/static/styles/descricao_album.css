@@ -115,11 +115,13 @@ section{
 
 .box-3 {
   background-color: #7991bd;
-  border-radius: 5%;
+  border-radius: 15px;
 }
 
 #imagem_bio {
   width: 200px;
+  height: 200px;
+  object-fit: cover;
 }
 
 .biografia {
@@ -216,6 +218,12 @@ button{
   font-family: Outfit;
   font-weight: 600;
   box-shadow: 0 4px 6px rgba(0,0,0,0.2)
+}
+
+.biblioteca {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .biblioteca a{
