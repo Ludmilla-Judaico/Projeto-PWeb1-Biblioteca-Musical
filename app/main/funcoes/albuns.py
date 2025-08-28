@@ -107,7 +107,6 @@ def carregar_album():
     for linha in linhas_album:
         album.append(linha)
     arq_album.close()
-    print(f'album: {album}')
     return album
 
 #============================================
