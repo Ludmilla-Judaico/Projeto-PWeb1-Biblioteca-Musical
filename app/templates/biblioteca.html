@@ -16,7 +16,7 @@
             <div class="grupos">
     
                 <figure class="albuns-agrupados" id="grupo1">
-                    <a href="{ url_for('app.album', album_id=fav.album_id) }}"><img src="{{a.capa}}" alt=""></a>
+                    <a href="{{ url_for('app.album', album_id=a.album_id) }}"><img src="{{a.capa}}" alt=""></a>
                 </figure>
                 <a href="{{ url_for('app.add_biblioteca', album_id=a.album_id)}}"><button>Remover da biblioteca</button></a>
 
