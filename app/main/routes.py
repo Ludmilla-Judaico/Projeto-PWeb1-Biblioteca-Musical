@@ -193,10 +193,3 @@ def review():
     salvar_comentario(album_id,review)
 
     return redirect('/')
-
-#==========================ROTAS ERROS================================
-
-@app.errorhandler(404)
-def page_not_found(err):
-    print("Handler 404 chamado!")
-    return render_template("erros/404.html"), err.code
