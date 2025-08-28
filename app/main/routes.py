@@ -58,6 +58,7 @@ def homepage():
     usuario = session['usuario']
     return render_template('musicotecahome.html', albuns=albuns, usuario=usuario)
 
+# filtragem
 @app.route('/search')
 def search():
     albuns = carregar_album()

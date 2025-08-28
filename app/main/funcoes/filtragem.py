@@ -1,5 +1,6 @@
 from app.main.funcoes.albuns import carregar_album  # importe a função aqui
 
+# Compara com os values do checkbox
 def classificar_decada(ano):
     ano = ano.strip()
     if ano.isdigit():
