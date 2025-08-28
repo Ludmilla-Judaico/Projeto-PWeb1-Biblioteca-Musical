@@ -25,11 +25,11 @@
         <label><input type="checkbox" name="generos" value="80s" class="custom-checkbox">1980 - 1989</label>
         <label><input type="checkbox" name="generos" value="70s" class="custom-checkbox">1970 - 1979</label>
     </nav>
-    <aside class="sidebar"></aside>
+    <!-- <aside class="sidebar"></aside> -->
 
     <main>
         {% for album in albuns %}
-            <a href="album/{{album.album_id}}"><img src="{{album.capa}}"></a>
+                <a href="album/{{album.album_id}}"><img src="{{album.capa}} alt="album.nome"></a>
         {% endfor %}
     </main>
 
