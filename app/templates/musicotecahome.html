@@ -29,7 +29,7 @@
 
     <main>
         {% for album in albuns %}
-                <a href="album/{{album.album_id}}"><img src="{{album.capa}} alt="album.nome"></a>
+            <a href="album/{{album.album_id}}"><img src="{{album.capa}}" alt="{{album.nome}}"></a>
         {% endfor %}
     </main>
 
